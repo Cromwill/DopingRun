@@ -30,14 +30,12 @@ public class Enlargable : MonoBehaviour
 
     public void EnalargeAnimation()
     {
-        _step++;
-
         if (_step< _maxSteps)
         {
+            _step++;
             if (_coroutine == null)
                 _coroutine = StartCoroutine(Enlarge());
         }
-
     }
 
     private IEnumerator Enlarge()
