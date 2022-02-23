@@ -7,6 +7,7 @@ using RunnerMovementSystem.Examples;
 public class SumoFightTransition : MonoBehaviour
 {
     private JoystickCanvas _joystickCanvas;
+    [SerializeField] private Enemy[] _enemys;
 
     private void Start()
     {
@@ -31,6 +32,18 @@ public class SumoFightTransition : MonoBehaviour
 
             if (player.TryGetComponent(out PlayerMover playerMover))
                 playerMover.enabled = true;
+
+            if (player.TryGetComponent(out Enemy enemy))
+                enemy.enabled = true;
+
+            foreach (var tempEnemy in _enemys)
+            {
+                tempEnemy.enabled = true;
+
+                if (tempEnemy.TryGetComponent(out EnemyStateMachine _machine))
+                    _machine.enabled = true;
+
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class Pushable : MonoBehaviour
     [SerializeField] private float _pushSpeed;
 
     private Rigidbody _rigidbody;
+
+    public event Action Pushed;
 
     private void Start()
     {
@@ -32,6 +35,7 @@ public class Pushable : MonoBehaviour
 
             yield return null;
         }
-    }
 
+        Pushed?.Invoke();
+    }
 }
