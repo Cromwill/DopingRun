@@ -6,10 +6,20 @@ using RunnerMovementSystem.Examples;
 
 public class SumoFightTransition : MonoBehaviour
 {
+    private JoystickCanvas _joystickCanvas;
+
+    private void Start()
+    {
+        _joystickCanvas = FindObjectOfType<JoystickCanvas>();
+        _joystickCanvas.gameObject.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent(out Player player))
         {
+            _joystickCanvas.gameObject.SetActive(true);
+
             if (player.TryGetComponent(out MovementSystem movementSystem))
                 movementSystem.enabled = false;
 
