@@ -9,6 +9,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _speed;
 
     private Rigidbody _rigidBody;
+    private float _threshold = 0.01f;
 
     private void Start()
     {
@@ -21,7 +22,7 @@ public class PlayerMover : MonoBehaviour
 
         _rigidBody.MovePosition(transform.position + direction.normalized * _speed * Time.deltaTime);
 
-        if(Input.GetMouseButton(0) && direction.magnitude > 0.01f)
+        if(Input.GetMouseButton(0) && direction.magnitude > _threshold)
             Rotate(direction);
 
     }
