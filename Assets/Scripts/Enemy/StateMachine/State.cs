@@ -6,9 +6,9 @@ public abstract class State : MonoBehaviour
 {
     [SerializeField] private List<Transition> _transitions;
 
-    protected Enemy Target { get; set; }
+    protected SumoFighter Target { get; set; }
 
-    public void Enter(Enemy target)
+    public void Enter(SumoFighter target)
     {
         if(enabled == false)
         {

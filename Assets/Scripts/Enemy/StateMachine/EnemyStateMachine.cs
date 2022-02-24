@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Enemy))]
+[RequireComponent(typeof(SumoFighter))]
 public class EnemyStateMachine : MonoBehaviour
 {
     [SerializeField] private State _firstState;
 
-    private Enemy _target;
-    private Enemy _self;
+    private SumoFighter _target;
+    private SumoFighter _self;
     private State _currentState;
 
     public State Current => _currentState;
 
     private void Start()
     {
-        _self = GetComponent<Enemy>();
+        _self = GetComponent<SumoFighter>();
         Reset(_firstState);
     }
 

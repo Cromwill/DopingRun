@@ -21,6 +21,7 @@ public class HustleZone : MonoBehaviour
         if (other.TryGetComponent(out IPushable pushable))
         {
             Vector3 direcation = (other.transform.position - transform.position).normalized;
+            direcation.y = 0f;
 
             CollideWithEnemy?.Invoke();
 

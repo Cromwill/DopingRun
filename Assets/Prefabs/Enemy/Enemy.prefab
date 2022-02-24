@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503042170313481405}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.075}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2979104440802091206}
@@ -43,7 +43,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.5, z: 0.5}
+  m_Size: {x: 0.15, y: 1, z: 1}
   m_Center: {x: -0.5, y: 0, z: 0}
 --- !u!114 &8611927603077614342
 MonoBehaviour:
@@ -76,7 +76,6 @@ GameObject:
   - component: {fileID: 2979104440802091209}
   - component: {fileID: 8603842584005173557}
   - component: {fileID: 2920294346643859836}
-  - component: {fileID: 6708526790377448854}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -93,7 +92,7 @@ Transform:
   m_GameObject: {fileID: 2979104440802091202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 180.65, y: 0.76, z: -48.68}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 1560137180457014120}
   m_Father: {fileID: 0}
@@ -234,8 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26954188c0e76241a90c0f5a6b5cb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transitions:
-  - {fileID: 6708526790377448854}
+  _transitions: []
   _enemy: {fileID: 2979104440802091211}
 --- !u!114 &8603842584005173557
 MonoBehaviour:
@@ -265,16 +263,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitions: []
---- !u!114 &6708526790377448854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2979104440802091202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7121a6aadd498e247881bfe4c1c14db9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetState: {fileID: 2920294346643859836}

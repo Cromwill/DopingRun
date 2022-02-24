@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class MoveState : State
 {
-    [SerializeField] private Enemy _enemy;
+    [SerializeField] private SumoFighter _enemy;
 
     private float _speed;
     private Rigidbody _rigidBody;
@@ -27,7 +27,7 @@ public class MoveState : State
         }
     }
 
-    public void SetTarget(Enemy target)
+    public void SetTarget(SumoFighter target)
     {
         Target = target;
     }
