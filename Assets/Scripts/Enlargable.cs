@@ -28,8 +28,8 @@ public class Enlargable : MonoBehaviour
 
     public void Reset()
     {
-        transform.localScale = _initialScale;
         _step = 0;
+        ShrinkAnimation();
     }
 
     public void EnalargeAnimation()
@@ -47,7 +47,7 @@ public class Enlargable : MonoBehaviour
 
     public void ShrinkAnimation()
     {
-        if (_step > 0)
+        if (_step >= 0)
         {
             _step--;
 
