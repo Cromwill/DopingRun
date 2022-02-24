@@ -10,7 +10,7 @@ public class Enlargable : MonoBehaviour
     [SerializeField] private float _scaleCoefficient;
 
     private int _step;
-    private Vector3 _initialScale = new Vector3(0.2f, 0.2f, 0.2f);
+    private Vector3 _initialScale;
     private Coroutine _coroutine;
 
     private float _additionalScale => _step * _scalePerStep;
@@ -19,7 +19,7 @@ public class Enlargable : MonoBehaviour
 
     private void Start()
     {
-        transform.localScale = _initialScale;   
+        _initialScale = transform.localScale;   
     }
 
     public void Reset()
@@ -30,7 +30,7 @@ public class Enlargable : MonoBehaviour
 
     public void EnalargeAnimation()
     {
-        if (_step< _maxSteps)
+        if (_step < _maxSteps)
         {
             _step++;
             if (_coroutine == null)
@@ -42,7 +42,7 @@ public class Enlargable : MonoBehaviour
     {
         while (transform.localScale.x < _enlargeScale.x)
         {
-            transform.localScale = Vector3.MoveTowards(transform.localScale, _enlargeScale, _changeSpeed);
+            transform.localScale = Vector3.MoveTowards(transform.localScale, _enlargeScale, _changeSpeed * Time.deltaTime);
             yield return null;
         }
 
@@ -53,7 +53,7 @@ public class Enlargable : MonoBehaviour
     {
         while (transform.localScale.x > _nexSteptScale.x)
         {
-            transform.localScale = Vector3.MoveTowards(transform.localScale, _nexSteptScale, _changeSpeed);
+            transform.localScale = Vector3.MoveTowards(transform.localScale, _nexSteptScale, _changeSpeed * Time.deltaTime);
 
             yield return null;
         }
