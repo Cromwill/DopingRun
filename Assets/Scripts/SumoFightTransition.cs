@@ -7,11 +7,11 @@ using RunnerMovementSystem.Examples;
 public class SumoFightTransition : MonoBehaviour
 {
     private JoystickCanvas _joystickCanvas;
-    [SerializeField] private Enemy[] _enemys;
+    private SumoFighterList _sumoFighterList;
 
     private void Start()
     {
-        _enemys = FindObjectsOfType<Enemy>();
+        _sumoFighterList = FindObjectOfType<SumoFighterList>();
         _joystickCanvas = FindObjectOfType<JoystickCanvas>();
         _joystickCanvas.gameObject.SetActive(false);
     }
@@ -24,7 +24,7 @@ public class SumoFightTransition : MonoBehaviour
 
             EnableSumoControls(player);
 
-            EnableEnemys();
+            _sumoFighterList.EnableFighters();
         }
     }
 
@@ -46,17 +46,5 @@ public class SumoFightTransition : MonoBehaviour
 
         if (player.TryGetComponent(out Rigidbody rigidbody))
             rigidbody.isKinematic = false;
-    }
-
-    private void EnableEnemys()
-    {
-        foreach (var tempEnemy in _enemys)
-        {
-            tempEnemy.enabled = true;
-
-            if (tempEnemy.TryGetComponent(out EnemyStateMachine _machine))
-                _machine.enabled = true;
-
-        }
     }
 }

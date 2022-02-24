@@ -26,7 +26,6 @@ public class Pushable : MonoBehaviour, IPushable
 
     private IEnumerator PushAnimation(Vector3 direction)
     {
-        Debug.LogError("asd");
         float timePassed = 0;
 
         PushStart?.Invoke();

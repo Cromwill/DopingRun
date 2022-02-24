@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DeathTrigger : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public event Action<SumoFighter> FighterOffTheRing;
+
+    private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Enemy enemy))
+        if (other.TryGetComponent(out SumoFighter enemy))
         {
             if (enemy.TryGetComponent(out EnemyStateMachine stateMachine))
                 stateMachine.enabled = false;
@@ -15,6 +18,8 @@ public class DeathTrigger : MonoBehaviour
                 moveState.enabled = false;
 
             enemy.OnDying();
+
+            FighterOffTheRing?.Invoke(enemy);
 
             enemy.enabled = false;
         }

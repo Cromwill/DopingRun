@@ -6,7 +6,7 @@ public class TargetSwitcher : MonoBehaviour
 {
     [SerializeField] private Pushable _pushable;
     [SerializeField] private MoveState _moveState;
-    [SerializeField] private Enemy _enemy;
+    [SerializeField] private SumoFighter _enemy;
 
     private void OnEnable()
     {

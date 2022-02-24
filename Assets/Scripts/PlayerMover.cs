@@ -20,10 +20,11 @@ public class PlayerMover : MonoBehaviour
     {
         Vector3 direction = new Vector3(_joystick.Horizontal, 0, _joystick.Vertical);
 
-        _rigidBody.MovePosition(transform.position + direction.normalized * _speed * Time.deltaTime);
-
         if(Input.GetMouseButton(0) && direction.magnitude > _threshold)
+        {
+            _rigidBody.MovePosition(transform.position + direction.normalized * _speed * Time.deltaTime);
             Rotate(direction);
+        }
 
     }
 

@@ -27,7 +27,7 @@ public class AttackState : State
         _lastAttackTime -= Time.deltaTime;
     }
 
-    private void Attack(Enemy target)
+    private void Attack(SumoFighter target)
     {
         _animator.Play("Attack");
 
