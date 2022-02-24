@@ -11,6 +11,7 @@ public class SumoFightTransition : MonoBehaviour
 
     private void Start()
     {
+        _enemys = FindObjectsOfType<Enemy>();
         _joystickCanvas = FindObjectOfType<JoystickCanvas>();
         _joystickCanvas.gameObject.SetActive(false);
     }
@@ -19,31 +20,43 @@ public class SumoFightTransition : MonoBehaviour
     {
         if(other.TryGetComponent(out Player player))
         {
-            _joystickCanvas.gameObject.SetActive(true);
+            DisableRunerControls(player);
 
-            if (player.TryGetComponent(out MovementSystem movementSystem))
-                movementSystem.enabled = false;
+            EnableSumoControls(player);
 
-            if (player.TryGetComponent(out MouseInput input))
-                input.enabled = false;
+            EnableEnemys();
+        }
+    }
 
-            if (player.TryGetComponent(out Rigidbody rigidbody))
-                rigidbody.isKinematic = false;
+    private void EnableSumoControls(Player player)
+    {
+        _joystickCanvas.gameObject.SetActive(true);
 
-            if (player.TryGetComponent(out PlayerMover playerMover))
-                playerMover.enabled = true;
+        if (player.TryGetComponent(out PlayerMover playerMover))
+            playerMover.enabled = true;
+    }
 
-            if (player.TryGetComponent(out Enemy enemy))
-                enemy.enabled = true;
+    private void DisableRunerControls(Player player)
+    {
+        if (player.TryGetComponent(out MovementSystem movementSystem))
+            movementSystem.enabled = false;
 
-            foreach (var tempEnemy in _enemys)
-            {
-                tempEnemy.enabled = true;
+        if (player.TryGetComponent(out MouseInput input))
+            input.enabled = false;
 
-                if (tempEnemy.TryGetComponent(out EnemyStateMachine _machine))
-                    _machine.enabled = true;
+        if (player.TryGetComponent(out Rigidbody rigidbody))
+            rigidbody.isKinematic = false;
+    }
 
-            }
+    private void EnableEnemys()
+    {
+        foreach (var tempEnemy in _enemys)
+        {
+            tempEnemy.enabled = true;
+
+            if (tempEnemy.TryGetComponent(out EnemyStateMachine _machine))
+                _machine.enabled = true;
+
         }
     }
 }
