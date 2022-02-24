@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +18,12 @@ public class Enlargable : MonoBehaviour
     private Vector3 _nexSteptScale => new Vector3(_initialScale.x + _additionalScale, _initialScale.y + _additionalScale, _initialScale.z + _additionalScale);
     private Vector3 _enlargeScale => _nexSteptScale *_scaleCoefficient;
 
+    public event Action<int, int> StepChanged;
+
     private void Start()
     {
-        _initialScale = transform.localScale;   
+        _initialScale = transform.localScale;
+        StepChanged?.Invoke(_step, _maxSteps);
     }
 
     public void Reset()
@@ -33,8 +37,23 @@ public class Enlargable : MonoBehaviour
         if (_step < _maxSteps)
         {
             _step++;
+
+            StepChanged?.Invoke(_step, _maxSteps);
+
             if (_coroutine == null)
                 _coroutine = StartCoroutine(Enlarge());
+        }
+    }
+
+    public void ShrinkAnimation()
+    {
+        if (_step > 0)
+        {
+            _step--;
+
+            StepChanged?.Invoke(_step, _maxSteps);
+
+            StartCoroutine(Shrink());
         }
     }
 

@@ -10,12 +10,12 @@ public class TargetSwitcher : MonoBehaviour
 
     private void OnEnable()
     {
-        _pushable.Pushed += ChangeTarget;
+        _pushable.PushEnd += ChangeTarget;
     }
 
     private void OnDisable()
     {
-        _pushable.Pushed -= ChangeTarget;
+        _pushable.PushEnd -= ChangeTarget;
     }
 
     private void ChangeTarget()

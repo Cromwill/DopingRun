@@ -14,6 +14,8 @@ public class InjectorCollectionZone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Injector injector))
+        {
             _enlargable.EnalargeAnimation();
+        }
     }
 }

@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HustleZone : MonoBehaviour
 {
     private float _cooldown;
 
     private float _expirationTime;
+
+    public UnityAction CollideWithEnemy;
 
     private void Start()
     {
@@ -15,15 +18,16 @@ public class HustleZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Pushable pushable))
+        if (other.TryGetComponent(out IPushable pushable))
         {
             Vector3 direcation = (other.transform.position - transform.position).normalized;
+
+            CollideWithEnemy?.Invoke();
 
             if (IsOnCooldown())
             {
                 _expirationTime = Time.time + _cooldown;
                 pushable.Push(direcation);
-
             }
         }
     }
