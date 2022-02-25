@@ -22,10 +22,14 @@ public class PlayerMover : MonoBehaviour
 
         if(Input.GetMouseButton(0) && direction.magnitude > _threshold)
         {
-            _rigidBody.MovePosition(transform.position + direction.normalized * _speed * Time.deltaTime);
+            Move(direction);
             Rotate(direction);
         }
+    }
 
+    public void Move(Vector3 direction)
+    {
+        _rigidBody.MovePosition(transform.position + direction.normalized * _speed * Time.deltaTime);
     }
 
     private void Rotate(Vector3 direction)
