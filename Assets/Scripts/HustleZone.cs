@@ -7,8 +7,9 @@ public class HustleZone : MonoBehaviour
 {
     [SerializeField] private float _pushSpeed = 25;
     [SerializeField] private float _stepCoeficient;
+    [SerializeField] private float _cooldown;
+
     
-    private float _cooldown;
     private float _expirationTime;
 
     public UnityAction CollideWithEnemy;
@@ -17,8 +18,6 @@ public class HustleZone : MonoBehaviour
     {
         if (_stepCoeficient <= 0)
             _stepCoeficient = 1;
-
-        _cooldown = Random.Range(0.2f, 0.8f);
     }
 
     private void OnTriggerEnter(Collider other)

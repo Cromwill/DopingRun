@@ -145,6 +145,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: syringe_object
       objectReference: {fileID: 0}
+    - target: {fileID: 4253280567622488715, guid: 8dc4273a5e5afe74cb79c1d3c38bf531, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a24a47a4e92069241b45a686c21a2254, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dc4273a5e5afe74cb79c1d3c38bf531, type: 3}
 --- !u!4 &4625270982792364397 stripped
