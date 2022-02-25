@@ -43,7 +43,6 @@ public class CameraTransition : MonoBehaviour
         }
 
         TransitionCompleted?.Invoke();
-        StartCoroutine(Rotation());
     }
 
     private IEnumerator Rotation()
@@ -54,5 +53,7 @@ public class CameraTransition : MonoBehaviour
 
             yield return null;
         }
+
+
     }
 }
