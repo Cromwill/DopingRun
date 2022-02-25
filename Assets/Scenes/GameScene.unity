@@ -1281,6 +1281,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73ad989d707a2d46b3dfb0c5c536e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &621453029 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3875349872356419631, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
+  m_PrefabInstance: {fileID: 2092437202}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &621453031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621453029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 921cf5d439b9e0346a051a9f9e692f1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationSpeed: 5
+  _resetSpeed: 500
+  _maxAngle: 20
 --- !u!114 &628214874 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1773191981, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
@@ -5972,6 +5992,14 @@ PrefabInstance:
       propertyPath: _firstRoad
       value: 
       objectReference: {fileID: 8182317289789283532}
+    - target: {fileID: 1823091554893732089, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
+      propertyPath: _options._moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1823091554893732089, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
+      propertyPath: _options._rotationSpeed
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1823091554893732091, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
       propertyPath: m_RootOrder
       value: 25

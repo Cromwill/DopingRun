@@ -8,7 +8,7 @@ public class Injector : MonoBehaviour
     {
         if (other.TryGetComponent(out InjectorCollectionZone injectorCollectionZone))
         {
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

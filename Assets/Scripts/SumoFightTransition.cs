@@ -13,6 +13,10 @@ public class SumoFightTransition : MonoBehaviour
     private void Start()
     {
         _sumoFighterList = FindObjectOfType<SumoFighterList>();
+
+        if (_sumoFighterList == null)
+            throw new NullReferenceException($"FindObjectOfType did not find {nameof(SumoFighterList)}");
+
         _collider = GetComponent<Collider>();
     }
 

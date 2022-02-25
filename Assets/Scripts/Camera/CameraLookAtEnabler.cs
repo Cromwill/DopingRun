@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CameraLookAtEnabler : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class CameraLookAtEnabler : MonoBehaviour
     private void Start()
     {
         _cameraLookAt = FindObjectOfType<CameraLookAt>();
+
+        if (_cameraLookAt == null)
+            throw new NullReferenceException($"FindObjectOfType did not find {nameof(CameraLookAt)}");
     }
 
     private void OnEnable()
