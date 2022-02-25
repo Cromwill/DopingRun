@@ -17,7 +17,7 @@ public class Kickable : MonoBehaviour, IPushable
         _rigidBody = GetComponent<Rigidbody>();
     }
 
-    public void Push(Vector3 direction)
+    public void Push(Vector3 direction, float pushSpeed)
     {
         Pushed?.Invoke();
         _rigidBody.AddForce(direction * _forceStrength, ForceMode.VelocityChange);

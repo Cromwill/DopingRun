@@ -7,7 +7,6 @@ using UnityEngine;
 public class Pushable : MonoBehaviour, IPushable
 {
     [SerializeField] private float _pushTime;
-    [SerializeField] private float _pushSpeed;
 
     private Rigidbody _rigidbody;
 
@@ -19,12 +18,12 @@ public class Pushable : MonoBehaviour, IPushable
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Push(Vector3 direction)
+    public void Push(Vector3 direction, float pushSpeed)
     {
-        StartCoroutine(PushAnimation(direction));
+        StartCoroutine(PushAnimation(direction, pushSpeed));
     }
 
-    private IEnumerator PushAnimation(Vector3 direction)
+    private IEnumerator PushAnimation(Vector3 direction, float _pushSpeed)
     {
         float timePassed = 0;
 
