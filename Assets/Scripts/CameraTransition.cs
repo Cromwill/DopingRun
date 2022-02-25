@@ -2,25 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RunnerMovementSystem.Examples;
+using System;
 
 public class CameraTransition : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
+    [SerializeField] private CameraPoint _cameraPoint;
     [SerializeField] private float _timeToTransit;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private CameraFollowing _following;
 
-    private Player _player;
+    private FocalPoint _focalPoint;
+    private Camera _camera;
+
+    public event Action TransitionCompleted;
 
     private void Start()
     {
-        _player = FindObjectOfType<Player>();
+        _camera = Camera.main;
+        _focalPoint = FindObjectOfType<Player>().GetComponentInChildren<FocalPoint>();
     }
 
     public void Transit()
     {
+        _camera.transform.SetParent(_cameraPoint.transform);
         _following.enabled = false;
-        float distance = Vector3.Distance(transform.position, _target.position);
+        float distance = Vector3.Distance(transform.position, _cameraPoint.transform.position);
         StartCoroutine(TransitAnimation(distance));
     }
 
@@ -28,22 +34,23 @@ public class CameraTransition : MonoBehaviour
     {
         float changeSpeed = distance / _timeToTransit;
 
-        while (transform.position!= _target.position)
+        while (_camera.transform.position != _cameraPoint.transform.position)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _target.position, changeSpeed * Time.deltaTime);
-            transform.LookAt(_player.transform);
+            _camera.transform.position = Vector3.MoveTowards(_camera.transform.position, _cameraPoint.transform.position, changeSpeed * Time.deltaTime);
+            _camera.transform.LookAt(_focalPoint.transform);
 
             yield return null;
         }
 
+        TransitionCompleted?.Invoke();
         StartCoroutine(Rotation());
     }
 
     private IEnumerator Rotation()
     {
-        while (transform.rotation != _target.rotation)
+        while (_camera.transform.rotation != _cameraPoint.transform.rotation)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, _target.rotation, _rotationSpeed * Time.deltaTime);
+            _camera.transform.rotation = Quaternion.RotateTowards(_camera.transform.rotation, _cameraPoint.transform.rotation, _rotationSpeed * Time.deltaTime);
 
             yield return null;
         }

@@ -17,6 +17,9 @@ public class DeathTrigger : MonoBehaviour
             if (enemy.TryGetComponent(out MoveState moveState))
                 moveState.enabled = false;
 
+            if (enemy.TryGetComponent(out PlayerMover playerMover))
+                playerMover.enabled = false;
+
             enemy.OnDying();
 
             FighterOffTheRing?.Invoke(enemy);
