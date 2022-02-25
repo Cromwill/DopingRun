@@ -7,7 +7,7 @@ public class Touchable : MonoBehaviour, IPushable
     [SerializeField] private RunerEnemyTrigger _enemyTriggerZone;
     [SerializeField] private RunerEnemyMover _enemyMover;
 
-    public void Push(Vector3 direction)
+    public void Push(Vector3 direction, float pushSpeed)
     {
         _enemyTriggerZone.gameObject.SetActive(false);
         _enemyMover.MoveForward();

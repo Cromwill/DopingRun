@@ -5,14 +5,19 @@ using UnityEngine.Events;
 
 public class HustleZone : MonoBehaviour
 {
+    [SerializeField] private float _pushSpeed = 25;
+    [SerializeField] private float _stepCoeficient;
+    
     private float _cooldown;
-
     private float _expirationTime;
 
     public UnityAction CollideWithEnemy;
 
     private void Start()
     {
+        if (_stepCoeficient <= 0)
+            _stepCoeficient = 1;
+
         _cooldown = Random.Range(0.2f, 0.8f);
     }
 
@@ -28,9 +33,15 @@ public class HustleZone : MonoBehaviour
             if (IsOnCooldown())
             {
                 _expirationTime = Time.time + _cooldown;
-                pushable.Push(direcation);
+                pushable.Push(direcation, _pushSpeed);
             }
         }
+    }
+
+    public void AddPushSpeed(float pushSpeed)
+    {
+        Debug.Log("asd");
+        _pushSpeed += pushSpeed * _stepCoeficient;
     }
 
     private bool IsOnCooldown()
