@@ -10,6 +10,7 @@ public class PlayerMover : MonoBehaviour
 
     private Rigidbody _rigidBody;
     private float _threshold = 0.01f;
+    private const int LeftMouseButton = 0;
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class PlayerMover : MonoBehaviour
     {
         Vector3 direction = new Vector3(_joystick.Horizontal, 0, _joystick.Vertical);
 
-        if(Input.GetMouseButton(0) && direction.magnitude > _threshold)
+        if(Input.GetMouseButton(LeftMouseButton) && direction.magnitude > _threshold)
         {
             Move(direction);
             Rotate(direction);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,10 @@ public class VictoryDecider : MonoBehaviour
     private void OnEnable()
     {
         _sumoFighterList = FindObjectOfType<SumoFighterList>();
+
+        if (_sumoFighterList == null)
+            throw new NullReferenceException($"FindObjectOfType did not find {nameof(SumoFighterList)}");
+
         _sumoFighterList.OneFighterLeft += OnLastFighterStand;
     }
 

@@ -19,7 +19,11 @@ public class CameraTransition : MonoBehaviour
     private void Start()
     {
         _camera = Camera.main;
+
         _focalPoint = FindObjectOfType<Player>().GetComponentInChildren<FocalPoint>();
+
+        if (_focalPoint == null)
+            throw new NullReferenceException($"FindObjectOfType did not find {nameof(FocalPoint)} or {nameof(Player)}");
     }
 
     public void Transit()

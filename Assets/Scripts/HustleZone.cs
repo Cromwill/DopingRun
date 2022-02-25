@@ -25,22 +25,22 @@ public class HustleZone : MonoBehaviour
     {
         if (other.TryGetComponent(out IPushable pushable))
         {
-            Vector3 direcation = (other.transform.position - transform.position).normalized;
-            direcation.y = 0f;
+            Vector3 direction = (other.transform.position - transform.position).normalized;
+            direction.y = 0f;
 
             CollideWithEnemy?.Invoke();
 
             if (IsOnCooldown())
             {
                 _expirationTime = Time.time + _cooldown;
-                pushable.Push(direcation, _pushSpeed);
+                pushable.Push(direction, _pushSpeed);
             }
         }
     }
 
     public void AddPushSpeed(float pushSpeed)
     {
-        Debug.Log("asd");
+        Debug.Log("asdhasidfahsfuiashi");
         _pushSpeed += pushSpeed * _stepCoeficient;
     }
 

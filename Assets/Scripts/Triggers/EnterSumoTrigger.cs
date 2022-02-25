@@ -15,7 +15,7 @@ public class EnterSumoTrigger : MonoBehaviour
     private void Start()
     {
         _joystickCanvas = FindObjectOfType<JoystickCanvas>();
-        _joystickCanvas.gameObject.SetActive(false);
+        _joystickCanvas.enabled = false;
     }
 
     private void OnEnable()
@@ -70,7 +70,7 @@ public class EnterSumoTrigger : MonoBehaviour
 
     private void EnableSumoControls(Player player)
     {
-        _joystickCanvas.gameObject.SetActive(true);
+        _joystickCanvas.enabled = true;
 
         if (player.TryGetComponent(out PlayerMover playerMover))
             playerMover.enabled = true;
