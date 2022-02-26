@@ -1,20 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RunnerMovementSystem;
-using RunnerMovementSystem.Examples;
 
+[RequireComponent(typeof(RunerControlls))]
 public class EnterSumoTrigger : MonoBehaviour
 {
     [SerializeField] private float _delay;
     [SerializeField] private SumoFightTransition _sumoFightTransition;
 
     private JoystickCanvas _joystickCanvas;
+    private SumoControlls _sumoControlls;
+    private RunerControlls _runerControls;
     private bool _isPlayerReachedDesitination;
 
     private void Start()
     {
+        _runerControls = new RunerControlls();
+        _sumoControlls = new SumoControlls();
         _joystickCanvas = FindObjectOfType<JoystickCanvas>();
+
+        Error.CheckOnNull(_joystickCanvas, nameof(JoystickCanvas));
+
         _joystickCanvas.enabled = false;
     }
 
@@ -32,8 +39,8 @@ public class EnterSumoTrigger : MonoBehaviour
     {
         if(other.TryGetComponent(out Player player))
         {
-            DisableRunerControls(player);
-            EnableSumoControls(player);
+            _runerControls.Disable(player);
+            _sumoControlls.Enable(player, _joystickCanvas);
         }
 
         if(other.TryGetComponent(out PlayerMover playerMover))
@@ -55,27 +62,6 @@ public class EnterSumoTrigger : MonoBehaviour
             yield return null;
         }
     }
-
-    private void DisableRunerControls(Player player)
-    {
-        if (player.TryGetComponent(out MovementSystem movementSystem))
-            movementSystem.enabled = false;
-
-        if (player.TryGetComponent(out MouseInput input))
-            input.enabled = false;
-
-        if (player.TryGetComponent(out Rigidbody rigidbody))
-            rigidbody.isKinematic = false;
-    }
-
-    private void EnableSumoControls(Player player)
-    {
-        _joystickCanvas.enabled = true;
-
-        if (player.TryGetComponent(out PlayerMover playerMover))
-            playerMover.enabled = true;
-    }
-
     private void SetReached()
     {
         _isPlayerReachedDesitination = true;

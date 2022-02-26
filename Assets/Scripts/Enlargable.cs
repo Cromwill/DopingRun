@@ -29,7 +29,7 @@ public class Enlargable : MonoBehaviour
 
     public void Reset()
     {
-        _step = 0;
+        _step = 1;
         ShrinkAnimation();
     }
 
@@ -48,7 +48,7 @@ public class Enlargable : MonoBehaviour
 
     public void ShrinkAnimation()
     {
-        if (_step >= 0)
+        if (_step > 0)
         {
             _step--;
 

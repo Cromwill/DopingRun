@@ -3,17 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VictoryDecider : MonoBehaviour
+public class WinerDecider : MonoBehaviour
 {
     private SumoFighterList _sumoFighterList;
     private DeathTrigger _deathTrigger;
+
+    public event Action Victory;
 
     private void OnEnable()
     {
         _sumoFighterList = FindObjectOfType<SumoFighterList>();
 
-        if (_sumoFighterList == null)
-            throw new NullReferenceException($"FindObjectOfType did not find {nameof(SumoFighterList)}");
+        Error.CheckOnNull(_sumoFighterList, nameof(SumoFighterList));
 
         _sumoFighterList.OneFighterLeft += OnLastFighterStand;
     }
@@ -25,9 +26,10 @@ public class VictoryDecider : MonoBehaviour
 
     private void OnLastFighterStand(SumoFighter fighter)
     {
-        Debug.Log("Victory");
-
         if (fighter.TryGetComponent(out CelebrationState celebrationState))
+        {
+            Victory?.Invoke();
             celebrationState.enabled = true;
+        }
     }
 }

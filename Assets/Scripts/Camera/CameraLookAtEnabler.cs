@@ -14,8 +14,7 @@ public class CameraLookAtEnabler : MonoBehaviour
     {
         _cameraLookAt = FindObjectOfType<CameraLookAt>();
 
-        if (_cameraLookAt == null)
-            throw new NullReferenceException($"FindObjectOfType did not find {nameof(CameraLookAt)}");
+        Error.CheckOnNull(_cameraLookAt, nameof(CameraLookAt));
     }
 
     private void OnEnable()
