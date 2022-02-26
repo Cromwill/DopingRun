@@ -14,6 +14,7 @@ public class SumoFighterList : MonoBehaviour
     private void Start()
     {
         _fighters = FindObjectsOfType<SumoFighter>().ToList();
+        Error.CheckOnNull(_fighters[0], nameof(SumoFighter));
     }
 
     private void OnEnable()

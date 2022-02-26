@@ -9,6 +9,7 @@ public class CameraLookAt : MonoBehaviour
     private void Start()
     {
         _focalPoint = FindObjectOfType<FocalPoint>();
+        Error.CheckOnNull(_focalPoint, nameof(FocalPoint));
     }
 
     private void Update()

@@ -6,6 +6,7 @@ using UnityEngine;
 public class DeathTrigger : MonoBehaviour
 {
     public event Action<SumoFighter> FighterOffTheRing;
+    public event Action PlayerLose;
 
     private void OnTriggerExit(Collider other)
     {
@@ -26,5 +27,8 @@ public class DeathTrigger : MonoBehaviour
 
             enemy.enabled = false;
         }
+
+        if (other.TryGetComponent(out Player player))
+            PlayerLose?.Invoke();
     }
 }

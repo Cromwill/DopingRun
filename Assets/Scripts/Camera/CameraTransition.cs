@@ -13,6 +13,7 @@ public class CameraTransition : MonoBehaviour
 
     private FocalPoint _focalPoint;
     private Camera _camera;
+    private float changeSpeed; 
 
     public event Action TransitionCompleted;
 
@@ -22,22 +23,22 @@ public class CameraTransition : MonoBehaviour
 
         _focalPoint = FindObjectOfType<Player>().GetComponentInChildren<FocalPoint>();
 
-        if (_focalPoint == null)
-            throw new NullReferenceException($"FindObjectOfType did not find {nameof(FocalPoint)} or {nameof(Player)}");
+        Error.CheckOnNull(_focalPoint, nameof(Player));
     }
 
     public void Transit()
     {
         _camera.transform.SetParent(_cameraPoint.transform);
         _following.enabled = false;
+
         float distance = Vector3.Distance(transform.position, _cameraPoint.transform.position);
+        changeSpeed = distance / _timeToTransit;
+
         StartCoroutine(TransitAnimation(distance));
     }
 
     private IEnumerator TransitAnimation(float distance)
     {
-        float changeSpeed = distance / _timeToTransit;
-
         while (_camera.transform.position != _cameraPoint.transform.position)
         {
             _camera.transform.position = Vector3.MoveTowards(_camera.transform.position, _cameraPoint.transform.position, changeSpeed * Time.deltaTime);
@@ -57,7 +58,5 @@ public class CameraTransition : MonoBehaviour
 
             yield return null;
         }
-
-
     }
 }

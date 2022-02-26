@@ -14,8 +14,7 @@ public class SumoFightTransition : MonoBehaviour
     {
         _sumoFighterList = FindObjectOfType<SumoFighterList>();
 
-        if (_sumoFighterList == null)
-            throw new NullReferenceException($"FindObjectOfType did not find {nameof(SumoFighterList)}");
+        Error.CheckOnNull(_sumoFighterList, nameof(SumoFighterList));
 
         _collider = GetComponent<Collider>();
     }
