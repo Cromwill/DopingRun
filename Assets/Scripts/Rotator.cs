@@ -10,10 +10,11 @@ public class Rotator : MonoBehaviour
 
     private Quaternion _forwardQuaternionRotation = new Quaternion(0, 0, 0, 1);
     private float xRotation;
-
+    private float _threshold = 0.001f;
+    private float _smoothMultiplier = 10;
     private void Update()
     {
-        float pointerX = Input.GetAxis("Mouse X") * _rotationSpeed;
+        float pointerX = Input.GetAxis("Mouse X") * _rotationSpeed * _smoothMultiplier * Time.deltaTime;
 
         xRotation += pointerX;
 
@@ -21,20 +22,19 @@ public class Rotator : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            if (pointerX != 0)
+            if (Mathf.Abs (pointerX) >= _threshold)
                 transform.localRotation = Quaternion.Euler(0, xRotation, 0f);
-            else
-                ResetRotation();
         }
-        else
-        {
-            ResetRotation();
-        }
+
+        ResetRotation();
     }
 
     private void ResetRotation()
     {
         transform.localRotation = Quaternion.RotateTowards(transform.localRotation, _forwardQuaternionRotation, _resetSpeed * Time.deltaTime);
-        xRotation = transform.localRotation.x;
+        xRotation = transform.localEulerAngles.y;
+
+        if (xRotation > 180)
+            xRotation = xRotation - 360;
     }
 }
