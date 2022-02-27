@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using FirstGearGames.SmoothCameraShaker;
 
 public class HustleZone : MonoBehaviour
 {
     [SerializeField] private float _pushSpeed = 25;
     [SerializeField] private float _stepCoeficient;
     [SerializeField] private float _cooldown;
-
+    [SerializeField] private ShakeData _shakeData;
     
     private float _expirationTime;
 
-    public UnityAction CollideWithEnemy;
+    public UnityAction CollidedWithPushable;
+    public UnityAction<ShakeData> PlayerCollidedWithPushable;
 
     private void Start()
     {
@@ -27,10 +29,13 @@ public class HustleZone : MonoBehaviour
             Vector3 direction = (other.transform.position - transform.position).normalized;
             direction.y = 0f;
 
-            CollideWithEnemy?.Invoke();
+            CollidedWithPushable?.Invoke();
 
             if (IsOnCooldown())
             {
+                if(_shakeData != null)
+                    PlayerCollidedWithPushable?.Invoke(_shakeData);
+
                 _expirationTime = Time.time + _cooldown;
                 pushable.Push(direction, _pushSpeed);
             }

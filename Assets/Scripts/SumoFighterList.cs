@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using System.Threading.Tasks;
 
 public class SumoFighterList : MonoBehaviour
 {
     private List<SumoFighter> _fighters;
     private DeathTrigger _deathTrigger;
+    private int _delayTime = 2000;
 
     public event Action<SumoFighter> OneFighterLeft;
 
@@ -28,14 +30,27 @@ public class SumoFighterList : MonoBehaviour
         _deathTrigger.FighterOffTheRing -= ExcludeFighter;
     }
 
-    public void EnableFighters()
+    public async void EnableFighters()
     {
+        ParachuteFighters();
+
+        await Task.Delay(_delayTime);
+
         foreach (var fighter in _fighters)
         {
             fighter.enabled = true;
 
-            if (fighter.TryGetComponent(out EnemyStateMachine _machine))
-                _machine.enabled = true;
+            if (fighter.TryGetComponent(out EnemyStateMachine machine))
+                machine.enabled = true;
+        }
+    }
+
+    private void ParachuteFighters()
+    {
+        foreach (var fighter in _fighters)
+        {
+            if (fighter.TryGetComponent(out Rigidbody rigidbody))
+                rigidbody.isKinematic = false;
         }
     }
 

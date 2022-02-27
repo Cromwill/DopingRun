@@ -9,8 +9,9 @@ public class CameraTransition : MonoBehaviour
     [SerializeField] private CameraPoint _cameraPoint;
     [SerializeField] private float _timeToTransit;
     [SerializeField] private float _rotationSpeed;
-    [SerializeField] private CameraFollowing _following;
+    [SerializeField] private bool _setPointAsParent;
 
+    private CameraFollowing _following;
     private FocalPoint _focalPoint;
     private Camera _camera;
     private float changeSpeed; 
@@ -22,13 +23,20 @@ public class CameraTransition : MonoBehaviour
         _camera = Camera.main;
 
         _focalPoint = FindObjectOfType<Player>().GetComponentInChildren<FocalPoint>();
-
         Error.CheckOnNull(_focalPoint, nameof(Player));
+
+        _following = FindObjectOfType<CameraFollowing>();
+        Error.CheckOnNull(_following, nameof(CameraFollowing));
     }
 
     public void Transit()
     {
-        _camera.transform.SetParent(_cameraPoint.transform);
+        if (_camera.transform.parent != null)
+            _camera.transform.parent = null;
+
+        if (_setPointAsParent)
+            _camera.transform.SetParent(_cameraPoint.transform);
+
         _following.enabled = false;
 
         float distance = Vector3.Distance(transform.position, _cameraPoint.transform.position);
