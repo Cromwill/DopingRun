@@ -1,4 +1,4 @@
-public class SumoControlls
+public class SumoControls
 {
     public void Enable(Player player, JoystickCanvas joystickCanvas)
     {

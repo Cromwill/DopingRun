@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WinerDecider : MonoBehaviour
+public class WinnerDecider : MonoBehaviour
 {
     private SumoFighterList _sumoFighterList;
     private DeathTrigger _deathTrigger;

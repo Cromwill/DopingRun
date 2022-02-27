@@ -7,12 +7,12 @@ public class WinScreenEnabler : MonoBehaviour
     [SerializeField] private float _delay;
 
     private WinScreen _winScreen;
-    private WinerDecider _winerDecider;
+    private WinnerDecider _winerDecider;
 
     private void OnEnable()
     {
-        _winerDecider = FindObjectOfType<WinerDecider>();
-        Error.CheckOnNull(_winerDecider, nameof(WinerDecider));
+        _winerDecider = FindObjectOfType<WinnerDecider>();
+        Error.CheckOnNull(_winerDecider, nameof(WinnerDecider));
 
         _winScreen = FindObjectOfType<WinScreen>();
         Error.CheckOnNull(_winScreen, nameof(WinScreen));

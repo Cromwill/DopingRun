@@ -3,25 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(WinerDecider))]
+[RequireComponent(typeof(WinnerDecider))]
 public class VictoryTrigger : MonoBehaviour
 {
     [SerializeField] private CameraTransition _cameraTransition;
 
-    private WinerDecider _winerDecider;
-    private SumoControlls _sumoControlls;
+    private WinnerDecider _winerDecider;
+    private SumoControls _sumoControlls;
 
     private Player _player;
     private JoystickCanvas _joystickCanvas;
 
     private void Start()
     {
-        _sumoControlls = new SumoControlls();
+        _sumoControlls = new SumoControls();
     }
 
     private void OnEnable()
     {
-        _winerDecider = GetComponent<WinerDecider>();
+        _winerDecider = GetComponent<WinnerDecider>();
         _winerDecider.Victory += OnVictory;
     }
 
