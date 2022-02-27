@@ -27,12 +27,12 @@ public class EnterSumoTrigger : MonoBehaviour
 
     private void OnEnable()
     {
-        _sumoFightTransition.PlayerEntered += SetReached;
+        _sumoFightTransition.PlayerEntered += OnPlayerReachedDestination;
     }
 
     private void OnDisable()
     {
-        _sumoFightTransition.PlayerEntered -= SetReached;
+        _sumoFightTransition.PlayerEntered -= OnPlayerReachedDestination;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -62,7 +62,7 @@ public class EnterSumoTrigger : MonoBehaviour
             yield return null;
         }
     }
-    private void SetReached()
+    private void OnPlayerReachedDestination()
     {
         _isPlayerReachedDesitination = true;
     }
