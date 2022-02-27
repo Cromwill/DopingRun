@@ -30,8 +30,5 @@ public class AttackState : State
     private void Attack(SumoFighter target)
     {
         _animator.Play("Attack");
-
-        //if(target != null)
-            //target.ApplyDamage(_damage);
     }
 }

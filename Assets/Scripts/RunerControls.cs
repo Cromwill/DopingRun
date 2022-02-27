@@ -1,7 +1,7 @@
 using UnityEngine;
 using RunnerMovementSystem;
 using RunnerMovementSystem.Examples;
-public class RunerControlls
+public class RunerControls
 {
     public void Disable(Player player)
     {

@@ -3,21 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(RunerControlls))]
+[RequireComponent(typeof(RunerControls))]
 public class EnterSumoTrigger : MonoBehaviour
 {
     [SerializeField] private float _delay;
     [SerializeField] private SumoFightTransition _sumoFightTransition;
 
     private JoystickCanvas _joystickCanvas;
-    private SumoControlls _sumoControlls;
-    private RunerControlls _runerControls;
+    private SumoControls _sumoControls;
+    private RunerControls _runerControls;
     private bool _isPlayerReachedDesitination;
 
     private void Start()
     {
-        _runerControls = new RunerControlls();
-        _sumoControlls = new SumoControlls();
+        _runerControls = new RunerControls();
+        _sumoControls = new SumoControls();
         _joystickCanvas = FindObjectOfType<JoystickCanvas>();
 
         Error.CheckOnNull(_joystickCanvas, nameof(JoystickCanvas));
@@ -40,7 +40,7 @@ public class EnterSumoTrigger : MonoBehaviour
         if(other.TryGetComponent(out Player player))
         {
             _runerControls.Disable(player);
-            _sumoControlls.Enable(player, _joystickCanvas);
+            _sumoControls.Enable(player, _joystickCanvas);
         }
 
         if(other.TryGetComponent(out PlayerMover playerMover))
