@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody),typeof(BoxCollider))]
 public class Kickable : MonoBehaviour, IPushable
 {
     [SerializeField] private float _forceStrength;

@@ -52,6 +52,11 @@ namespace RunnerMovementSystem
             _currentMovement?.Update();
         }
 
+        public void SetDirection(Direction direction)
+        {
+            _options.SetDirection(direction);
+        }
+
         public void Init(RoadSegment firstRoad)
         {
             _firstRoad = firstRoad;
@@ -100,4 +105,9 @@ namespace RunnerMovementSystem
             PathChanged?.Invoke(nearestRoad);
         }
     }
+}
+
+public enum Direction
+{
+    Reverse = -1
 }

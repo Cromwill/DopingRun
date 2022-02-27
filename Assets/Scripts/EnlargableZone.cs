@@ -12,12 +12,12 @@ public class EnlargableZone : MonoBehaviour
     private void OnEnable()
     {
         _enlaragable = GetComponent<Enlargable>();
-        _hustleZone.CollideWithEnemy += OnCollideWithEnemy;
+        _hustleZone.CollidedWithPushable += OnCollideWithEnemy;
     }
 
     private void OnDisable()
     {
-        _hustleZone.CollideWithEnemy -= OnCollideWithEnemy;
+        _hustleZone.CollidedWithPushable -= OnCollideWithEnemy;
     }
 
     private void OnCollideWithEnemy()

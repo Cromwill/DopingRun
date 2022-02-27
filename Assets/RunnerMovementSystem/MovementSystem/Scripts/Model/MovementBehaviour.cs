@@ -8,7 +8,6 @@ namespace RunnerMovementSystem.Model
         private PathSegment _pathSegment;
         private MovementOptions _movementOptions;
         private float _distanceTravelled;
-
         public MovementBehaviour(Transform targetTransform, MovementOptions movementOptions)
         {
             _targetTransform = targetTransform;

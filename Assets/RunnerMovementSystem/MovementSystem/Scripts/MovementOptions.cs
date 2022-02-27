@@ -13,5 +13,10 @@ namespace RunnerMovementSystem
         public float MoveSpeed => _moveSpeed;
         public float RotationSpeed => _rotationSpeed;
         public float BorderOffset => _borderOffset;
+
+        public void SetDirection(Direction direction )
+        {
+            _moveSpeed *= (int)direction;
+        }
     }
 }
