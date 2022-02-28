@@ -42,10 +42,10 @@ public class CameraTransition : MonoBehaviour
         float distance = Vector3.Distance(transform.position, _cameraPoint.transform.position);
         changeSpeed = distance / _timeToTransit;
 
-        StartCoroutine(TransitAnimation(distance));
+        StartCoroutine(TransitAnimation());
     }
 
-    private IEnumerator TransitAnimation(float distance)
+    private IEnumerator TransitAnimation()
     {
         while (_camera.transform.position != _cameraPoint.transform.position)
         {

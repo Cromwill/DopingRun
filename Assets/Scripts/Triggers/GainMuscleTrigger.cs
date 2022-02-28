@@ -7,7 +7,7 @@ public class GainMuscleTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out PlayerAnimator animator))
-            animator.GainMuscleAnimation();
+            animator.GainMuscle();
 
         if (other.TryGetComponent(out Player player))
         {

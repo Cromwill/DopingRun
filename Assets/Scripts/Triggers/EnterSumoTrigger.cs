@@ -6,9 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(RunerControls))]
 public class EnterSumoTrigger : MonoBehaviour
 {
-    [SerializeField] private float _delay;
     [SerializeField] private SumoFightTransition _sumoFightTransition;
 
+    private float _delay;
     private JoystickCanvas _joystickCanvas;
     private SumoControls _sumoControls;
     private RunerControls _runerControls;
@@ -41,6 +41,9 @@ public class EnterSumoTrigger : MonoBehaviour
         {
             _runerControls.Disable(player);
             _sumoControls.Enable(player, _joystickCanvas);
+
+            if (player.TryGetComponent(out PlayerAnimator playerAnimator))
+                _delay = playerAnimator.AnimationTime;
         }
 
         if(other.TryGetComponent(out PlayerMover playerMover))
