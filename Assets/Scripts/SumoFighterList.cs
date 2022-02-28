@@ -9,7 +9,7 @@ public class SumoFighterList : MonoBehaviour
 {
     private List<SumoFighter> _fighters;
     private DeathTrigger _deathTrigger;
-    private int _delayTime = 2000;
+    private float _delayTime = 2f;
 
     public event Action<SumoFighter> OneFighterLeft;
 
@@ -30,11 +30,16 @@ public class SumoFighterList : MonoBehaviour
         _deathTrigger.FighterOffTheRing -= ExcludeFighter;
     }
 
-    public async void EnableFighters()
+    public void EnableFighters()
     {
         ParachuteFighters();
 
-        await Task.Delay(_delayTime);
+        StartCoroutine(DelayedEnableFighters());
+    }
+
+    private IEnumerator DelayedEnableFighters()
+    {
+        yield return new WaitForSeconds(_delayTime);
 
         foreach (var fighter in _fighters)
         {

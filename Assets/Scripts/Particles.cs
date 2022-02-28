@@ -9,9 +9,12 @@ public class Particles : MonoBehaviour
 
     private ParticleSystem _particles;
 
-    private void OnEnable()
+    private void Start()
     {
         _particles = GetComponent<ParticleSystem>();
+    }
+    private void OnEnable()
+    {
         _hustleZone.CollidedWithPushable += OnCollideWithPushable;
     }
 
