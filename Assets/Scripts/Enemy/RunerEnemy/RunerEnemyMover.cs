@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,12 @@ using UnityEngine;
 public class RunerEnemyMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
-
+    [SerializeField] private GrabZone _grabZone;
+    
     private Rigidbody _rigidbody;
     private RunerEnemyTrigger _enemyTrigger;
+
+    public event Action Moving;
 
     private void Start()
     {
@@ -19,11 +23,13 @@ public class RunerEnemyMover : MonoBehaviour
     {
         _enemyTrigger = GetComponentInChildren<RunerEnemyTrigger>();
         _enemyTrigger.PlayerInTriggerZone += Move;
+        _grabZone.PlayerInGrabZone += Disable;
     }
 
     private void OnDisable()
     {
         _enemyTrigger.PlayerInTriggerZone -= Move;
+        _grabZone.PlayerInGrabZone -= Disable;
     }
 
     private void Rotate(Vector3 direction)
@@ -38,6 +44,7 @@ public class RunerEnemyMover : MonoBehaviour
     private void Move(Vector3 direction)
     {
         _rigidbody.MovePosition(transform.position + direction * _speed * Time.deltaTime);
+        Moving?.Invoke();
         Rotate(direction);
     }
 
@@ -52,7 +59,7 @@ public class RunerEnemyMover : MonoBehaviour
 
         while(timePassed < 0.1f)
         {
-            _rigidbody.MovePosition(transform.position + (transform.right+transform.forward) * _speed*8f * Time.deltaTime);
+            _rigidbody.MovePosition(transform.position + (transform.right+transform.forward) * _speed*2f * Time.deltaTime);
             timePassed += Time.deltaTime;
 
             yield return null;

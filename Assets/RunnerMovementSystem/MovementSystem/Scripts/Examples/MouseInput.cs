@@ -41,13 +41,10 @@ namespace RunnerMovementSystem.Examples
             {
                 var offset = Input.mousePosition - _mousePosition;
                 _roadMovement.SetOffset(_saveOffset + offset.x * _sensitivity);
-                _roadMovement.MoveForward();
             }
 
-            if (Input.GetMouseButtonUp(0))
-            {
-                IsMoved = false;
-            }
+            if(IsMoved)
+                _roadMovement.MoveForward();
         }
     }
 }
