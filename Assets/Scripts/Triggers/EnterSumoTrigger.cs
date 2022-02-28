@@ -22,7 +22,7 @@ public class EnterSumoTrigger : MonoBehaviour
 
         Error.CheckOnNull(_joystickCanvas, nameof(JoystickCanvas));
 
-        _joystickCanvas.enabled = false;
+        _joystickCanvas.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -40,7 +40,7 @@ public class EnterSumoTrigger : MonoBehaviour
         if(other.TryGetComponent(out Player player))
         {
             _runerControls.Disable(player);
-            _sumoControls.Enable(player, _joystickCanvas);
+            _sumoControls.Enable(player);
 
             if (player.TryGetComponent(out PlayerAnimator playerAnimator))
                 _delay = playerAnimator.AnimationTime;
@@ -67,6 +67,7 @@ public class EnterSumoTrigger : MonoBehaviour
     }
     private void OnPlayerReachedDestination()
     {
+        _sumoControls.EnableJouystick(_joystickCanvas);
         _isPlayerReachedDesitination = true;
     }
 }
