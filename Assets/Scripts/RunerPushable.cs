@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RunnerMovementSystem.Model;
-using System.Threading.Tasks;
 using RunnerMovementSystem;
 
 public class RunerPushable : MonoBehaviour
 {
     [SerializeField] private MovementSystem _movementSystems;
 
-    private int _pushTime = 500;
+    private float _pushTime = 0.5f;
 
-    public async void Push()
+    public void Push()
+    {
+        StartCoroutine(PushAnimation());
+    }
+
+    private IEnumerator PushAnimation()
     {
         _movementSystems.SetDirection(Direction.Reverse);
 
-        await Task.Delay(_pushTime);
+        yield return new WaitForSeconds(_pushTime);
 
         _movementSystems.SetDirection(Direction.Reverse);
     }
