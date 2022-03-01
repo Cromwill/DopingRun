@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8258476653226042377}
   - component: {fileID: 8833275441955037986}
   - component: {fileID: 8235958607591039519}
+  - component: {fileID: 1331174571}
   m_Layer: 0
   m_Name: RunerEnemy
   m_TagString: Untagged
@@ -131,7 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
-  _grabZone: {fileID: 1817223519751837581}
 --- !u!114 &8833275441955037986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +160,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 612494509836772043}
   _grabZone: {fileID: 1817223519751837581}
+--- !u!114 &1331174571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236078360691607390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b1ad4dd261f1b4bab3d9c1b35bc775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3685359155811560944
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d55c2e3d533284e984aa329c6c9c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _graber: {fileID: 1331174571}
 --- !u!1 &8508658267885162844
 GameObject:
   m_ObjectHideFlags: 0

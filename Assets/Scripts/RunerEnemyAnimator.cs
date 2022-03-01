@@ -12,18 +12,21 @@ public class RunerEnemyAnimator : MonoBehaviour
 
     private const string _moving = "IsMoving";
     private const string _grab = "Grab";
+    private const string _lay = "Lay";
+
+    private void Awake()
+    {
+        _runerEnemyMover = GetComponent<RunerEnemyMover>();      
+    }
 
     private void OnEnable()
     {
-        _runerEnemyMover = GetComponent<RunerEnemyMover>();
         _runerEnemyMover.Moving += OnMove;
-        _grabZone.PlayerInGrabZone += OnPlayerInGrabZone;
     }
 
     private void OnDisable()
     {
         _runerEnemyMover.Moving -= OnMove;
-        _grabZone.PlayerInGrabZone -= OnPlayerInGrabZone;
     }
 
     private void OnMove()
@@ -31,8 +34,9 @@ public class RunerEnemyAnimator : MonoBehaviour
         _animator.SetBool(_moving, true);
     }
 
-    private void OnPlayerInGrabZone()
+    public void GrabAnimation()
     {
         _animator.SetTrigger(_grab);
+        _animator.SetTrigger(_lay);
     }
 }
