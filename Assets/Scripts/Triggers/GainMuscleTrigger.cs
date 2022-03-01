@@ -14,7 +14,6 @@ public class GainMuscleTrigger : MonoBehaviour
             Enlargable enlargable = player.GetComponentInChildren<Enlargable>();
             HustleZone hustleZone = player.GetComponentInChildren<HustleZone>();
             hustleZone.AddPushSpeed(enlargable.Step);
-            enlargable.Reset();
         }
     }
 }

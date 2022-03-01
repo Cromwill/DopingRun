@@ -35,6 +35,7 @@ public class Enlargable : MonoBehaviour
 
     public void EnalargeAnimation()
     {
+ 
         if (_step < _maxSteps)
         {
             _step++;

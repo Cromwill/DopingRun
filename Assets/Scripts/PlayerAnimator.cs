@@ -5,34 +5,34 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
-    [SerializeField] private EnlargePlayer _enlargePlayer;
-    [SerializeField] private float _timeToGainMuscle;
-    [SerializeField] private float _targetScale;
+    
+    private const string _injection = "Injection";
+    private const string _gainMuscle = "GainMuscle";
+    private const string _transformation = "Transformation";
+    private const string _run = "Run";
 
-    private float _maxWeight = 100f;
-    public float AnimationTime => _timeToGainMuscle;
+    private float _GainMuscleAnimationTime;
+    private float _transformationAnimationTime;
+    private float _injectionAnimationTime =0.75f;
 
-    private float _changeSpeed;
+    public float AnimationTime => _GainMuscleAnimationTime;
+    public float TransformationAnimationTime => _transformationAnimationTime;
+    public float InjectionAnimationTime => _injectionAnimationTime;
+    private void Awake()
+    {
+        AnimationClip[] _animationClips = _animator.runtimeAnimatorController.animationClips;
 
+        foreach (var animationClip in _animationClips)
+        {
+            if(animationClip.name != _run)
+                _GainMuscleAnimationTime += animationClip.length;
+
+            if (animationClip.name == _transformation)
+                _transformationAnimationTime = animationClip.length;
+        }
+    }
     public void GainMuscle()
     {
-        _changeSpeed = _maxWeight / _timeToGainMuscle;
-        _enlargePlayer.Enlarge(_timeToGainMuscle, _targetScale);
-        StartCoroutine(GainMuscleAnimation());
-    }
-
-    private IEnumerator GainMuscleAnimation()
-    {
-        float currentWeight = 0;
-
-        while(currentWeight < _maxWeight)
-        {
-            currentWeight = Mathf.MoveTowards(currentWeight, _maxWeight, _changeSpeed * Time.deltaTime);
-
-            _skinnedMeshRenderer.SetBlendShapeWeight(0, currentWeight);
-
-            yield return null;
-        }
+        _animator.SetTrigger(_gainMuscle);
     }
 }

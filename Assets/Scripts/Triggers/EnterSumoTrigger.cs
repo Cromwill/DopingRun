@@ -7,6 +7,7 @@ using UnityEngine;
 public class EnterSumoTrigger : MonoBehaviour
 {
     [SerializeField] private SumoFightTransition _sumoFightTransition;
+    [SerializeField] private float _transitionSpeed;
 
     private float _delay;
     private JoystickCanvas _joystickCanvas;
@@ -22,7 +23,7 @@ public class EnterSumoTrigger : MonoBehaviour
 
         Error.CheckOnNull(_joystickCanvas, nameof(JoystickCanvas));
 
-        _joystickCanvas.gameObject.SetActive(false);
+        StartCoroutine(DelayedCanvasDisable());
     }
 
     private void OnEnable()
@@ -60,7 +61,7 @@ public class EnterSumoTrigger : MonoBehaviour
 
         while (_isPlayerReachedDesitination == false)
         {
-            playerMover.Move(direction);
+            playerMover.Move(direction, _transitionSpeed);
 
             yield return null;
         }
@@ -69,5 +70,12 @@ public class EnterSumoTrigger : MonoBehaviour
     {
         _sumoControls.EnableJouystick(_joystickCanvas);
         _isPlayerReachedDesitination = true;
+    }
+
+    private IEnumerator DelayedCanvasDisable()
+    {
+        yield return new WaitForSeconds(1f);
+
+        _joystickCanvas.gameObject.SetActive(false);
     }
 }
