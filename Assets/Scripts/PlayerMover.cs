@@ -23,14 +23,14 @@ public class PlayerMover : MonoBehaviour
 
         if(Input.GetMouseButton(LeftMouseButton) && direction.magnitude > _threshold)
         {
-            Move(direction);
+            Move(direction, _speed);
             Rotate(direction);
         }
     }
 
-    public void Move(Vector3 direction)
+    public void Move(Vector3 direction, float speed)
     {
-        _rigidBody.MovePosition(transform.position + direction.normalized * _speed * Time.deltaTime);
+        _rigidBody.MovePosition(transform.position + direction.normalized * speed * Time.deltaTime);
     }
 
     private void Rotate(Vector3 direction)

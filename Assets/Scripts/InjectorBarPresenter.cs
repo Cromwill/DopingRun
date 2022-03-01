@@ -27,9 +27,9 @@ public class InjectorBarPresenter : MonoBehaviour
         _enlargable.StepChanged -= ChangeValue;
     }
 
-    public void SetChangeSpeed(float speed)
+    public void SetTimeToErase(float time)
     {
-        _changeSpeed = speed;
+        _changeSpeed = _slider.value / time;
     }
 
     public void ChangeValue(int value, int maxValue)

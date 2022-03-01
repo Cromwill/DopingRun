@@ -9,9 +9,14 @@ public class BreakRoad : MonoBehaviour
 
     private Rigidbody _rigidbody;
 
-    private void OnEnable()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.isKinematic = true;
+    }
+    private void OnEnable()
+    {
+        
         _cameraTransition.TransitionCompleted += Break;
     }
 

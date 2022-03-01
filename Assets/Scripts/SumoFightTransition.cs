@@ -8,11 +8,13 @@ public class SumoFightTransition : MonoBehaviour
 {
     private SumoFighterList _sumoFighterList;
     private Collider _collider;
+    private SumoFightTransition[] _sumoFightTransitions;
 
     public event Action PlayerEntered;
     private void Start()
     {
         _sumoFighterList = FindObjectOfType<SumoFighterList>();
+        _sumoFightTransitions = FindObjectsOfType<SumoFightTransition>();
 
         Error.CheckOnNull(_sumoFighterList, nameof(SumoFighterList));
 
@@ -24,7 +26,12 @@ public class SumoFightTransition : MonoBehaviour
         if(other.TryGetComponent(out Player player))
         {
             _sumoFighterList.EnableFighters();
-            _collider.enabled = false;
+
+            foreach (var sumoFightTransition in _sumoFightTransitions)
+            {
+                sumoFightTransition.GetComponent<Collider>().enabled = false;
+            }
+
             PlayerEntered?.Invoke();
         }
     }
