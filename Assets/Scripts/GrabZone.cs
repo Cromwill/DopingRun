@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class GrabZone : MonoBehaviour
 {
-    public event Action PlayerInGrabZone;
+    [SerializeField] private Graber _graber;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Player player))
-            PlayerInGrabZone?.Invoke();
+            _graber.Grab();
     }
 }

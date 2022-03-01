@@ -7,7 +7,6 @@ using UnityEngine;
 public class RunerEnemyMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private GrabZone _grabZone;
     
     private Rigidbody _rigidbody;
     private RunerEnemyTrigger _enemyTrigger;
@@ -23,13 +22,11 @@ public class RunerEnemyMover : MonoBehaviour
     {
         _enemyTrigger = GetComponentInChildren<RunerEnemyTrigger>();
         _enemyTrigger.PlayerInTriggerZone += Move;
-        _grabZone.PlayerInGrabZone += Disable;
     }
 
     private void OnDisable()
     {
         _enemyTrigger.PlayerInTriggerZone -= Move;
-        _grabZone.PlayerInGrabZone -= Disable;
     }
 
     private void Rotate(Vector3 direction)
@@ -66,7 +63,7 @@ public class RunerEnemyMover : MonoBehaviour
         }
     }
 
-    private void Disable()
+    public void Disable()
     {
         this.enabled = false;
     }
