@@ -40,6 +40,9 @@ public class LevelsHandler : MonoBehaviour
     {
         var scene = _levelList.GetScene(_counter);
 
+        if(scene != null)
+            scene.ReleaseAsset();
+
         scene.LoadSceneAsync();
     }
 
