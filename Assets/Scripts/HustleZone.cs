@@ -14,6 +14,7 @@ public class HustleZone : MonoBehaviour
     private float _expirationTime;
 
     public UnityAction CollidedWithPushable;
+    public UnityAction CollidedWithTouchable;
     public UnityAction<ShakeData> PlayerCollidedWithPushable;
 
     private void Start()
@@ -30,6 +31,9 @@ public class HustleZone : MonoBehaviour
             direction.y = 0f;
 
             CollidedWithPushable?.Invoke();
+
+            if (pushable is  Kickable == false)
+                CollidedWithTouchable?.Invoke();
 
             if (IsOnCooldown())
             {
