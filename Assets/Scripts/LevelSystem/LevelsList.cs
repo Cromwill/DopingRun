@@ -17,11 +17,26 @@ public class LevelsList : ScriptableObject
 
     public AssetReference GetRandomScene(int currentSceneIndex)
     {
-        int index =-1;
+        int index = 0;
 
-        if(SceneCount>1)
-            while (index != currentSceneIndex)
+        int counter = 0;
+
+        if (SceneCount > 1)
+        {
+            do
+            {
+                counter++;
+
                 index = Random.Range(0, _scenes.Length);
+
+                if (counter > 5)
+                {
+                    index = 0;
+                    return _scenes[index];
+                }
+
+            } while (index != currentSceneIndex);
+        }
 
         return _scenes[index];
     }

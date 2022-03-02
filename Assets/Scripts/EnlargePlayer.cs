@@ -7,6 +7,7 @@ public class EnlargePlayer : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
     [SerializeField] private float _timeToGainMuscle;
     [SerializeField] private float _targetScaleValue;
+    [SerializeField] private SkinnedMeshRenderer _meshRenderer;
 
     private const float _maxWeight = 100f;
     private Vector3 _targetScale;
@@ -46,6 +47,21 @@ public class EnlargePlayer : MonoBehaviour
         while (transform.localScale.x<= _targetScale.x)
         {
             transform.localScale = Vector3.MoveTowards(transform.localScale, _targetScale, changeSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator Hulkization()
+    {
+        float timePassed =0;
+
+        while (timePassed != _timeToGainMuscle)
+        {
+            _meshRenderer.material.color = Color.Lerp(_meshRenderer.material.color, Color.green, timePassed/ _timeToGainMuscle);
+            _meshRenderer.material.SetColor("_ColorShaded", _meshRenderer.material.color);
+
+            timePassed += Time.deltaTime;
 
             yield return null;
         }

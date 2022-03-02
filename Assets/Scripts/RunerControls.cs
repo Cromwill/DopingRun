@@ -15,5 +15,7 @@ public class RunerControls
             rigidbody.isKinematic = false;
 
         player.GetComponentInChildren<InjectionBarAnimator>().enabled = true;
+
+        player.GetComponentInChildren<Particles>().enabled = false;
     }
 }
