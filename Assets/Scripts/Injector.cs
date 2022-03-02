@@ -6,7 +6,7 @@ public class Injector : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out InjectorCollectionZone injectorCollectionZone))
+        if (other.TryGetComponent(out SyringeCollectionZone injectorCollectionZone))
         {
             gameObject.SetActive(false);
         }
