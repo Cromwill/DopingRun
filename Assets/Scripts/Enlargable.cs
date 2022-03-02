@@ -69,7 +69,7 @@ public class Enlargable : MonoBehaviour
             yield return null;
         }
 
-        _coroutine = StartCoroutine(Shrink());
+        StartCoroutine(Shrink());
     }
 
     private IEnumerator Shrink()
