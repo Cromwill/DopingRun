@@ -46,14 +46,13 @@ public class InjectorBarPresenter : MonoBehaviour
         while (_slider.value != _currentValue)
         {
             _slider.value = Mathf.MoveTowards(_slider.value, _currentValue, changeSpeed * Time.deltaTime);
-            _liquid.level = _slider.value + _minimalLiquidValue;
+            _liquid.level = _slider.value;
 
             yield return null;
         }
 
         if(_slider.value <= 0)
         {
-            _liquid.level = _slider.value;
             OnValueZero?.Invoke();
         }
     }
