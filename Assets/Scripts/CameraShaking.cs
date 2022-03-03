@@ -5,24 +5,12 @@ using UnityEngine;
 
 public class CameraShaking : MonoBehaviour
 {
-    [SerializeField] private HustleZone _playerHustleZone;
-
     private CameraShaker _cameraShaker;
 
     private void Start()
     {
         _cameraShaker = FindObjectOfType<CameraShaker>();
         Error.CheckOnNull(_cameraShaker, nameof(CameraShaker));
-    }
-
-    private void OnEnable()
-    {
-        _playerHustleZone.PlayerCollidedWithPushable += Shake;
-    }
-
-    private void OnDisable()
-    {
-        _playerHustleZone.PlayerCollidedWithPushable -= Shake;
     }
 
     public void Shake(ShakeData shakeData)

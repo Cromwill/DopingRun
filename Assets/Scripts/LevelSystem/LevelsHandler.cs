@@ -20,12 +20,15 @@ public class LevelsHandler : MonoBehaviour
     {
         _winnderDecider = FindObjectOfType<WinnerDecider>();
         Error.CheckOnNull(_winnderDecider, nameof(WinnerDecider));
-        _winnderDecider.Victory += OnLevelCompleted;
+
+        if(_winnderDecider != null)
+            _winnderDecider.Victory += OnLevelCompleted;
     }
 
     private void OnDisable()
     {
-        _winnderDecider.Victory -= OnLevelCompleted;
+        if (_winnderDecider != null)
+            _winnderDecider.Victory -= OnLevelCompleted;
     }
 
     public void LoadNextLevel()

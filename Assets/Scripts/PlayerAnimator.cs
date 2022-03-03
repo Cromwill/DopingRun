@@ -12,10 +12,12 @@ public class PlayerAnimator : MonoBehaviour
     private float _gainMuscleAnimationTime;
     private float _transformationAnimationTime;
     private float _injectionAnimationTime =0.75f;
+    private float _animationSpeed = 1.6f;
 
     public float AnimationTime => _gainMuscleAnimationTime;
     public float TransformationAnimationTime => _transformationAnimationTime;
     public float InjectionAnimationTime => _injectionAnimationTime;
+
     private void Awake()
     {
         _clipName = new AnimationClipNames();
@@ -24,47 +26,54 @@ public class PlayerAnimator : MonoBehaviour
 
         foreach (var animationClip in _animationClips)
         {
-            if(animationClip.name == _clipName.Injection)
-            {
-                _gainMuscleAnimationTime += animationClip.length;
+            if (animationClip.name == _clipName.Injection)
+            { 
+                _gainMuscleAnimationTime += animationClip.length / _animationSpeed;
             }
 
             if (animationClip.name == _clipName.Transformation)
             {
-                _transformationAnimationTime = animationClip.length;
+                _transformationAnimationTime = animationClip.length / _animationSpeed;
                 _gainMuscleAnimationTime += _transformationAnimationTime;
             }
-        }
+        } 
+
+        Debug.Log(_gainMuscleAnimationTime);
     }
 
     private void OnEnable()
     {
-        _hustleZone.CollidedWithTouchable += OnCollideWithPushable;
+        _hustleZone.CollidedWithTouchable += OnCollideWithTouchable;
+        _hustleZone.CollidedWithPushable += OnCollidedWithPushable;
         _pushable.PushStart += OnPushed;
     }
 
     private void OnDisable()
     {
-        _hustleZone.CollidedWithTouchable -= OnCollideWithPushable;
+        _hustleZone.CollidedWithTouchable -= OnCollideWithTouchable;
+        _hustleZone.CollidedWithPushable -= OnCollidedWithPushable;
         _pushable.PushStart -= OnPushed;
     }
+
     public void GainMuscle()
     {
         _animator.SetTrigger(_clipName.GainMuscle);
     }
 
-    private void OnCollideWithPushable()
+    private void OnCollideWithTouchable()
     {
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsName(_clipName.Run))
-            _animator.SetTrigger(_clipName.Attack);
+        _animator.SetTrigger(_clipName.Hitted);
+    }
 
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsName(_clipName.RunSumo))
+    private void OnCollidedWithPushable()
+    {
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsName(_clipName.SumoRun))
             _animator.SetTrigger(_clipName.Attack);
     }
 
     private void OnPushed()
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(_clipName.RunSumo))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(_clipName.SumoRun))
             _animator.SetTrigger(_clipName.Hitted);
     }
 }
