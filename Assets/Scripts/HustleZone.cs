@@ -9,13 +9,11 @@ public class HustleZone : MonoBehaviour
     [SerializeField] private float _pushSpeed = 25;
     [SerializeField] private float _stepCoeficient;
     [SerializeField] private float _cooldown;
-    [SerializeField] private ShakeData _shakeData;
     
     private float _expirationTime;
 
     public UnityAction CollidedWithPushable;
     public UnityAction CollidedWithTouchable;
-    public UnityAction<ShakeData> PlayerCollidedWithPushable;
 
     private void Start()
     {
@@ -30,19 +28,38 @@ public class HustleZone : MonoBehaviour
             Vector3 direction = (other.transform.position - transform.position).normalized;
             direction.y = 0f;
 
-            CollidedWithPushable?.Invoke();
-
-            if (pushable is  Kickable == false)
-                CollidedWithTouchable?.Invoke();
-
-            if (IsOnCooldown())
+            if (pushable is Touchable)
             {
-                if(_shakeData != null)
-                    PlayerCollidedWithPushable?.Invoke(_shakeData);
-
-                _expirationTime = Time.time + _cooldown;
-                pushable.Push(direction, _pushSpeed);
+                CollidedWithPushable?.Invoke();
+                CollidedWithTouchable?.Invoke();
             }
+
+            if(pushable is Pushable)
+                TryPush(pushable, direction);
+
+            if (pushable is BreakablePiece)
+                Break(pushable, direction);
+        }
+    }
+
+    private void TryPush(IPushable pushable, Vector3 direction)
+    {
+        if (IsOnCooldown())
+        {
+            CollidedWithPushable?.Invoke();
+            _expirationTime = Time.time + _cooldown;
+            pushable.Push(direction, _pushSpeed);
+        }
+    }
+
+    private void Break(IPushable pushable, Vector3 direction)
+    {
+        pushable.Push(direction, _pushSpeed);
+
+        if (IsOnCooldown())
+        {
+            CollidedWithPushable?.Invoke();
+            _expirationTime = Time.time + _cooldown;
         }
     }
 

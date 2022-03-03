@@ -8,7 +8,7 @@ public class AnimationClipNames
     public readonly string GainMuscle = "GainMuscle";
     public readonly string Transformation = "Transformation";
     public readonly string Run = "Run";
-    public readonly string RunSumo = "RunSumo";
+    public readonly string SumoRun = "RunSumo";
     public readonly string Hitted = "Hitted";
     public readonly string Attack = "Attack";
 }

@@ -12,6 +12,7 @@ public class Rotator : MonoBehaviour
     private float xRotation;
     private float _threshold = 0.001f;
     private float _smoothMultiplier = 10;
+
     private void Update()
     {
         float pointerX = Input.GetAxis("Mouse X") * _rotationSpeed * _smoothMultiplier * Time.deltaTime;
