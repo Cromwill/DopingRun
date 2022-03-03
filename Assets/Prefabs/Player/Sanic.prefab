@@ -46,8 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pushSpeed: 25
   _stepCoeficient: 1
-  _cooldown: 0
-  _shakeData: {fileID: 11400000, guid: 7e1ee5ddb971be049b85bffb040b3876, type: 2}
+  _cooldown: 0.1
 --- !u!65 &375733991
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -59,8 +58,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 2.5, z: 0.8}
-  m_Center: {x: 0, y: 0.7, z: -0.25}
+  m_Size: {x: 0.9, y: 2.5, z: 0.256294}
+  m_Center: {x: 0.0000001481265, y: 0.70000005, z: 0.021852763}
 --- !u!1 &1168255634
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,7 +2209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotationSpeed: 100
   _resetSpeed: 10
-  _maxAngle: 50
+  _maxAngle: 25
 --- !u!114 &1089535039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3428,9 +3427,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6408624957917398749, guid: c16c0a75153497e4cb6c349aaea6ba77, type: 3}
-  - {fileID: 3798207618743312529, guid: c16c0a75153497e4cb6c349aaea6ba77, type: 3}
-  - {fileID: 3548294114686091318, guid: c16c0a75153497e4cb6c349aaea6ba77, type: 3}
+  - {fileID: 2100000, guid: 74957f5392f790040a4b78822b01ad73, type: 2}
+  - {fileID: 2100000, guid: 6196548da8597d041a224a3253f5a1a3, type: 2}
+  - {fileID: 2100000, guid: d290f797ab14cab45aacf2440447bc69, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

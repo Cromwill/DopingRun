@@ -8,6 +8,8 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Pushable _pushable;
     [SerializeField] private HustleZone _hustleZone;
 
+    private WinnerDecider _winnerDecider;
+    private StartLevelButton _startLevel;
     private AnimationClipNames _clipName;
     private float _gainMuscleAnimationTime;
     private float _transformationAnimationTime;
@@ -20,6 +22,12 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Awake()
     {
+        _winnerDecider = FindObjectOfType<WinnerDecider>();
+        Error.CheckOnNull(_winnerDecider, nameof(WinnerDecider));
+
+        _startLevel = FindObjectOfType<StartLevelButton>();
+        Error.CheckOnNull(_winnerDecider, nameof(StartLevelButton));
+
         _clipName = new AnimationClipNames();
 
         AnimationClip[] _animationClips = _animator.runtimeAnimatorController.animationClips;
@@ -43,6 +51,8 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnEnable()
     {
+        _winnerDecider.Victory += OnVictory;
+        _startLevel.RunStarted += Run;
         _hustleZone.CollidedWithTouchable += OnCollideWithTouchable;
         _hustleZone.CollidedWithPushable += OnCollidedWithPushable;
         _pushable.PushStart += OnPushed;
@@ -50,6 +60,8 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnDisable()
     {
+        _winnerDecider.Victory -= OnVictory;
+        _startLevel.RunStarted -= Run;
         _hustleZone.CollidedWithTouchable -= OnCollideWithTouchable;
         _hustleZone.CollidedWithPushable -= OnCollidedWithPushable;
         _pushable.PushStart -= OnPushed;
@@ -76,5 +88,15 @@ public class PlayerAnimator : MonoBehaviour
     {
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName(_clipName.SumoRun))
             _animator.SetTrigger(_clipName.Hitted);
+    }
+
+    public void Run()
+    {
+        _animator.SetTrigger(_clipName.Run);
+    }
+
+    private void OnVictory()
+    {
+        _animator.SetTrigger(_clipName.Victory);
     }
 }
