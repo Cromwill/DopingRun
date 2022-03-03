@@ -11,4 +11,5 @@ public class AnimationClipNames
     public readonly string SumoRun = "RunSumo";
     public readonly string Hitted = "Hitted";
     public readonly string Attack = "Attack";
+    public readonly string Victory = "Victory";
 }

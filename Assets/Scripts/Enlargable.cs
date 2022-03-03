@@ -37,16 +37,17 @@ public class Enlargable : MonoBehaviour
 
     public void EnalargeAnimation()
     {
- 
+
         if (_step < _maxSteps)
         {
             _step++;
 
             StepChanged?.Invoke(_step, _maxSteps);
 
+        }
+
             if (_coroutine == null)
                 _coroutine = StartCoroutine(Enlarge());
-        }
     }
 
     public void ShrinkAnimation()

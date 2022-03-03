@@ -2,14 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FirstGearGames.SmoothCameraShaker;
+using System;
 
 public class SumoRing : MonoBehaviour
 {
     [SerializeField] private ShakeData _shakeData;
 
+    private FightScreenEnabler _fightScreenEnabler;
     private CameraShaking _cameraShaking;
     private CameraShaker _cameraShaker;
     private bool _isShaked;
+
+    private void Awake()
+    {
+        _fightScreenEnabler = FindObjectOfType<FightScreenEnabler>();
+        Error.CheckOnNull(_fightScreenEnabler, nameof(FightScreenEnabler));
+    }
 
     private void Start()
     {
@@ -25,9 +33,8 @@ public class SumoRing : MonoBehaviour
     {
         if (collision.transform.TryGetComponent(out TargetSwitcher targetSwitcher) && _isShaked == false)
         {
-            _cameraShaker.SetShakeTechnique(CameraShaker.ShakeTechniques.LocalSpace);
             _cameraShaking.Shake(_shakeData);
-
+            _fightScreenEnabler.OnSumoFightBegun();
             _isShaked = true;
         }
     }
