@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.AddressableAssets;
 
 public class LevelsHandler : MonoBehaviour
 {
     [SerializeField] private LevelsList _levelList;
+    [SerializeField] private TMP_Text _text;
 
     private WinnerDecider _winnderDecider;
     private int _counter;
@@ -19,7 +22,6 @@ public class LevelsHandler : MonoBehaviour
     private void OnEnable()
     {
         _winnderDecider = FindObjectOfType<WinnerDecider>();
-        Error.CheckOnNull(_winnderDecider, nameof(WinnerDecider));
 
         if(_winnderDecider != null)
             _winnderDecider.Victory += OnLevelCompleted;
@@ -36,7 +38,11 @@ public class LevelsHandler : MonoBehaviour
         if (_counter > _levelList.SceneCount)
             _levelList.GetRandomScene(_counter).LoadSceneAsync();
         else
-            _levelList.GetScene(_counter).LoadSceneAsync();
+        {
+            AssetReference scene = _levelList.GetScene(_counter);
+            scene.ReleaseAsset();
+            scene.LoadSceneAsync();
+        }
     }
 
     public void RestartLevel()
