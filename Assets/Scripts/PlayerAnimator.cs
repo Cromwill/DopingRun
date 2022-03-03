@@ -62,7 +62,8 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnCollideWithTouchable()
     {
-        _animator.SetTrigger(_clipName.Hitted);
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsName(_clipName.Run))
+            _animator.SetTrigger(_clipName.Hitted);
     }
 
     private void OnCollidedWithPushable()
