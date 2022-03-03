@@ -30,8 +30,8 @@ public class HustleZone : MonoBehaviour
 
             if (pushable is Touchable)
             {
-                CollidedWithPushable?.Invoke();
                 CollidedWithTouchable?.Invoke();
+                pushable.Push(direction, _pushSpeed);
             }
 
             if(pushable is Pushable)
