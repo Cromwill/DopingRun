@@ -8,6 +8,7 @@ public class EnlargePlayer : MonoBehaviour
     [SerializeField] private float _timeToGainMuscle;
     [SerializeField] private float _targetScaleValue;
     [SerializeField] private SkinnedMeshRenderer _meshRenderer;
+    [SerializeField] private Material _targetMaterial;
 
     private const float _maxWeight = 100f;
     private Vector3 _targetScale;
