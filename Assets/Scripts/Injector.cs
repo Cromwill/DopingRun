@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class Injector : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public void Disable()
     {
-        if (other.TryGetComponent(out SyringeCollectionZone injectorCollectionZone))
-        {
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
     }
 }
