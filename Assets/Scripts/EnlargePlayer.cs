@@ -10,17 +10,23 @@ public class EnlargePlayer : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _meshRenderer;
     [SerializeField] private Material _targetMaterial;
 
+    private Vector3 _maxScale;
+    private float _scalePerStep;
+    private float _weightPerStep;
+    private const float _initialScale = 1f;
     private const float _maxWeight = 100f;
-    private Vector3 _targetScale;
+    private float _targetWeight;
     private Enlargable _enlargable;
     private InjectorBarPresenter _barPresenter;
     private PlayerAnimator _playerAnimator;
 
     private void Awake()
     {
-        _targetScale = Vector3.one * _targetScaleValue;
+        _maxScale = Vector3.one * _targetScaleValue;
         _enlargable = FindObjectOfType<Enlargable>();
         Error.CheckOnNull(_enlargable, nameof(Enlargable));
+
+        StepCalculation();
 
         _barPresenter = FindObjectOfType<InjectorBarPresenter>();
         Error.CheckOnNull(_barPresenter, nameof(InjectorBarPresenter));
@@ -29,8 +35,25 @@ public class EnlargePlayer : MonoBehaviour
         Error.CheckOnNull(_playerAnimator, nameof(PlayerAnimator));
     }
 
+    private void StepCalculation()
+    {
+        float sizeDiffrence = _targetScaleValue - _initialScale;
+        _scalePerStep = sizeDiffrence / _enlargable.MaxStep;
+        _weightPerStep = Mathf.Ceil(_maxWeight / _enlargable.MaxStep);
+    }
+
+    private void TargetSizeCalculation()
+    {
+        _maxScale = (_scalePerStep * _enlargable.Step + _initialScale) * Vector3.one;
+        _targetWeight = _weightPerStep * _enlargable.Step;
+        _targetWeight = Mathf.Clamp(_targetWeight, 0, _maxWeight);
+    } 
+
     private void OnInjection()
     {
+        StepCalculation();
+        TargetSizeCalculation();
+
         _barPresenter.SetTimeToErase(_playerAnimator.InjectionAnimationTime);
         _enlargable.Reset();
     }
@@ -43,26 +66,11 @@ public class EnlargePlayer : MonoBehaviour
 
     private IEnumerator EnlargeAnimation()
     {
-        float changeSpeed = (_targetScale.x - transform.localScale.x) / _timeToGainMuscle;
+        float changeSpeed = (_maxScale.x - transform.localScale.x) / _timeToGainMuscle;
 
-        while (transform.localScale.x<= _targetScale.x)
+        while (transform.localScale.x<= _maxScale.x)
         {
-            transform.localScale = Vector3.MoveTowards(transform.localScale, _targetScale, changeSpeed * Time.deltaTime);
-
-            yield return null;
-        }
-    }
-
-    private IEnumerator Hulkization()
-    {
-        float timePassed =0;
-
-        while (timePassed != _timeToGainMuscle)
-        {
-            _meshRenderer.material.color = Color.Lerp(_meshRenderer.material.color, Color.green, timePassed/ _timeToGainMuscle);
-            _meshRenderer.material.SetColor("_ColorShaded", _meshRenderer.material.color);
-
-            timePassed += Time.deltaTime;
+            transform.localScale = Vector3.MoveTowards(transform.localScale, _maxScale, changeSpeed * Time.deltaTime);
 
             yield return null;
         }
@@ -71,13 +79,29 @@ public class EnlargePlayer : MonoBehaviour
     private IEnumerator GainMuscleAnimation()
     {
         float currentWeight = 0;
-        float changeSpeed = _maxWeight / _timeToGainMuscle;
+        float changeSpeed = _targetWeight / _timeToGainMuscle;
 
-        while (currentWeight < _maxWeight)
+        while (currentWeight < _targetWeight)
         {
-            currentWeight = Mathf.MoveTowards(currentWeight, _maxWeight, changeSpeed * Time.deltaTime);
+            currentWeight = Mathf.MoveTowards(currentWeight, _targetWeight, changeSpeed * Time.deltaTime);
 
             _skinnedMeshRenderer.SetBlendShapeWeight(0, currentWeight);
+
+            yield return null;
+        }
+    }
+
+
+    private IEnumerator Hulkization()
+    {
+        float timePassed = 0;
+
+        while (timePassed != _timeToGainMuscle)
+        {
+            _meshRenderer.material.color = Color.Lerp(_meshRenderer.material.color, Color.green, timePassed / _timeToGainMuscle);
+            _meshRenderer.material.SetColor("_ColorShaded", _meshRenderer.material.color);
+
+            timePassed += Time.deltaTime;
 
             yield return null;
         }
