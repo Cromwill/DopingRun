@@ -32,4 +32,9 @@ public class WinnerDecider : MonoBehaviour
             celebrationState.enabled = true;
         }
     }
+
+    public void Disable()
+    {
+        this.enabled = false;
+    }
 }

@@ -10,7 +10,6 @@ public class PlayerAnimator : MonoBehaviour
 
     private WinnerDecider _winnerDecider;
     private StartLevelButton _startLevel;
-    private AnimationClipNames _clipName;
     private float _gainMuscleAnimationTime;
     private float _transformationAnimationTime;
     private float _injectionAnimationTime =0.75f;
@@ -28,18 +27,16 @@ public class PlayerAnimator : MonoBehaviour
         _startLevel = FindObjectOfType<StartLevelButton>();
         Error.CheckOnNull(_winnerDecider, nameof(StartLevelButton));
 
-        _clipName = new AnimationClipNames();
-
         AnimationClip[] _animationClips = _animator.runtimeAnimatorController.animationClips;
 
         foreach (var animationClip in _animationClips)
         {
-            if (animationClip.name == _clipName.Injection)
+            if (animationClip.name == AnimationClipNames.Injection)
             { 
                 _gainMuscleAnimationTime += animationClip.length / _animationSpeed;
             }
 
-            if (animationClip.name == _clipName.Transformation)
+            if (animationClip.name == AnimationClipNames.Transformation)
             {
                 _transformationAnimationTime = animationClip.length / _animationSpeed;
                 _gainMuscleAnimationTime += _transformationAnimationTime;
@@ -69,34 +66,34 @@ public class PlayerAnimator : MonoBehaviour
 
     public void GainMuscle()
     {
-        _animator.SetTrigger(_clipName.GainMuscle);
+        _animator.SetTrigger(AnimationClipNames.GainMuscle);
     }
 
     private void OnCollideWithTouchable()
     {
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsName(_clipName.Run))
-            _animator.SetTrigger(_clipName.Hitted);
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.Run))
+            _animator.SetTrigger(AnimationClipNames.Hitted);
     }
 
     private void OnCollidedWithPushable()
     {
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsName(_clipName.SumoRun))
-            _animator.SetTrigger(_clipName.Attack);
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.SumoRun))
+            _animator.SetTrigger(AnimationClipNames.Attack);
     }
 
     private void OnPushed()
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(_clipName.SumoRun))
-            _animator.SetTrigger(_clipName.Hitted);
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.SumoRun))
+            _animator.SetTrigger(AnimationClipNames.Hitted);
     }
 
     public void Run()
     {
-        _animator.SetTrigger(_clipName.Run);
+        _animator.SetTrigger(AnimationClipNames.Run);
     }
 
     private void OnVictory()
     {
-        _animator.SetTrigger(_clipName.Victory);
+        _animator.SetTrigger(AnimationClipNames.Victory);
     }
 }

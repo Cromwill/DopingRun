@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class AnimationClipNames
 {
-    public readonly string Injection = "Injection";
-    public readonly string GainMuscle = "GainMuscle";
-    public readonly string Transformation = "Transformation";
-    public readonly string Run = "Run";
-    public readonly string SumoRun = "RunSumo";
-    public readonly string Hitted = "Hitted";
-    public readonly string Attack = "Attack";
-    public readonly string Victory = "Victory";
+    public const string Injection = "Injection";
+    public const string GainMuscle = "GainMuscle";
+    public const string Transformation = "Transformation";
+    public const string Run = "Run";
+    public const string SumoRun = "RunSumo";
+    public const string Hitted = "Hitted";
+    public const string Attack = "Attack";
+    public const string Victory = "Victory";
 }
