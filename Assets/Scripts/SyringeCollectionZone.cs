@@ -15,6 +15,7 @@ public class SyringeCollectionZone : MonoBehaviour
     {
         if (other.TryGetComponent(out Injector injector))
         {
+            injector.Disable();
             _enlargable.EnalargeAnimation();
         }
     }

@@ -37,11 +37,11 @@ public class Enlargable : MonoBehaviour
 
     public void EnalargeAnimation()
     {
-
         if (_step < _maxSteps)
         {
             _step++;
 
+            Debug.Log(_step);
             StepChanged?.Invoke(_step, _maxSteps);
 
         }
