@@ -15,6 +15,20 @@ namespace RunnerMovementSystem.Examples
         [SerializeField] private float _lookAngleY;
 
         private Vector3 _targetPosition;
+        private DeathTrigger _deathTrigger;
+
+        private void OnEnable()
+        {
+            _deathTrigger = FindObjectOfType<DeathTrigger>();
+            Error.CheckOnNull(_deathTrigger, nameof(DeathTrigger));
+
+            _deathTrigger.PlayerHasLost += Disable;
+        }
+
+        private void OnDisable()
+        {
+            _deathTrigger.PlayerHasLost -= Disable;
+        }
 
         private void LateUpdate()
         {
@@ -27,6 +41,11 @@ namespace RunnerMovementSystem.Examples
             var targetRotation = Quaternion.LookRotation(_target.forward, Vector3.up);
             targetRotation.eulerAngles = new Vector3(_lookAngle, targetRotation.eulerAngles.y +_lookAngleY, targetRotation.eulerAngles.z);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        }
+
+        private void Disable()
+        {
+            this.enabled = false;
         }
     }
 }

@@ -9,6 +9,8 @@ public class EnlargableZone : MonoBehaviour
 
     private Enlargable _enlaragable;
 
+    private const int _pushableStepCount = 1;
+    private int _breakableStepCount => (int)(_enlaragable.Step * 0.6f);
     private void Start()
     {
         _enlaragable = GetComponent<Enlargable>();
@@ -16,15 +18,22 @@ public class EnlargableZone : MonoBehaviour
     private void OnEnable()
     {
         _hustleZone.CollidedWithPushable += OnCollideWithEnemy;
+        _hustleZone.CollidedWithBreakable += OnCollideWithBreakable;
     }
 
     private void OnDisable()
     {
         _hustleZone.CollidedWithPushable -= OnCollideWithEnemy;
+        _hustleZone.CollidedWithBreakable -= OnCollideWithBreakable;
     }
 
     private void OnCollideWithEnemy()
     {
-        _enlaragable.ShrinkAnimation();
+        _enlaragable.ShrinkAnimation(_pushableStepCount);
+    }
+
+    private void OnCollideWithBreakable()
+    {
+        _enlaragable.ShrinkAnimation(_breakableStepCount);
     }
 }

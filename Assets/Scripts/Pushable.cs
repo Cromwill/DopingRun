@@ -33,7 +33,7 @@ public class Pushable : MonoBehaviour, IPushable
         {
             timePassed += Time.deltaTime;
 
-            _rigidbody.MovePosition(transform.position + direction * _pushSpeed * Time.deltaTime);
+            _rigidbody.MovePosition(transform.position - transform.forward * _pushSpeed * Time.deltaTime);
 
             yield return null;
         }
