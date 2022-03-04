@@ -2193,8 +2193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skinnedMeshRenderer: {fileID: 4649259982016329597}
-  _timeToGainMuscle: 2
-  _targetScaleValue: 1.4
+  _timeToGainMuscle: 1.2
+  _targetScaleValue: 1.8
   _meshRenderer: {fileID: 4649259982016329597}
   _targetMaterial: {fileID: 2100000, guid: b506d99b1ec15194abd07c2fe68b39f4, type: 2}
 --- !u!114 &8756239892193133999
@@ -3795,11 +3795,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81794abb94a8d894ca49970d65fc4f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scalePerStep: 0.025
-  _maxSteps: 13
+  _scalePerStep: 0.06
+  _maxSteps: 20
   _changeSpeed: 10
   _scaleCoefficient: 2
-  _initialScaleValue: 0.6
+  _initialScaleValue: 0.4
 --- !u!114 &3914151686341121684
 MonoBehaviour:
   m_ObjectHideFlags: 0
