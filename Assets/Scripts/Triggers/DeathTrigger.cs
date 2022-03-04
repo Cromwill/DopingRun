@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathTrigger : MonoBehaviour
+public class DeathTrigger : Trigger
 {
     public event Action<SumoFighter> FighterOffTheRing;
-    public event Action PlayerLose;
 
     private void OnTriggerExit(Collider other)
     {
@@ -29,6 +28,6 @@ public class DeathTrigger : MonoBehaviour
         }
 
         if (other.TryGetComponent(out Player player))
-            PlayerLose?.Invoke();
+            PlayerLost();
     }
 }
