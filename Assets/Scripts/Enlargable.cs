@@ -16,6 +16,7 @@ public class Enlargable : MonoBehaviour
     private Vector3 _initialScale;
 
     public int Step => _step;
+    public int MaxStep => _maxSteps;
     private float _additionalScale => _step * _scalePerStep;
     private Vector3 _nexSteptScale => new Vector3(_initialScale.x + _additionalScale, _initialScale.y + _additionalScale, _initialScale.z + _additionalScale);
     private Vector3 _enlargeScale => _nexSteptScale *_scaleCoefficient;
