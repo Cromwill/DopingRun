@@ -42,8 +42,6 @@ public class PlayerAnimator : MonoBehaviour
                 _gainMuscleAnimationTime += _transformationAnimationTime;
             }
         } 
-
-        Debug.Log(_gainMuscleAnimationTime);
     }
 
     private void OnEnable()
