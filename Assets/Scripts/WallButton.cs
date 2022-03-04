@@ -2,27 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator),typeof(MeshRenderer))]
+[RequireComponent(typeof(Animator))]
 public class WallButton : MonoBehaviour
 {
-    [SerializeField] private bool _isCorrectButton;
     [SerializeField] private Wall _wall;
-    [SerializeField] private Material _correctMaterial;
-    [SerializeField] private Material _badMaterial;
+    [SerializeField] private MeshRenderer _meshrenderer;
 
     private Animator _animator;
     private const string _pressed = "Pressed";
-    private MeshRenderer _meshrenderer;
+    private bool _isCorrectButton;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _meshrenderer = GetComponent<MeshRenderer>();
-
-        if (_isCorrectButton)
-            _meshrenderer.material = _correctMaterial;
-        else
-            _meshrenderer.material = _badMaterial;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,5 +26,15 @@ public class WallButton : MonoBehaviour
             if(_isCorrectButton)
                 _wall.HideWall();
         }
+    }
+
+    public void InitButton(Material material)
+    {
+        _meshrenderer.material = material;
+    }
+
+    public void SetCorrect()
+    {
+        _isCorrectButton = true;
     }
 }

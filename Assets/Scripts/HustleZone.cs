@@ -9,11 +9,13 @@ public class HustleZone : MonoBehaviour
     [SerializeField] private float _pushSpeed = 25;
     [SerializeField] private float _stepCoeficient;
     [SerializeField] private float _cooldown;
+    [SerializeField] private ParticleSystem _hitParticles;
     
     private float _expirationTime;
 
-    public UnityAction CollidedWithPushable;
-    public UnityAction CollidedWithTouchable;
+    public event UnityAction CollidedWithPushable;
+    public event UnityAction CollidedWithTouchable;
+    public event UnityAction CollidedWithBreakable;
 
     private void Start()
     {
@@ -25,6 +27,9 @@ public class HustleZone : MonoBehaviour
     {
         if (other.TryGetComponent(out IPushable pushable))
         {
+            if(_hitParticles != null)
+                _hitParticles.Play();
+
             Vector3 direction = (other.transform.position - transform.position).normalized;
             direction.y = 0f;
 
@@ -59,7 +64,7 @@ public class HustleZone : MonoBehaviour
 
         if (IsOnCooldown())
         {
-            CollidedWithPushable?.Invoke();
+            CollidedWithBreakable?.Invoke();
             _expirationTime = Time.time + _cooldown;
         }
     }

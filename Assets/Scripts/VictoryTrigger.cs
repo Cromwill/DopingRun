@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(WinnerDecider))]
+[RequireComponent(typeof(WinnerDecider), typeof(VictoryCameraTranstion))]
 public class VictoryTrigger : MonoBehaviour
 {
-    [SerializeField] private CameraTransition _cameraTransition;
-
+    private CameraTransition _cameraTransition;
     private WinnerDecider _winerDecider;
     private SumoControls _sumoControlls;
 
@@ -16,6 +15,7 @@ public class VictoryTrigger : MonoBehaviour
 
     private void Start()
     {
+        _cameraTransition = GetComponent<VictoryCameraTranstion>();
         _sumoControlls = new SumoControls();
     }
 

@@ -38,18 +38,14 @@ public class LevelsHandler : MonoBehaviour
         if (_counter > _levelList.SceneCount)
             _levelList.GetRandomScene(_counter).LoadSceneAsync();
         else
-        {
-            AssetReference scene = _levelList.GetScene(_counter);
-            scene.ReleaseAsset();
-            scene.LoadSceneAsync();
-        }
+            _levelList.GetScene(_counter).LoadSceneAsync();
     }
 
     public void RestartLevel()
     {
         var scene = _levelList.GetScene(_counter);
 
-        if(scene != null)
+        if (scene != null)
             scene.ReleaseAsset();
 
         scene.LoadSceneAsync();
