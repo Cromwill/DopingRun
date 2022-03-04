@@ -5,12 +5,19 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class BreakRoad : MonoBehaviour
 {
-    [SerializeField] private CameraTransition _cameraTransition;
+    private CameraTransition _cameraTransition;
 
     private Rigidbody _rigidbody;
 
+    private const int _breakeableRoadLayer = 7;
+
     private void Awake()
     {
+        _cameraTransition = FindObjectOfType<SumoFightTransition>().GetComponent<CameraTransition>();
+        Error.CheckOnNull(_cameraTransition, nameof(SumoFightTransition));
+
+        gameObject.layer = _breakeableRoadLayer;
+
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.isKinematic = true;
     }
@@ -27,7 +34,6 @@ public class BreakRoad : MonoBehaviour
 
     private void Break()
     {
-
         _rigidbody.isKinematic = false;
     }
 }

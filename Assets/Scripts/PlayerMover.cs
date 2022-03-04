@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] private FloatingJoystick _joystick;
+    [SerializeField] private DynamicJoystick _joystick;
     [SerializeField] private float _speed;
 
     private Rigidbody _rigidBody;
@@ -19,9 +19,15 @@ public class PlayerMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 direction = new Vector3(_joystick.Horizontal, 0, _joystick.Vertical);
+        Vector3 direcationForward = Camera.main.transform.forward * _joystick.Vertical;
 
-        if(Input.GetMouseButton(LeftMouseButton) && direction.magnitude > _threshold)
+        Vector3 directioRight = Camera.main.transform.right * _joystick.Horizontal;
+
+        Vector3 direction = (direcationForward + directioRight).normalized;
+
+        direction.y = 0;
+
+        if (Input.GetMouseButton(LeftMouseButton) && direction.magnitude > _threshold)
         {
             Move(direction, _speed);
             Rotate(direction);

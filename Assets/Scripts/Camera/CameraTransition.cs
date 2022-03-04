@@ -6,7 +6,7 @@ using System;
 
 public class CameraTransition : MonoBehaviour
 {
-    [SerializeField] private CameraPoint _cameraPoint;
+    [SerializeField] protected CameraPoint _cameraPoint;
     [SerializeField] private float _timeToTransit;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private bool _setPointAsParent;

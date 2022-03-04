@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class ParticleEnabler : MonoBehaviour
 {
-    [SerializeField] private ParticleHolder _particleHolder;
+    [SerializeField] private PlayerParticleHolder _particleHolder;
     [SerializeField] private CameraTransition _CameraTransition;
 
     private void Start()
     {
+        _particleHolder = FindObjectOfType<PlayerParticleHolder>();
+        Error.CheckOnNull(_particleHolder, nameof(PlayerParticleHolder));
+
         _particleHolder.gameObject.SetActive(false);
     }
 

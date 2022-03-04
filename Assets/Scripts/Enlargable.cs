@@ -10,6 +10,7 @@ public class Enlargable : MonoBehaviour
     [SerializeField] private float _changeSpeed;
     [SerializeField] private float _scaleCoefficient;
     [SerializeField] private float _initialScaleValue;
+    [SerializeField] private ParticleSystem _particles;
 
     private int _step;
     private Coroutine _coroutine;
@@ -42,20 +43,19 @@ public class Enlargable : MonoBehaviour
         {
             _step++;
 
-            Debug.Log(_step);
             StepChanged?.Invoke(_step, _maxSteps);
-
         }
 
             if (_coroutine == null)
                 _coroutine = StartCoroutine(Enlarge());
     }
 
-    public void ShrinkAnimation()
+    public void ShrinkAnimation(int stepCount)
     {
         if (_step > 0)
         {
-            _step--;
+            _step -= stepCount;
+            _particles.Play();
 
             StepChanged?.Invoke(_step, _maxSteps);
 

@@ -4,17 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Collider))]
 public class SumoFighter : MonoBehaviour
 {
     [SerializeField] private float _triggerRadius;
     [SerializeField] private LayerMask _enemyLayerMask;
-
-    [SerializeField]private bool IsAlive = true;
     [SerializeField] private SumoFighter _target;
 
+    private bool IsAlive = true;
+
+    private Collider _collider;
     public SumoFighter Target => _target;
 
     public event Action<SumoFighter> Dead;
+
+    private void Awake()
+    {
+        _collider = GetComponent<Collider>();
+    }
 
     private void FixedUpdate()
     {
@@ -49,7 +56,7 @@ public class SumoFighter : MonoBehaviour
         Init(enemy);
     }
 
-    public Collider GetClosestEnemyCollider(Collider[] enemiesColliders)
+    private Collider GetClosestEnemyCollider(Collider[] enemiesColliders)
     {
         Collider enemyCollider = null;
         float minDistance = Mathf.Infinity;
