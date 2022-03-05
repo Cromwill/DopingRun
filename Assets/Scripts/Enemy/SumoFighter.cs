@@ -82,6 +82,7 @@ public class SumoFighter : MonoBehaviour
     public void OnDying()
     {
         IsAlive = false;
+        _collider.enabled = false;
         Dead?.Invoke(this);
     }
 

@@ -9,6 +9,8 @@ public class Pushable : MonoBehaviour, IPushable
     [SerializeField] private float _pushTime;
 
     private Rigidbody _rigidbody;
+    private float _pushSpeed;
+    private bool _isPushed;
 
     public event Action PushEnd;
     public event Action PushStart;
@@ -18,26 +20,26 @@ public class Pushable : MonoBehaviour, IPushable
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Push(Vector3 direction, float pushSpeed)
+    private void FixedUpdate()
     {
-        StartCoroutine(PushAnimation(direction, pushSpeed));
+        if(_isPushed)
+            _rigidbody.MovePosition(transform.position - transform.forward * _pushSpeed * Time.deltaTime);
     }
 
-    private IEnumerator PushAnimation(Vector3 direction, float _pushSpeed)
+    public void Push(Vector3 direction, float pushSpeed)
     {
-        float timePassed = 0;
+        _pushSpeed = pushSpeed;
+        StartCoroutine(PushAnimation());
+    }
 
+    private IEnumerator PushAnimation()
+    {
         PushStart?.Invoke();
+        _isPushed = true;
 
-        while (timePassed< _pushTime)
-        {
-            timePassed += Time.deltaTime;
+        yield return new WaitForSeconds(_pushTime);
 
-            _rigidbody.MovePosition(transform.position - transform.forward * _pushSpeed * Time.deltaTime);
-
-            yield return null;
-        }
-
+        _isPushed = false;
         PushEnd?.Invoke();
     }
 }
