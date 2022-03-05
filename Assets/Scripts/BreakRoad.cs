@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody),typeof(MeshCollider))]
 public class BreakRoad : MonoBehaviour
 {
     private CameraTransition _cameraTransition;
-
+    private MeshCollider _collider;
     private Rigidbody _rigidbody;
 
     private const int _breakeableRoadLayer = 7;
@@ -15,6 +15,9 @@ public class BreakRoad : MonoBehaviour
     {
         _cameraTransition = FindObjectOfType<SumoFightTransition>().GetComponent<CameraTransition>();
         Error.CheckOnNull(_cameraTransition, nameof(SumoFightTransition));
+        
+        _collider = GetComponent<MeshCollider>();
+        _collider.convex = false;
 
         gameObject.layer = _breakeableRoadLayer;
 
@@ -23,7 +26,6 @@ public class BreakRoad : MonoBehaviour
     }
     private void OnEnable()
     {
-        
         _cameraTransition.TransitionCompleted += Break;
     }
 
@@ -34,6 +36,7 @@ public class BreakRoad : MonoBehaviour
 
     private void Break()
     {
+        _collider.enabled = false;
         _rigidbody.isKinematic = false;
     }
 }

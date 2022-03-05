@@ -10,7 +10,7 @@ public class Pushable : MonoBehaviour, IPushable
 
     private Rigidbody _rigidbody;
     private float _pushSpeed;
-    private bool _isPushed;
+    public bool IsPushed { get; private set; }
 
     public event Action PushEnd;
     public event Action PushStart;
@@ -22,7 +22,7 @@ public class Pushable : MonoBehaviour, IPushable
 
     private void FixedUpdate()
     {
-        if(_isPushed)
+        if(IsPushed)
             _rigidbody.MovePosition(transform.position - transform.forward * _pushSpeed * Time.deltaTime);
     }
 
@@ -35,11 +35,11 @@ public class Pushable : MonoBehaviour, IPushable
     private IEnumerator PushAnimation()
     {
         PushStart?.Invoke();
-        _isPushed = true;
+        IsPushed = true;
 
         yield return new WaitForSeconds(_pushTime);
 
-        _isPushed = false;
+        IsPushed = false;
         PushEnd?.Invoke();
     }
 }

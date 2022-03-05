@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,8 @@ public class EnlargePlayer : MonoBehaviour
     private Enlargable _enlargable;
     private InjectorBarPresenter _barPresenter;
     private PlayerAnimator _playerAnimator;
+
+    public event Action<EnlargePlayer> AnimationEnd;
 
     private void Awake()
     {
@@ -67,6 +70,11 @@ public class EnlargePlayer : MonoBehaviour
         StartCoroutine(Hulkization());
     }
 
+    private void OnFlexEnd()
+    {
+        AnimationEnd?.Invoke(this);
+    }
+
     private IEnumerator EnlargeAnimation()
     {
         float changeSpeed = (_maxScale.x - transform.localScale.x) / _timeToGainMuscle;
@@ -98,7 +106,7 @@ public class EnlargePlayer : MonoBehaviour
     private IEnumerator Hulkization()
     {
         float changeSpeed = _maxOutlineWidth / _timeToGainMuscle;
-        float width = 0;
+        float width = _meshRenderer.material.GetFloat(_outline);
 
         while (width != _maxOutlineWidth)
         {

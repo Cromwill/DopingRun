@@ -10,6 +10,8 @@ public class RunerEnemyMover : MonoBehaviour
     
     private Rigidbody _rigidbody;
     private RunerEnemyTrigger _enemyTrigger;
+    private Vector3 _direction;
+    private bool _playerInSight;
 
     public event Action Moving;
 
@@ -29,6 +31,15 @@ public class RunerEnemyMover : MonoBehaviour
         _enemyTrigger.PlayerInTriggerZone -= Move;
     }
 
+    private void FixedUpdate()
+    {
+        if (_playerInSight)
+        {
+            _rigidbody.MovePosition(transform.position + _direction * _speed * Time.deltaTime);
+            Rotate(_direction);
+        }
+    }
+
     private void Rotate(Vector3 direction)
     {
         Quaternion lookRotation = Quaternion.LookRotation(direction);
@@ -40,9 +51,9 @@ public class RunerEnemyMover : MonoBehaviour
 
     private void Move(Vector3 direction)
     {
-        _rigidbody.MovePosition(transform.position + direction * _speed * Time.deltaTime);
-        Moving?.Invoke();
-        Rotate(direction);
+        _playerInSight = true;
+        _direction = direction;
+        Moving?.Invoke(); 
     }
 
     public void MoveForward()

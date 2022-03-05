@@ -7,16 +7,15 @@ using UnityEngine.AddressableAssets;
 public class LevelsHandler : MonoBehaviour
 {
     [SerializeField] private LevelsList _levelList;
-    [SerializeField] private TMP_Text _text;
 
     private WinnerDecider _winnderDecider;
-    private int _counter;
+    public int Counter { get; private set; }
 
     private SaveSystem _saveSystem = new SaveSystem();
 
     private void Start()
     {
-        _counter = _saveSystem.LoadLevelsProgression();
+        Counter = _saveSystem.LoadLevelsProgression();
     }
 
     private void OnEnable()
@@ -35,15 +34,15 @@ public class LevelsHandler : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        if (_counter > _levelList.SceneCount)
-            _levelList.GetRandomScene(_counter).LoadSceneAsync();
+        if (Counter > _levelList.SceneCount)
+            _levelList.GetRandomScene(Counter).LoadSceneAsync();
         else
-            _levelList.GetScene(_counter).LoadSceneAsync();
+            _levelList.GetScene(Counter).LoadSceneAsync();
     }
 
     public void RestartLevel()
     {
-        var scene = _levelList.GetScene(_counter);
+        var scene = _levelList.GetScene(Counter);
 
         if (scene != null)
             scene.ReleaseAsset();
@@ -53,8 +52,8 @@ public class LevelsHandler : MonoBehaviour
 
     private void OnLevelCompleted()
     {
-        _counter++;
+        Counter++;
 
-        _saveSystem.SaveLevelsProgression(_counter);
+        _saveSystem.SaveLevelsProgression(Counter);
     }
 }

@@ -17,16 +17,6 @@ namespace RunnerMovementSystem.Examples
         private Vector3 _targetPosition;
         private DeathTrigger _deathTrigger;
 
-        private void Awake()
-        {
-            _target = FindObjectOfType<CameraTarget>().transform;
-            Error.CheckOnNull(_target, nameof(CameraTarget));
-
-            transform.position = _targetPosition;
-
-            var targetRotation = Quaternion.LookRotation(_target.forward, Vector3.up);
-            transform.rotation = targetRotation;
-        }
         private void OnEnable()
         {
             _deathTrigger = FindObjectOfType<DeathTrigger>();
@@ -42,6 +32,9 @@ namespace RunnerMovementSystem.Examples
 
         private void LateUpdate()
         {
+            if (_target == null)
+                return;
+
             _targetPosition = _target.position;
             _targetPosition -= _target.forward * _distance;
             _targetPosition += Vector3.up * _height;
@@ -51,6 +44,16 @@ namespace RunnerMovementSystem.Examples
             var targetRotation = Quaternion.LookRotation(_target.forward, Vector3.up);
             targetRotation.eulerAngles = new Vector3(_lookAngle, targetRotation.eulerAngles.y +_lookAngleY, targetRotation.eulerAngles.z);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        }
+
+        public void SetTarget(Transform target)
+        {
+            _target = target;
+
+            transform.position = _targetPosition;
+
+            var targetRotation = Quaternion.LookRotation(_target.forward, Vector3.up);
+            transform.rotation = targetRotation;
         }
 
         private void Disable()

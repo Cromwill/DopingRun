@@ -7,6 +7,7 @@ public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private DynamicJoystick _joystick;
     [SerializeField] private float _speed;
+    [SerializeField] private Pushable _pushable;
 
     private Rigidbody _rigidBody;
     private float _threshold = 0.01f;
@@ -19,6 +20,9 @@ public class PlayerMover : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_pushable.IsPushed)
+            return;
+
         Vector3 direcationForward = Camera.main.transform.forward * _joystick.Vertical;
 
         Vector3 directioRight = Camera.main.transform.right * _joystick.Horizontal;
