@@ -19,8 +19,13 @@ namespace RunnerMovementSystem.Examples
 
         private void Awake()
         {
-            _target = FindObjectOfType<Player>().transform;
-            Error.CheckOnNull(_target, nameof(Player));
+            _target = FindObjectOfType<CameraTarget>().transform;
+            Error.CheckOnNull(_target, nameof(CameraTarget));
+
+            transform.position = _targetPosition;
+
+            var targetRotation = Quaternion.LookRotation(_target.forward, Vector3.up);
+            transform.rotation = targetRotation;
         }
         private void OnEnable()
         {

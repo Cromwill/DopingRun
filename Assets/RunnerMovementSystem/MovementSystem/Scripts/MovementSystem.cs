@@ -16,6 +16,9 @@ namespace RunnerMovementSystem
 
         public event UnityAction<PathSegment> PathChanged;
 
+        public IMovement CurrentMovement => _currentMovement;
+        public MovementOptions Options => _options;
+        public RoadSegment FirstRoad => _firstRoad;
         public float Offset => _currentMovement.Offset;
         public float CurrentSpeed => _movementBehaviour.GetCurrentSpeed();
         public bool IsOnTransition => _currentMovement is TransitionMovement;
@@ -57,6 +60,16 @@ namespace RunnerMovementSystem
             _options.SetDirection(direction);
         }
 
+        public void SetOptions(MovementOptions options)
+        {
+            _options = options;
+        }
+
+        public void SetFirstRoad(RoadSegment segment)
+        {
+            _firstRoad = segment;
+        }
+
         public void Init(RoadSegment firstRoad)
         {
             _firstRoad = firstRoad;
@@ -74,6 +87,11 @@ namespace RunnerMovementSystem
         {
             if (enabled)
                 _currentMovement.SetOffset(offset);
+        }
+
+        public void SetCureentMovent(IMovement movement)
+        {
+            _currentMovement = movement;
         }
 
         public void Transit(TransitionSegment transition)

@@ -46,5 +46,10 @@ namespace RunnerMovementSystem.Examples
             if(IsMoved)
                 _roadMovement.MoveForward();
         }
+
+        public void SetSensitivity(float value)
+        {
+            _sensitivity = value;
+        }
     }
 }
