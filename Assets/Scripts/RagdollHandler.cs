@@ -5,7 +5,7 @@ using UnityEngine;
 public class RagdollHandler : MonoBehaviour
 {
     private Rigidbody[] _rigidbodys;
-    private const int _untuchableLayer = 9;
+
 
     private void Start()
     {
@@ -22,7 +22,6 @@ public class RagdollHandler : MonoBehaviour
         foreach (var rigidbody in _rigidbodys)
         {
             rigidbody.isKinematic = false;
-            rigidbody.gameObject.layer = _untuchableLayer;
         }
     }
 }

@@ -9,16 +9,19 @@ public class WinScreenEnabler : MonoBehaviour
     private WinScreen _winScreen;
     private WinnerDecider _winerDecider;
 
-    private void OnEnable()
+    private void Awake()
     {
         _winerDecider = FindObjectOfType<WinnerDecider>();
         Error.CheckOnNull(_winerDecider, nameof(WinnerDecider));
 
-        _winScreen = FindObjectOfType<WinScreen>();
+        _winScreen = GetComponentInChildren<WinScreen>();
         Error.CheckOnNull(_winScreen, nameof(WinScreen));
 
         _winScreen.gameObject.SetActive(false);
+    }
 
+    private void OnEnable()
+    {
         _winerDecider.Victory += OnVictory;
     }
 

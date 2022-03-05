@@ -14,6 +14,7 @@ public class EnterSumoTrigger : MonoBehaviour
     private SumoControls _sumoControls;
     private RunerControls _runerControls;
     private bool _isPlayerReachedDesitination;
+    private bool _isAnimationEnd;
 
     private void Start()
     {
@@ -43,8 +44,7 @@ public class EnterSumoTrigger : MonoBehaviour
             _runerControls.Disable(player);
             _sumoControls.Enable(player);
 
-            if (player.TryGetComponent(out PlayerAnimator playerAnimator))
-                _delay = playerAnimator.AnimationTime;
+            player.GetComponentInChildren<EnlargePlayer>().AnimationEnd += OnAnimationEnd;
         }
 
         if(other.TryGetComponent(out PlayerMover playerMover))
@@ -53,9 +53,19 @@ public class EnterSumoTrigger : MonoBehaviour
         }
     }
 
+    private void OnAnimationEnd(EnlargePlayer enlargePlayer)
+    {
+        _isAnimationEnd = true;
+        enlargePlayer.AnimationEnd -= OnAnimationEnd;
+    }
+
     private IEnumerator MoveToFight(PlayerMover playerMover)
     {
-        yield return new WaitForSeconds(_delay);
+
+        while (_isAnimationEnd == false)
+        {
+            yield return null;
+        }
 
         Vector3 direction = (_sumoFightTransition.transform.position - playerMover.transform.position).normalized;
 

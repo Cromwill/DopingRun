@@ -122,6 +122,10 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2979104440802091209, guid: 557cca42c75b2334b9acae1b11f8e6bf, type: 3}
+      propertyPath: _pushable
+      value: 
+      objectReference: {fileID: 2816910866040449113}
     - target: {fileID: 2979104440802091210, guid: 557cca42c75b2334b9acae1b11f8e6bf, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -162,6 +166,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2979104440802091206, guid: 557cca42c75b2334b9acae1b11f8e6bf, type: 3}
   m_PrefabInstance: {fileID: 1026902312851556510}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2816910866040449113 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2979104440802091207, guid: 557cca42c75b2334b9acae1b11f8e6bf, type: 3}
+  m_PrefabInstance: {fileID: 1026902312851556510}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe31faeb5acedb4fbf47bd455175561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2816910866179006978
 PrefabInstance:
   m_ObjectHideFlags: 0

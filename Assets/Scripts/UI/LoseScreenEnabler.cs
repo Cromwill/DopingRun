@@ -32,7 +32,6 @@ public class LoseScreenEnabler : MonoBehaviour
         {
             deathTrigger.PlayerHasLost += OnLose;
         }
-        Debug.Log(_deathTriggers.Length);
     }
 
     private void OnDisable()
@@ -45,9 +44,8 @@ public class LoseScreenEnabler : MonoBehaviour
 
     private void OnLose()
     {
-        StartCoroutine(Delay());
         _winDecider.Disable();
-        Debug.Log("asd");
+        StartCoroutine(Delay());
     }
 
     private IEnumerator Delay()

@@ -12,6 +12,7 @@ public class Touchable : MonoBehaviour, IPushable
     [SerializeField] private float _forceMultiplier;
 
     private Rigidbody _rigidbody;
+    private const int _untuchableLayer = 9;
 
     private void Awake()
     {
@@ -20,10 +21,11 @@ public class Touchable : MonoBehaviour, IPushable
 
     public void Push(Vector3 direction, float pushSpeed)
     {
-        _enemyTriggerZone.gameObject.SetActive(false);
         _animator.enabled = false;
         _enemyMover.enabled = false;
         _ragdollHandler.EnableRagdoll();
         _rigidbody.AddForce(-transform.parent.transform.forward * pushSpeed * _forceMultiplier, ForceMode.VelocityChange);
+        _enemyTriggerZone.gameObject.SetActive(false);
+        gameObject.layer = _untuchableLayer;
     }
 }

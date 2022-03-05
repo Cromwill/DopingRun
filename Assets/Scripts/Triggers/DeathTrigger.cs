@@ -20,6 +20,9 @@ public class DeathTrigger : Trigger
             if (enemy.TryGetComponent(out PlayerMover playerMover))
                 playerMover.enabled = false;
 
+            if (enemy.TryGetComponent(out CelebrationState celebrationState))
+                celebrationState.enabled = false;
+
             enemy.OnDying();
 
             FighterOffTheRing?.Invoke(enemy);

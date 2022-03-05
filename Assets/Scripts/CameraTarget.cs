@@ -9,15 +9,22 @@ public class CameraTarget : MonoBehaviour
 {
     private MovementSystem _movementSystem;
     private MovementSystem _playerMovementSystem;
-    private MouseInput _mouseInput;
+    private CameraFollowing _cameraFollowing;
     private float _offset;
 
     private bool _isMoving;
-    private void Start()
+    private void Awake()
     {
+        _cameraFollowing = FindObjectOfType<CameraFollowing>();
+        Error.CheckOnNull(_cameraFollowing, nameof(CameraFollowing));
+
+        _cameraFollowing.SetTarget(transform);
+
         _movementSystem = GetComponent<MovementSystem>();
+        Error.CheckOnNull(_movementSystem, nameof(MovementSystem));
 
         _playerMovementSystem = FindObjectOfType<Player>().GetComponent<MovementSystem>();
+        Error.CheckOnNull(_playerMovementSystem, nameof(Player));
 
         _movementSystem.SetOptions(_playerMovementSystem.Options);
         _movementSystem.SetFirstRoad(_playerMovementSystem.FirstRoad);
@@ -32,10 +39,12 @@ public class CameraTarget : MonoBehaviour
             _isMoving = true;
 
         if (_isMoving)
+        {
             _movementSystem.MoveForward();
 
-        _offset = Mathf.Lerp(_movementSystem.Offset, 0 , 12f * Time.deltaTime);
+            _offset = Mathf.Lerp(_movementSystem.Offset, 0, 12f * Time.deltaTime);
 
-        _movementSystem.SetOffset(_offset);
+            _movementSystem.SetOffset(_offset);
+        }
     }
 }
