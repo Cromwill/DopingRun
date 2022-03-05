@@ -1570,7 +1570,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000357190}
   m_CullTransparentMesh: 1
---- !u!21 &1070852845
+--- !u!21 &1088398697
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -3530,6 +3530,10 @@ PrefabInstance:
       propertyPath: _joystick
       value: 
       objectReference: {fileID: 853316830}
+    - target: {fileID: 2139742935, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 1823091554893732080, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
       propertyPath: m_Name
       value: Sanic (1)
@@ -3585,7 +3589,7 @@ PrefabInstance:
     - target: {fileID: 2935438366055093703, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1070852845}
+      objectReference: {fileID: 1088398697}
     - target: {fileID: 5132741616341025395, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
       propertyPath: m_Camera
       value: 

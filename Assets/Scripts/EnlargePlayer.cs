@@ -62,6 +62,7 @@ public class EnlargePlayer : MonoBehaviour
     {
         StartCoroutine(EnlargeAnimation());
         StartCoroutine(GainMuscleAnimation());
+        StartCoroutine(Hulkization());
     }
 
     private IEnumerator EnlargeAnimation()
@@ -94,14 +95,14 @@ public class EnlargePlayer : MonoBehaviour
 
     private IEnumerator Hulkization()
     {
-        float timePassed = 0;
+        float changeSpeed = 3 / _timeToGainMuscle;
+        float width = 0;
 
-        while (timePassed != _timeToGainMuscle)
+        while (width != 3)
         {
-            _meshRenderer.material.color = Color.Lerp(_meshRenderer.material.color, Color.green, timePassed / _timeToGainMuscle);
-            _meshRenderer.material.SetColor("_ColorShaded", _meshRenderer.material.color);
+            width = Mathf.MoveTowards(width, 3, changeSpeed * Time.deltaTime);
 
-            timePassed += Time.deltaTime;
+            _meshRenderer.material.SetFloat("_OutlineWidth", width);
 
             yield return null;
         }
