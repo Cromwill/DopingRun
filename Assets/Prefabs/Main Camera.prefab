@@ -61,7 +61,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 50
+  field of view: 57
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -94,18 +94,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23074581127286321}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24a7904073e150149b5d12b6099dbbe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 10
   _rotationSpeed: 10
-  _height: 6.75
-  _distance: 8.7
-  _offest: 0.49
-  _lookAngle: 22
-  _lookAngleY: -3.5
+  _height: 7.3
+  _distance: 9.5
+  _offest: 1.65
+  _lookAngle: 27.49
+  _lookAngleY: -8.97
 --- !u!114 &23074581127286326
 MonoBehaviour:
   m_ObjectHideFlags: 0
