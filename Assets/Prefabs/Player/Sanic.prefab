@@ -904,7 +904,7 @@ Transform:
   m_GameObject: {fileID: 1823091554893732080}
   m_LocalRotation: {x: 0, y: 0.5114281, z: 0, w: 0.85932606}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 1.15, y: 1.05, z: 1.15}
   m_Children:
   - {fileID: 1823091555214885464}
   - {fileID: 375733990}
@@ -961,7 +961,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &2139742934
 BoxCollider:
@@ -2420,6 +2420,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3441035041870719997}
+  - component: {fileID: 1465050523}
   m_Layer: 0
   m_Name: Syringe_Nidle
   m_TagString: Untagged
@@ -2441,6 +2442,19 @@ Transform:
   m_Father: {fileID: 2818308958159894809}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -1.2501998, y: -0.0036257072, z: 0.3336279}
+--- !u!114 &1465050523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4629597884089410046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f29b4761eb608494387056c71f605803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enlargable: {fileID: 2425830175773164846}
 --- !u!1 &4659618183364965850
 GameObject:
   m_ObjectHideFlags: 0
