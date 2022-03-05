@@ -16,6 +16,9 @@ public class SumoFighterList : MonoBehaviour
     private void Start()
     {
         _fighters = FindObjectsOfType<SumoFighter>().ToList();
+
+        ChangeViewState(false);
+
         Error.CheckOnNull(_fighters[0], nameof(SumoFighter));
     }
 
@@ -32,9 +35,27 @@ public class SumoFighterList : MonoBehaviour
 
     public void EnableFighters()
     {
+        ChangeViewState(true);
+
         ParachuteFighters();
 
         StartCoroutine(DelayedEnableFighters());
+    }
+
+    private void ChangeViewState(bool state)
+    {
+        foreach (var fighter in _fighters)
+        {
+            if (fighter.TryGetComponent(out Player player))
+                return;
+
+            var renders = fighter.GetComponentsInChildren<SkinnedMeshRenderer>();
+
+            foreach (var renderer in renders)
+            {
+                renderer.enabled = state;
+            }
+        }
     }
 
     private IEnumerator DelayedEnableFighters()

@@ -7,16 +7,21 @@ namespace RunnerMovementSystem.Examples
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _rotationSpeed;
         [Space(15)]
-        [SerializeField] private Transform _target;
         [SerializeField] private float _height;
         [SerializeField] private float _distance;
         [SerializeField] private float _offest;
         [SerializeField] private float _lookAngle;
         [SerializeField] private float _lookAngleY;
 
+        private Transform _target;
         private Vector3 _targetPosition;
         private DeathTrigger _deathTrigger;
 
+        private void Awake()
+        {
+            _target = FindObjectOfType<Player>().transform;
+            Error.CheckOnNull(_target, nameof(Player));
+        }
         private void OnEnable()
         {
             _deathTrigger = FindObjectOfType<DeathTrigger>();

@@ -369,6 +369,7 @@ MonoBehaviour:
   _pushSpeed: 25
   _stepCoeficient: 0
   _cooldown: 0
+  _hitParticles: {fileID: 0}
 --- !u!1 &1522298397695953025
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1237585084490106027}
   - component: {fileID: 8884404026678197007}
+  - component: {fileID: 6686074682013907503}
   m_Layer: 0
   m_Name: Slim_to_Muscle_Man (14)
   m_TagString: Untagged
@@ -519,6 +521,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6686074682013907503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902517677174988305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55ae7123b839f640a568961b3a1f181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1914697400538470241
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,7 +1388,6 @@ MonoBehaviour:
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  IsAlive: 1
   _target: {fileID: 0}
 --- !u!114 &2979104440802091210
 MonoBehaviour:

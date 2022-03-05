@@ -15,6 +15,8 @@ public class EnlargePlayer : MonoBehaviour
     private float _weightPerStep;
     private const float _initialScale = 1f;
     private const float _maxWeight = 100f;
+    private const string _outline = "_OutlineWidth";
+    private const float _maxOutlineWidth = 3f;
     private float _targetWeight;
     private Enlargable _enlargable;
     private InjectorBarPresenter _barPresenter;
@@ -95,14 +97,14 @@ public class EnlargePlayer : MonoBehaviour
 
     private IEnumerator Hulkization()
     {
-        float changeSpeed = 3 / _timeToGainMuscle;
+        float changeSpeed = _maxOutlineWidth / _timeToGainMuscle;
         float width = 0;
 
-        while (width != 3)
+        while (width != _maxOutlineWidth)
         {
-            width = Mathf.MoveTowards(width, 3, changeSpeed * Time.deltaTime);
+            width = Mathf.MoveTowards(width, _maxOutlineWidth, changeSpeed * Time.deltaTime);
 
-            _meshRenderer.material.SetFloat("_OutlineWidth", width);
+            _meshRenderer.material.SetFloat(_outline, width);
 
             yield return null;
         }
