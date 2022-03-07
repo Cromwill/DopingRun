@@ -223,6 +223,9 @@ GameObject:
   - component: {fileID: 4686951729001903488}
   - component: {fileID: 2174588147937698694}
   - component: {fileID: 6957618985045897862}
+  - component: {fileID: 413101529396524255}
+  - component: {fileID: 1957222197860324767}
+  - component: {fileID: 4690342432286329382}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -326,7 +329,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a65bd0b11e34c429440a4d55df7e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _wienerDecider: {fileID: 413101529396524255}
   _delay: 2
+  _winScreen: {fileID: 2948703462257482706}
 --- !u!114 &4686951729001903488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,6 +371,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fightScreen: {fileID: 2111675544596380462}
+--- !u!114 &413101529396524255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4686951729001903494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b73ad989d707a2d46b3dfb0c5c536e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1957222197860324767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4686951729001903494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e03cbe73f9d6e014ca0db0e6eb6f25bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraPoint: {fileID: 0}
+  _timeToTransit: 0
+  _rotationSpeed: 0
+  _setPointAsParent: 0
+--- !u!114 &4690342432286329382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4686951729001903494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da177fc741346f2428883c8b99649975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5547764040894764983
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,6 +941,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WinScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 3023669467423323, guid: d181d4c875d38154c8fd7e47a12d0e6f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7631980603191523339, guid: d181d4c875d38154c8fd7e47a12d0e6f, type: 3}
       propertyPath: _text
       value: 
@@ -915,6 +964,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2948703462257482706 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7631980603191523339, guid: d181d4c875d38154c8fd7e47a12d0e6f, type: 3}
+  m_PrefabInstance: {fileID: 4684266710460834777}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a86ee48d6aed20341b8078f999bfff6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &4686951729004183939 stripped

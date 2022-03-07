@@ -44,12 +44,12 @@ public class EnterSumoTrigger : MonoBehaviour
             _runerControls.Disable(player);
             _sumoControls.Enable(player);
 
-            player.GetComponentInChildren<EnlargePlayer>().AnimationEnd += OnAnimationEnd;
-        }
+            if (player.TryGetComponent(out PlayerMover playerMover))
+            {
+                StartCoroutine(MoveToFight(playerMover));
+            }
 
-        if(other.TryGetComponent(out PlayerMover playerMover))
-        {
-            StartCoroutine(MoveToFight(playerMover));
+            player.GetComponentInChildren<EnlargePlayer>().AnimationEnd += OnAnimationEnd;
         }
     }
 
@@ -63,14 +63,11 @@ public class EnterSumoTrigger : MonoBehaviour
     {
 
         while (_isAnimationEnd == false)
-        {
             yield return null;
-        }
-
-        Vector3 direction = (_sumoFightTransition.transform.position - playerMover.transform.position).normalized;
 
         while (_isPlayerReachedDesitination == false)
         {
+            Vector3 direction = (_sumoFightTransition.transform.position - playerMover.transform.position).normalized;
             playerMover.Move(direction, _transitionSpeed);
 
             yield return null;

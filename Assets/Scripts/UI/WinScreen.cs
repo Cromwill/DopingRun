@@ -8,7 +8,7 @@ public class WinScreen : MonoBehaviour
     [SerializeField] private TMP_Text _text;
     [SerializeField] private LevelsHandler _levelsHandler;
 
-    private void OnEnable()
+    public void ShowLevelNumber()
     {
         _text.text = $"Level {_levelsHandler.Counter}";
     }

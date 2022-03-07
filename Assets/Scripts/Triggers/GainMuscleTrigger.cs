@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GainMuscleTrigger : MonoBehaviour
 {
-    [SerializeField]private GainMuscleTrigger[] _gainMuscleTriggers;
+    private GainMuscleTrigger[] _gainMuscleTriggers;
 
     private void Awake()
     {

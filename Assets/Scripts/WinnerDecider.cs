@@ -28,7 +28,9 @@ public class WinnerDecider : MonoBehaviour
     {
         if (fighter.TryGetComponent(out CelebrationState celebrationState))
         {
-            Victory?.Invoke();
+            if(fighter.TryGetComponent(out Player player))
+                Victory?.Invoke();
+
             celebrationState.enabled = true;
         }
     }
