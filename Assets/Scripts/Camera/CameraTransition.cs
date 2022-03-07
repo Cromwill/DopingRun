@@ -7,14 +7,16 @@ using System;
 public class CameraTransition : MonoBehaviour
 {
     [SerializeField] protected CameraPoint _cameraPoint;
-    [SerializeField] private float _timeToTransit;
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private bool _setPointAsParent;
 
+    private float _timeToTransit = 1f;
+    protected float _delay = 0f;
     private CameraFollowing _following;
     private FocalPoint _focalPoint;
     private Camera _camera;
-    private float changeSpeed; 
+    private float changeSpeed;
+    protected bool _lookAtPlayer = true;
 
     public event Action TransitionCompleted;
 
@@ -27,6 +29,7 @@ public class CameraTransition : MonoBehaviour
 
         _following = FindObjectOfType<CameraFollowing>();
         Error.CheckOnNull(_following, nameof(CameraFollowing));
+
     }
 
     public void Transit()
@@ -39,17 +42,19 @@ public class CameraTransition : MonoBehaviour
 
         _following.enabled = false;
 
-        float distance = Vector3.Distance(transform.position, _cameraPoint.transform.position);
+        float distance = Vector3.Distance(Camera.main.transform.position, _cameraPoint.transform.position);
         changeSpeed = distance / _timeToTransit;
-
         StartCoroutine(TransitAnimation());
     }
 
     private IEnumerator TransitAnimation()
     {
+        yield return new WaitForSeconds(_delay);
+
         while (_camera.transform.position != _cameraPoint.transform.position)
         {
             _camera.transform.position = Vector3.MoveTowards(_camera.transform.position, _cameraPoint.transform.position, changeSpeed * Time.deltaTime);
+
             _camera.transform.LookAt(_focalPoint.transform);
 
             yield return null;

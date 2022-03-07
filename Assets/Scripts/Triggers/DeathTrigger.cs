@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DeathTrigger : Trigger
 {
+    private float _pushOutForce = 50f;
     private CameraLookAt _cameraLookAt;
     private SumoControls _sumoControls = new SumoControls();
 
@@ -18,26 +19,33 @@ public class DeathTrigger : Trigger
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out SumoFighter enemy))
+        if (other.TryGetComponent(out DeathHandler deathHandler))
+            deathHandler.Die();
+
+        if (other.TryGetComponent(out SumoFighter sumoFighter))
         {
-            if (enemy.TryGetComponent(out EnemyStateMachine stateMachine))
+            if (sumoFighter.TryGetComponent(out EnemyStateMachine stateMachine))
                 stateMachine.enabled = false;
 
-            if (enemy.TryGetComponent(out MoveState moveState))
+            if (sumoFighter.TryGetComponent(out MoveState moveState))
                 moveState.enabled = false;
 
-            if (enemy.TryGetComponent(out PlayerMover playerMover))
+            if (sumoFighter.TryGetComponent(out PlayerMover playerMover))
                 playerMover.enabled = false;
 
-            if (enemy.TryGetComponent(out CelebrationState celebrationState))
+            if (sumoFighter.TryGetComponent(out CelebrationState celebrationState))
                 celebrationState.enabled = false;
 
-            enemy.OnDying();
+            if (sumoFighter.TryGetComponent(out Rigidbody rigidbody))
+                rigidbody.constraints = RigidbodyConstraints.None;
 
-            FighterOffTheRing?.Invoke(enemy);
+            PushOut(sumoFighter);
 
-            enemy.enabled = false;
+            sumoFighter.OnDying();
 
+            FighterOffTheRing?.Invoke(sumoFighter);
+
+            sumoFighter.enabled = false;
         }
 
         if (other.TryGetComponent(out Player player))
@@ -45,11 +53,16 @@ public class DeathTrigger : Trigger
             PlayerLost();
             _sumoControls.Disable(player);
 
-            if (enemy.TryGetComponent(out Rigidbody rigidbody))
-            {
-                rigidbody.constraints = RigidbodyConstraints.None;
-                _cameraLookAt.enabled = false;
-            }
+            _cameraLookAt.enabled = false;
         }
+    }
+
+    private void PushOut(SumoFighter sumoFighter)
+    {
+        Chest chest = sumoFighter.GetComponentInChildren<Chest>();
+
+        Vector3 direction = sumoFighter.transform.position - transform.position;
+
+        chest.Push(direction.normalized, _pushOutForce);
     }
 }

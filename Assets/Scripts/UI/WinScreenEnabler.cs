@@ -4,30 +4,24 @@ using UnityEngine;
 
 public class WinScreenEnabler : MonoBehaviour
 {
+    [SerializeField] private WinnerDecider _wienerDecider;
     [SerializeField] private float _delay;
+    [SerializeField] private WinScreen _winScreen;
 
-    private WinScreen _winScreen;
-    private WinnerDecider _winerDecider;
 
     private void Awake()
     {
-        _winerDecider = FindObjectOfType<WinnerDecider>();
-        Error.CheckOnNull(_winerDecider, nameof(WinnerDecider));
-
-        _winScreen = GetComponentInChildren<WinScreen>();
-        Error.CheckOnNull(_winScreen, nameof(WinScreen));
-
         _winScreen.gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
-        _winerDecider.Victory += OnVictory;
+        _wienerDecider.Victory += OnVictory;
     }
 
     private void OnDisable()
     {
-        _winerDecider.Victory -= OnVictory;
+        _wienerDecider.Victory -= OnVictory;
     }
 
     private void OnVictory()
@@ -40,5 +34,6 @@ public class WinScreenEnabler : MonoBehaviour
         yield return new WaitForSeconds(_delay);
 
         _winScreen.gameObject.SetActive(true);
+        _winScreen.ShowLevelNumber();
     }
 }

@@ -21,6 +21,9 @@ public class RunerDeathTrigger : Trigger
             _cameraFollowing.enabled = false;
             _runerControls.Disable(player);
             PlayerLost();
+
+            if (player.TryGetComponent(out DeathHandler deathHandler))
+                deathHandler.Die();
         }
 
         if (other.TryGetComponent(out CameraTarget cameraTarget))

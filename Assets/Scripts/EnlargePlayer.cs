@@ -9,7 +9,7 @@ public class EnlargePlayer : MonoBehaviour
     [SerializeField] private float _timeToGainMuscle;
     [SerializeField] private float _targetScaleValue;
     [SerializeField] private SkinnedMeshRenderer _meshRenderer;
-    [SerializeField] private Material _targetMaterial;
+    [SerializeField] private Material _outlineMaterial;
 
     private Vector3 _maxScale;
     private float _scalePerStep;
@@ -105,6 +105,8 @@ public class EnlargePlayer : MonoBehaviour
 
     private IEnumerator Hulkization()
     {
+        _meshRenderer.material = _outlineMaterial;
+
         float changeSpeed = _maxOutlineWidth / _timeToGainMuscle;
         float width = _meshRenderer.material.GetFloat(_outline);
 

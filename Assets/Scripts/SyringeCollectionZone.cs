@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SyringeCollectionZone : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _particle;
+
     private Enlargable _enlargable;
 
     private void Start()
@@ -17,6 +19,7 @@ public class SyringeCollectionZone : MonoBehaviour
         {
             injector.Disable();
             _enlargable.EnalargeAnimation();
+            _particle.Play();
         }
     }
 }

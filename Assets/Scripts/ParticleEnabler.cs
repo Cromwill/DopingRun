@@ -5,27 +5,29 @@ using UnityEngine;
 public class ParticleEnabler : MonoBehaviour
 {
     [SerializeField] private PlayerParticleHolder _particleHolder;
-    [SerializeField] private CameraTransition _CameraTransition;
+    private WinnerDecider _winerDecider;
 
+    private void Awake()
+    {
+        _winerDecider = FindObjectOfType<WinnerDecider>();
+        Error.CheckOnNull(_winerDecider, nameof(WinnerDecider));
+    }
     private void Start()
     {
-        _particleHolder = FindObjectOfType<PlayerParticleHolder>();
-        Error.CheckOnNull(_particleHolder, nameof(PlayerParticleHolder));
-
         _particleHolder.gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
-        _CameraTransition.TransitionCompleted += OnTranstionComplete;
+        _winerDecider.Victory += OnVictory;
     }
 
     private void OnDisable()
     {
-        _CameraTransition.TransitionCompleted -= OnTranstionComplete;
+        _winerDecider.Victory -= OnVictory;
     }
 
-    private void OnTranstionComplete()
+    private void OnVictory()
     {
         _particleHolder.gameObject.SetActive(true);
     }

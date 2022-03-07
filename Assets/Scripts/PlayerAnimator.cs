@@ -76,15 +76,26 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnCollidedWithPushable()
     {
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.SumoRun))
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.RunSumo))
             _animator.SetTrigger(AnimationClipNames.Attack);
     }
 
     private void OnPushed()
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.SumoRun))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.RunSumo))
+        {
             _animator.SetTrigger(AnimationClipNames.Hitted);
+            StartCoroutine(ResetTrigger());
+        } 
     }
+
+    private IEnumerator ResetTrigger()
+    {
+        yield return new WaitForSeconds(0.01f);
+
+        _animator.ResetTrigger(AnimationClipNames.Hitted);
+    }
+
 
     public void Run()
     {
