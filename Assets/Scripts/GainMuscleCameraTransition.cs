@@ -8,4 +8,10 @@ public class GainMuscleCameraTransition : CameraTransition
     {
         _cameraPoint = FindObjectOfType<GainMuscleCameraPoint>();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out CameraTarget cameraTarget))
+            cameraTarget.gameObject.SetActive(false);
+    }
 }

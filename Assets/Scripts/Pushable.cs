@@ -10,6 +10,7 @@ public class Pushable : MonoBehaviour, IPushable
 
     private Rigidbody _rigidbody;
     private float _pushSpeed;
+    private Vector3 _direction;
     public bool IsPushed { get; private set; }
 
     public event Action PushEnd;
@@ -23,12 +24,14 @@ public class Pushable : MonoBehaviour, IPushable
     private void FixedUpdate()
     {
         if(IsPushed)
-            _rigidbody.MovePosition(transform.position - transform.forward * _pushSpeed * Time.deltaTime);
+            _rigidbody.MovePosition(transform.position + _direction * _pushSpeed * Time.deltaTime);
     }
 
     public void Push(Vector3 direction, float pushSpeed)
     {
         _pushSpeed = pushSpeed;
+        _direction = direction.normalized;
+        _direction.y = 0f;
         StartCoroutine(PushAnimation());
     }
 

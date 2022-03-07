@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GainMuscleTrigger : MonoBehaviour
 {
+    [SerializeField]private GainMuscleTrigger[] _gainMuscleTriggers;
+
+    private void Awake()
+    {
+        _gainMuscleTriggers = FindObjectsOfType<GainMuscleTrigger>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out PlayerAnimator animator))
@@ -14,6 +20,12 @@ public class GainMuscleTrigger : MonoBehaviour
             Enlargable enlargable = player.GetComponentInChildren<Enlargable>();
             HustleZone hustleZone = player.GetComponentInChildren<HustleZone>();
             hustleZone.AddPushSpeed(enlargable.Step);
+
+            foreach (var gainMuscleTrigger in _gainMuscleTriggers)
+            {
+                gainMuscleTrigger.enabled = false;
+            }
+
         }
     }
 }

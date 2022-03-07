@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2960827940219491861}
   m_LocalRotation: {x: -0, y: -0.030549735, z: -0, w: 0.9995333}
-  m_LocalPosition: {x: 0.55, y: 3.15, z: -8.25}
+  m_LocalPosition: {x: 0.42, y: 3.15, z: -6.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2960827940724497040}
@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2196a2ec1196b074592c2f9f27b95694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gainMuscleTriggers: []
 --- !u!114 &2960827940219491857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,6 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shakeData: {fileID: 11400000, guid: b20aafe7df2f8274780b4bc635e31915, type: 2}
+  _capsuleCollider: {fileID: 2960827940946327381}
 --- !u!114 &6868956783388764595
 MonoBehaviour:
   m_ObjectHideFlags: 0

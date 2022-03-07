@@ -11,10 +11,8 @@ public class SumoControls
         joystickCanvas.gameObject.SetActive(true);
     }
 
-    public void Disable(Player player, JoystickCanvas joystickCanvas)
+    public void Disable(Player player)
     {
-        joystickCanvas.gameObject.SetActive(false);
-
         if (player.TryGetComponent(out PlayerMover playerMover))
             playerMover.enabled = false;
     }
