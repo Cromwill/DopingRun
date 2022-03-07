@@ -22,5 +22,8 @@ public class RunerDeathTrigger : Trigger
             _runerControls.Disable(player);
             PlayerLost();
         }
+
+        if (other.TryGetComponent(out CameraTarget cameraTarget))
+            cameraTarget.gameObject.SetActive(false);
     }
 }

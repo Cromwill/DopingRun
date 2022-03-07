@@ -124,8 +124,3 @@ namespace RunnerMovementSystem
         }
     }
 }
-
-public enum Direction
-{
-    Reverse = -1
-}

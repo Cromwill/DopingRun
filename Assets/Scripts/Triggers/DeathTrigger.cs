@@ -5,7 +5,16 @@ using UnityEngine;
 
 public class DeathTrigger : Trigger
 {
+    private CameraLookAt _cameraLookAt;
+    private SumoControls _sumoControls = new SumoControls();
+
     public event Action<SumoFighter> FighterOffTheRing;
+
+    private void Awake()
+    {
+        _cameraLookAt = Camera.main.GetComponent<CameraLookAt>();
+        Error.CheckOnNull(_cameraLookAt, nameof(CameraLookAt));
+    }
 
     private void OnTriggerExit(Collider other)
     {
@@ -28,9 +37,19 @@ public class DeathTrigger : Trigger
             FighterOffTheRing?.Invoke(enemy);
 
             enemy.enabled = false;
+
         }
 
         if (other.TryGetComponent(out Player player))
+        {
             PlayerLost();
+            _sumoControls.Disable(player);
+
+            if (enemy.TryGetComponent(out Rigidbody rigidbody))
+            {
+                rigidbody.constraints = RigidbodyConstraints.None;
+                _cameraLookAt.enabled = false;
+            }
+        }
     }
 }

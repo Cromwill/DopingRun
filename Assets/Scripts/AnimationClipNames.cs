@@ -12,4 +12,5 @@ public class AnimationClipNames
     public const string Hitted = "Hitted";
     public const string Attack = "Attack";
     public const string Victory = "Victory";
+    public const string Idle = "Idle";
 }

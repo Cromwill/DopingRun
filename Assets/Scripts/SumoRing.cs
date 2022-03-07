@@ -7,6 +7,7 @@ using System;
 public class SumoRing : MonoBehaviour
 {
     [SerializeField] private ShakeData _shakeData;
+    [SerializeField] private CapsuleCollider _capsuleCollider;
 
     private FightScreenEnabler _fightScreenEnabler;
     private CameraShaking _cameraShaking;
@@ -15,6 +16,7 @@ public class SumoRing : MonoBehaviour
 
     private void Awake()
     {
+        _capsuleCollider.enabled = false;
         _fightScreenEnabler = FindObjectOfType<FightScreenEnabler>();
         Error.CheckOnNull(_fightScreenEnabler, nameof(FightScreenEnabler));
     }
@@ -36,6 +38,7 @@ public class SumoRing : MonoBehaviour
             _cameraShaking.Shake(_shakeData);
             _fightScreenEnabler.OnSumoFightBegun();
             _isShaked = true;
+            _capsuleCollider.enabled = true;
         }
     }
 }

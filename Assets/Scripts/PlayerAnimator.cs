@@ -64,7 +64,8 @@ public class PlayerAnimator : MonoBehaviour
 
     public void GainMuscle()
     {
-        _animator.SetTrigger(AnimationClipNames.GainMuscle);
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.Run))
+            _animator.SetTrigger(AnimationClipNames.GainMuscle);
     }
 
     private void OnCollideWithTouchable()
@@ -87,7 +88,8 @@ public class PlayerAnimator : MonoBehaviour
 
     public void Run()
     {
-        _animator.SetTrigger(AnimationClipNames.Run);
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.Idle))
+            _animator.SetTrigger(AnimationClipNames.Run);
     }
 
     private void OnVictory()

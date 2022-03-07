@@ -33,7 +33,7 @@ public class VictoryTrigger : MonoBehaviour
     private void OnVictory()
     {
         Init();
-        _sumoControlls.Disable(_player, _joystickCanvas);
+        _sumoControlls.Disable(_player);
         _cameraTransition.Transit();
     }
 
