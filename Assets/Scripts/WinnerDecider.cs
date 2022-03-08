@@ -33,6 +33,9 @@ public class WinnerDecider : MonoBehaviour
 
             celebrationState.enabled = true;
         }
+
+        if (fighter.TryGetComponent(out MoveState moveState))
+            moveState.enabled = false;
     }
 
     public void Disable()

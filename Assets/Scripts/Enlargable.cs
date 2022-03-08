@@ -46,8 +46,8 @@ public class Enlargable : MonoBehaviour
             StepChanged?.Invoke(_step, _maxSteps);
         }
 
-            if (_coroutine == null)
-                _coroutine = StartCoroutine(Enlarge());
+        if (_coroutine == null)
+            _coroutine = StartCoroutine(Enlarge());
     }
 
     public void ShrinkAnimation(int stepCount)

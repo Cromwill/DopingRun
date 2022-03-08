@@ -8,7 +8,6 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Pushable _pushable;
     [SerializeField] private HustleZone _hustleZone;
 
-    private WinnerDecider _winnerDecider;
     private StartLevelButton _startLevel;
     private float _gainMuscleAnimationTime;
     private float _transformationAnimationTime;
@@ -21,11 +20,8 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Awake()
     {
-        _winnerDecider = FindObjectOfType<WinnerDecider>();
-        Error.CheckOnNull(_winnerDecider, nameof(WinnerDecider));
-
         _startLevel = FindObjectOfType<StartLevelButton>();
-        Error.CheckOnNull(_winnerDecider, nameof(StartLevelButton));
+        Error.CheckOnNull(_startLevel, nameof(StartLevelButton));
 
         AnimationClip[] _animationClips = _animator.runtimeAnimatorController.animationClips;
 
@@ -46,7 +42,6 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        _winnerDecider.Victory += OnVictory;
         _startLevel.RunStarted += Run;
         _hustleZone.CollidedWithTouchable += OnCollideWithTouchable;
         _hustleZone.CollidedWithPushable += OnCollidedWithPushable;
@@ -55,7 +50,6 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnDisable()
     {
-        _winnerDecider.Victory -= OnVictory;
         _startLevel.RunStarted -= Run;
         _hustleZone.CollidedWithTouchable -= OnCollideWithTouchable;
         _hustleZone.CollidedWithPushable -= OnCollidedWithPushable;
@@ -103,7 +97,7 @@ public class PlayerAnimator : MonoBehaviour
             _animator.SetTrigger(AnimationClipNames.Run);
     }
 
-    private void OnVictory()
+    public void OnVictory()
     {
         _animator.SetTrigger(AnimationClipNames.Victory);
     }

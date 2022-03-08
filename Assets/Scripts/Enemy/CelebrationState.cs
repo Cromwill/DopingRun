@@ -4,10 +4,10 @@ using UnityEngine;
 
 
 public class CelebrationState : State
-{ 
+{
+    [SerializeField] private PlayerAnimator _animator;
     private void OnEnable()
     {
-        Debug.Log($"win {transform.name}");
-        
+        _animator.OnVictory();
     }
 }
