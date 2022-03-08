@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.AddressableAssets;
-using UnityEngine.SceneManagement;
 
 public class LevelsHandler : MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class LevelsHandler : MonoBehaviour
 
         Counter = _saveSystem.LoadLevelsProgression();
 
-        if(_InitialLevel == false)
+        if(_InitialLevel)
             _integrationMetric.OnLevelStart(Counter);
     }
 
@@ -66,12 +65,14 @@ public class LevelsHandler : MonoBehaviour
     {
         _integrationMetric.OnRestartLevel(Counter);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        var scene = _levelList.GetScene(Counter);
+
+        Addressables.LoadSceneAsync(scene);
     }
 
     private void OnLevelCompleted()
     {
-        _integrationMetric.OnLevelComplete(GetTime(), Counter);
+        _integrationMetric.OnLevelComplete(Counter, GetTime());
 
         Counter++;
 
