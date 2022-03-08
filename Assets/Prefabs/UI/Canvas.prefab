@@ -358,6 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelList: {fileID: 11400000, guid: df377612cc695f84eac058924b72ea72, type: 2}
+  _InitialLevel: 0
 --- !u!114 &6957618985045897862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,7 +397,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraPoint: {fileID: 0}
-  _timeToTransit: 0
   _rotationSpeed: 0
   _setPointAsParent: 0
 --- !u!114 &4690342432286329382
@@ -835,6 +835,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2174588147937698694}
+    - target: {fileID: 7338880131329146255, guid: dd14502fe66ad614ba999e66e2d1fad2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0000026636
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338880131329146255, guid: dd14502fe66ad614ba999e66e2d1fad2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1698
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd14502fe66ad614ba999e66e2d1fad2, type: 3}
 --- !u!224 &4686951729653246734 stripped
