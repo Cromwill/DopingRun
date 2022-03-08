@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathTrigger : Trigger
+public class DeathTrigger : LoseTrigger
 {
     private float _pushOutForce = 50f;
     private CameraLookAt _cameraLookAt;

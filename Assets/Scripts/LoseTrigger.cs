@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trigger : MonoBehaviour, ILosable
+public class LoseTrigger : MonoBehaviour, ILosable
 {
     public event Action PlayerHasLost;
 

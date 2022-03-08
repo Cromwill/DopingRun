@@ -22,8 +22,8 @@ public class LoseScreenEnabler : MonoBehaviour
 
     private void OnEnable()
     {
-        _deathTriggers = FindObjectsOfType<Trigger>();
-        Error.CheckOnNull(_deathTriggers, nameof(Trigger));
+        _deathTriggers = FindObjectsOfType<LoseTrigger>();
+        Error.CheckOnNull(_deathTriggers, nameof(LoseTrigger));
 
         _loseScreen = FindObjectOfType<LoseScreen>();
         Error.CheckOnNull(_loseScreen, nameof(LoseScreen));
