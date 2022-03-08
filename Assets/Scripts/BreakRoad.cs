@@ -8,14 +8,14 @@ public class BreakRoad : MonoBehaviour
     private MeshCollider _collider;
     private Rigidbody _rigidbody;
 
-    private const int _breakeableRoadLayer = 7;
+    private const int BreakeableRoadLayer = 7;
 
     private void Awake()
     {
         _collider = GetComponent<MeshCollider>();
         _collider.convex = false;
 
-        gameObject.layer = _breakeableRoadLayer;
+        gameObject.layer = BreakeableRoadLayer;
 
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.isKinematic = true;
