@@ -39,11 +39,12 @@ public class SumoRing : MonoBehaviour
         {
             _cameraShaking.Shake(_shakeData);
             _fightScreenEnabler.OnSumoFightBegun();
-            _isShaked = true;
             _capsuleCollider.enabled = true;
 
-            if(_breakRoad != null)
+            if (_breakRoad != null)
                 _breakRoad.Break();
+
+            _isShaked = true;
         }
     }
 }
