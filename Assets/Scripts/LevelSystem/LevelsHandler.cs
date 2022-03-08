@@ -3,26 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
 
 public class LevelsHandler : MonoBehaviour
 {
     [SerializeField] private LevelsList _levelList;
+    [SerializeField] private bool _InitialLevel;
 
     private WinnerDecider _winnderDecider;
-    public int Counter { get; private set; }
-
+    private LoseTrigger[] _loseTriggers;
     private SaveSystem _saveSystem = new SaveSystem();
+    private IntegrationMetric _integrationMetric = new IntegrationMetric();
+    private float _timePassed;
+    public int Counter { get; private set; }
 
     private void Start()
     {
+        _timePassed = Time.time;
+
         Counter = _saveSystem.LoadLevelsProgression();
+
+        if(_InitialLevel == false)
+            _integrationMetric.OnLevelStart(Counter);
     }
 
     private void OnEnable()
     {
         _winnderDecider = FindObjectOfType<WinnerDecider>();
+        _loseTriggers = FindObjectsOfType<LoseTrigger>();
 
-        if(_winnderDecider != null)
+        foreach (var loseTrigger in _loseTriggers)
+        {
+            if (loseTrigger != null)
+                loseTrigger.PlayerHasLost += OnLevelFailed;
+        }
+
+        if (_winnderDecider != null)
             _winnderDecider.Victory += OnLevelCompleted;
     }
 
@@ -30,6 +46,12 @@ public class LevelsHandler : MonoBehaviour
     {
         if (_winnderDecider != null)
             _winnderDecider.Victory -= OnLevelCompleted;
+
+        foreach (var loseTrigger in _loseTriggers)
+        {
+            if (loseTrigger != null)
+                loseTrigger.PlayerHasLost -= OnLevelFailed;
+        }
     }
 
     public void LoadNextLevel()
@@ -42,18 +64,27 @@ public class LevelsHandler : MonoBehaviour
 
     public void RestartLevel()
     {
-        var scene = _levelList.GetScene(Counter);
+        _integrationMetric.OnRestartLevel(Counter);
 
-        if (scene != null)
-            scene.ReleaseAsset();
-
-        scene.LoadSceneAsync();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnLevelCompleted()
     {
+        _integrationMetric.OnLevelComplete(GetTime(), Counter);
+
         Counter++;
 
         _saveSystem.SaveLevelsProgression(Counter);
+    }
+
+    private void OnLevelFailed()
+    {
+        _integrationMetric.OnLevelFail(GetTime(), Counter);
+    }
+
+    private int GetTime()
+    {
+        return (int)(Time.time - _timePassed);
     }
 }

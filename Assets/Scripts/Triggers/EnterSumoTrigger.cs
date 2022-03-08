@@ -61,7 +61,6 @@ public class EnterSumoTrigger : MonoBehaviour
 
     private IEnumerator MoveToFight(PlayerMover playerMover)
     {
-
         while (_isAnimationEnd == false)
             yield return null;
 

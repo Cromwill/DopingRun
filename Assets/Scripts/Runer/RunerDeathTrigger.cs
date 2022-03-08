@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RunnerMovementSystem.Examples;
 
-public class RunerDeathTrigger : Trigger
+public class RunerDeathTrigger : LoseTrigger
 {
     private CameraFollowing _cameraFollowing;
     private RunerControls _runerControls;
