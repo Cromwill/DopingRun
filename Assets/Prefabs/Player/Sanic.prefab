@@ -1049,7 +1049,7 @@ MonoBehaviour:
   _options:
     _moveSpeed: 12
     _rotationSpeed: 30
-    _borderOffset: 0
+    _borderOffset: 0.7
 --- !u!114 &1823091554893732090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1120,7 +1120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _joystick: {fileID: 0}
-  _speed: 5
+  _speed: 7
   _pushable: {fileID: 2997792724805144190}
 --- !u!114 &175608142
 MonoBehaviour:
