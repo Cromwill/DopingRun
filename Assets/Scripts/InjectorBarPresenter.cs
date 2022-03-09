@@ -37,7 +37,7 @@ public class InjectorBarPresenter : MonoBehaviour
 
     public void ChangeValue(int value, int maxValue)
     {
-        _currentValue = (float)value/ maxValue;
+        _currentValue = (float)value / maxValue;
         StartCoroutine(ChangeCroutine(_changeSpeed));
     }
 

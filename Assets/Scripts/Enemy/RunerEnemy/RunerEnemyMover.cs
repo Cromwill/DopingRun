@@ -24,11 +24,13 @@ public class RunerEnemyMover : MonoBehaviour
     {
         _enemyTrigger = GetComponentInChildren<RunerEnemyTrigger>();
         _enemyTrigger.PlayerInTriggerZone += Move;
+        _enemyTrigger.PlayerOutOfTriggerZone += StopMove;
     }
 
     private void OnDisable()
     {
         _enemyTrigger.PlayerInTriggerZone -= Move;
+        _enemyTrigger.PlayerOutOfTriggerZone -= StopMove;
     }
 
     private void FixedUpdate()
@@ -54,6 +56,11 @@ public class RunerEnemyMover : MonoBehaviour
         _playerInSight = true;
         _direction = direction;
         Moving?.Invoke(); 
+    }
+
+    private void StopMove()
+    {
+        _playerInSight = false;
     }
 
     public void MoveForward()
