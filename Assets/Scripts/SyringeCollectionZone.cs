@@ -5,8 +5,10 @@ using UnityEngine;
 public class SyringeCollectionZone : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _particle;
+    [SerializeField] private Animator _animator;
 
     private Enlargable _enlargable;
+    private const string full = "full";
 
     private void Start()
     {
@@ -19,6 +21,7 @@ public class SyringeCollectionZone : MonoBehaviour
         {
             injector.Disable();
             _enlargable.EnalargeAnimation();
+            _animator.SetTrigger(full);
             _particle.Play();
         }
     }

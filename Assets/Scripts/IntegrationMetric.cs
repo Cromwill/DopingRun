@@ -20,29 +20,21 @@ public class IntegrationMetric
 
     public void OnLevelComplete(int levelComplitioTime, int levelIndex)
     {
-        Amplitude.Instance.logEvent("level_complete", CreateLevelEndTimeProperty(levelComplitioTime));
+        Dictionary<string, object> userInfo = new Dictionary<string, object> { { "level", levelIndex }, { "time_spent", levelComplitioTime } };
 
-        Amplitude.Instance.logEvent("level_complete", CreateLevelProperty( levelIndex));
+        Amplitude.Instance.logEvent("level_complete", userInfo);
     }
 
     public void OnLevelFail(int levelFailTime, int levelIndex)
     {
-        Amplitude.Instance.logEvent("fail", CreateLevelEndTimeProperty(levelFailTime));
+        Dictionary<string, object> userInfo = new Dictionary<string, object> { { "level", levelIndex }, { "time_spent", levelFailTime } };
 
-        Amplitude.Instance.logEvent("fail", CreateLevelProperty( levelIndex));
+        Amplitude.Instance.logEvent("fail", userInfo);
     }
 
     public void OnRestartLevel(int levelIndex)
     {
         Amplitude.Instance.logEvent("restart", CreateLevelProperty(levelIndex));
-    }
-
-    private Dictionary<string, object> CreateLevelEndTimeProperty(float levelEndTime)
-    {
-        Dictionary<string, object> time_spent = new Dictionary<string, object>();
-        time_spent.Add("time_spent", levelEndTime);
-
-        return time_spent;
     }
 
     private Dictionary<string, object> CreateLevelProperty( int levelIndex)
@@ -55,7 +47,7 @@ public class IntegrationMetric
 
     private int CountSession()
     {
-        int count = 0;
+        int count = 1;
 
         if (PlayerPrefs.HasKey(sessionCount))
         {

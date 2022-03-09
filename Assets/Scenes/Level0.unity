@@ -3114,7 +3114,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &1880311075
+--- !u!21 &1877538354
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -3700,10 +3700,6 @@ PrefabInstance:
       propertyPath: _firstRoad
       value: 
       objectReference: {fileID: 5964621426378064571}
-    - target: {fileID: 1823091554893732089, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
-      propertyPath: _options._borderOffset
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1823091554893732091, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3751,7 +3747,7 @@ PrefabInstance:
     - target: {fileID: 2935438366055093703, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1880311075}
+      objectReference: {fileID: 1877538354}
     - target: {fileID: 8831673615900884066, guid: 418cd5b25b03a4c449349628483ac5d8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

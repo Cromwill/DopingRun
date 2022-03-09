@@ -10,7 +10,8 @@ public class RunerEnemyTrigger : MonoBehaviour
 
     private SphereCollider _sphereCollider;
 
-    public Action<Vector3> PlayerInTriggerZone;
+    public event Action<Vector3> PlayerInTriggerZone;
+    public event Action PlayerOutOfTriggerZone;
 
     private void Start()
     {
@@ -24,6 +25,14 @@ public class RunerEnemyTrigger : MonoBehaviour
         {
             Vector3 direction = (player.transform.position - transform.position).normalized;
             PlayerInTriggerZone?.Invoke(direction);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out Player player))
+        {
+            PlayerOutOfTriggerZone?.Invoke();
         }
     }
 }
