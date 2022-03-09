@@ -8,18 +8,21 @@ public class LevelsList : ScriptableObject
 {
     [SerializeField] private AssetReference[] _scenes;
 
-    private AssetReference currentScene;
+    private AssetReference _currentScene;
     public int SceneCount => _scenes.Length-1;
 
     public AssetReference GetScene(int index)
     {
-        currentScene = _scenes[index];
-        return currentScene;
+        _currentScene = _scenes[index];
+        return _currentScene;
     }
 
     public AssetReference GetCurrentScene()
     {
-        return currentScene;
+        if (_currentScene == null)
+            _currentScene = _scenes[0];
+
+        return _currentScene;
     }
 
     public AssetReference GetRandomScene(int currentSceneIndex)
@@ -34,7 +37,7 @@ public class LevelsList : ScriptableObject
             } while (index == currentSceneIndex);
         }
 
-        currentScene = _scenes[index];
-        return currentScene;
+        _currentScene = _scenes[index];
+        return _currentScene;
     }
 }
