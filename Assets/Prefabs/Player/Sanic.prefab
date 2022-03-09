@@ -852,6 +852,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5275620684569023965}
+  - component: {fileID: 6646766608696884}
   m_Layer: 6
   m_Name: HitParticle
   m_TagString: Untagged
@@ -876,6 +877,18 @@ Transform:
   m_Father: {fileID: 1823091554893732091}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6646766608696884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633933532394566366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb6c5b8cc751da439dd8e3a7e04066a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1728490901154630386
 GameObject:
   m_ObjectHideFlags: 0
