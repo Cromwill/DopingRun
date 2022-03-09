@@ -16,10 +16,10 @@ public class SumoFighterList : MonoBehaviour
     private void Start()
     {
         _fighters = FindObjectsOfType<SumoFighter>().ToList();
+        Error.CheckOnNull(_fighters[0], nameof(SumoFighter));
 
         ChangeViewState(false);
 
-        Error.CheckOnNull(_fighters[0], nameof(SumoFighter));
     }
 
     private void OnEnable()
@@ -47,7 +47,7 @@ public class SumoFighterList : MonoBehaviour
         foreach (var fighter in _fighters)
         {
             if (fighter.TryGetComponent(out Player player))
-                return;
+                continue;
 
             var renders = fighter.GetComponentsInChildren<SkinnedMeshRenderer>();
 
