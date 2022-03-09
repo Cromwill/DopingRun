@@ -10,7 +10,7 @@ public class SumoRing : MonoBehaviour
     [SerializeField] private CapsuleCollider _capsuleCollider;
 
     private FightScreenEnabler _fightScreenEnabler;
-    private BreakRoad _breakRoad;
+    private BreakRoad[] _breakRoads;
     private CameraShaking _cameraShaking;
     private CameraShaker _cameraShaker;
     private bool _isShaked;
@@ -30,7 +30,7 @@ public class SumoRing : MonoBehaviour
         _cameraShaker = FindObjectOfType<CameraShaker>();
         Error.CheckOnNull(_cameraShaker, nameof(CameraShaker));
 
-        _breakRoad = FindObjectOfType<BreakRoad>();
+        _breakRoads = FindObjectsOfType<BreakRoad>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -41,8 +41,13 @@ public class SumoRing : MonoBehaviour
             _fightScreenEnabler.OnSumoFightBegun();
             _capsuleCollider.enabled = true;
 
-            if (_breakRoad != null)
-                _breakRoad.Break();
+            if (_breakRoads != null)
+            {
+                foreach (var breakRoad in _breakRoads)
+                {
+                    breakRoad.Break();
+                }
+            }
 
             _isShaked = true;
         }
