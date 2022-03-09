@@ -47,7 +47,7 @@ MonoBehaviour:
   _pushSpeed: 18
   _stepCoeficient: 0.3
   _cooldown: 0.1
-  _hitParticles: {fileID: 7175451596438146527}
+  _hitParticles: {fileID: 2124369856}
 --- !u!65 &375733991
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4925,6 +4925,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 475894, guid: d166c8ca466ba4a42a2c22afdee2d7e1, type: 3}
   m_PrefabInstance: {fileID: 2142358798}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &2124369856 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19825358, guid: d166c8ca466ba4a42a2c22afdee2d7e1, type: 3}
+  m_PrefabInstance: {fileID: 2142358798}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1842511954545655645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5805,11 +5810,6 @@ PrefabInstance:
 --- !u!4 &7175451596453315663 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 439252, guid: c2f28a236b0696a4f90a994422019577, type: 3}
-  m_PrefabInstance: {fileID: 7175451596453230491}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &7175451596438146527 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19806788, guid: c2f28a236b0696a4f90a994422019577, type: 3}
   m_PrefabInstance: {fileID: 7175451596453230491}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8858426871830491285
