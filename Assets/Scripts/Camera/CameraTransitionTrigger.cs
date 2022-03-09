@@ -18,7 +18,7 @@ public class CameraTransitionTrigger : MonoBehaviour
         if (other.TryGetComponent(out Player player))
         {
             _cameraTransition.Transit();
-            this.enabled = false;
+            transform.gameObject.GetComponent<Collider>().enabled = false;
         }
     }
 }

@@ -107,8 +107,6 @@ GameObject:
   - component: {fileID: 4717102210080656424}
   - component: {fileID: 4717102210080656425}
   - component: {fileID: 1726796012}
-  - component: {fileID: 1726796011}
-  - component: {fileID: 1726796013}
   m_Layer: 6
   m_Name: CameraTarget
   m_TagString: Untagged
@@ -176,29 +174,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &1726796011
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4717102210080656427}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2231444, y: 0.7265766, z: 1.3258178}
-  m_Center: {x: -2.4700005, y: 0.13671228, z: -0.000000028772046}
---- !u!114 &1726796013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4717102210080656427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5d908c9a624913459d64e16308e5955, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _boxCollider: {fileID: 1726796011}
