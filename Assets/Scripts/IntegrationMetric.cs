@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class IntegrationMetric
 {
-
     private const string sessionCount = "sessionCount";
+    public int SessionCount;
+
     public void OnGameStart()
     {
         Dictionary<string, object> count = new Dictionary<string, object>();
@@ -56,6 +57,7 @@ public class IntegrationMetric
         }
 
         PlayerPrefs.SetInt(sessionCount, count);
+        SessionCount = count;
 
         return count;
     }
