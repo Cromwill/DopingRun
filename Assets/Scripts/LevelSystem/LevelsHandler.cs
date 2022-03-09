@@ -78,8 +78,6 @@ public class LevelsHandler : MonoBehaviour
         Counter++;
 
         _saveSystem.SaveLevelsProgression(Counter);
-
-        Debug.Log(Counter);
     }
 
     private void OnLevelFailed()
