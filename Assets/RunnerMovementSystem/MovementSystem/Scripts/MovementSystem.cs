@@ -15,6 +15,7 @@ namespace RunnerMovementSystem
         private IMovement _currentMovement;
 
         public event UnityAction<PathSegment> PathChanged;
+        public event UnityAction<TransitionSegment> TransitedToSegment;
 
         public IMovement CurrentMovement => _currentMovement;
         public MovementOptions Options => _options;
@@ -96,6 +97,7 @@ namespace RunnerMovementSystem
 
         public void Transit(TransitionSegment transition)
         {
+            TransitedToSegment?.Invoke(transition);
             _transitionMovement.Init(transition);
             _currentMovement = _transitionMovement;
 
@@ -119,6 +121,7 @@ namespace RunnerMovementSystem
             var nearestRoad = transition.GetNearestRoad(transform.position);
             _roadMovement.Init(nearestRoad);
             _currentMovement = _roadMovement;
+
 
             PathChanged?.Invoke(nearestRoad);
         }

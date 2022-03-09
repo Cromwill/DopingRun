@@ -33,6 +33,16 @@ public class CameraTarget : MonoBehaviour
         transform.rotation = _playerMovementSystem.transform.rotation;
     }
 
+    private void OnEnable()
+    {
+        _playerMovementSystem.TransitedToSegment += OnPlayerTransitToSegment;
+    }
+
+    private void OnDisable()
+    {
+        _playerMovementSystem.TransitedToSegment -= OnPlayerTransitToSegment;
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -46,5 +56,10 @@ public class CameraTarget : MonoBehaviour
 
             _movementSystem.SetOffset(_offset);
         }
+    }
+
+    private void OnPlayerTransitToSegment(TransitionSegment transition)
+    {
+        _movementSystem.Transit(transition);
     }
 }

@@ -19,7 +19,7 @@ namespace RunnerMovementSystem
 
         private void OnDisable()
         {
-            _trigger.Triggered += OnTriggered;            
+            _trigger.Triggered -= OnTriggered;            
         }
 
         private void OnTriggered(Collider collider)
