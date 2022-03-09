@@ -10,7 +10,7 @@ public class HustleZone : MonoBehaviour
     [SerializeField] private float _stepCoeficient;
     [SerializeField] private float _cooldown;
     [SerializeField] private ParticleSystem _hitParticles;
-    
+
     private float _expirationTime;
 
     public event UnityAction CollidedWithPushable;
