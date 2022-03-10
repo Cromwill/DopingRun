@@ -53,9 +53,16 @@ public class HustleZone : MonoBehaviour
         if (IsOnCooldown())
         {
             CollidedWithPushable?.Invoke();
-            _expirationTime = Time.time + _cooldown;
-            pushable.Push(direction, _pushSpeed);
+            StartCoroutine(Delay(pushable,direction));
         }
+    }
+
+    private IEnumerator Delay(IPushable pushable, Vector3 direction)
+    {
+        yield return new WaitForSeconds(0.23f);
+
+        _expirationTime = Time.time + _cooldown;
+        pushable.Push(direction, _pushSpeed);
     }
 
     private void Break(IPushable pushable, Vector3 direction)
