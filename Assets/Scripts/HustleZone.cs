@@ -12,6 +12,7 @@ public class HustleZone : MonoBehaviour
     [SerializeField] private ParticleSystem _hitParticles;
 
     private float _expirationTime;
+    private const float AnimationDelay = 0.23f;
 
     public event UnityAction CollidedWithPushable;
     public event UnityAction CollidedWithTouchable;
@@ -21,6 +22,8 @@ public class HustleZone : MonoBehaviour
     {
         if (_stepCoeficient <= 0)
             _stepCoeficient = 1;
+
+        _cooldown = AnimationDelay;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -59,7 +62,7 @@ public class HustleZone : MonoBehaviour
 
     private IEnumerator Delay(IPushable pushable, Vector3 direction)
     {
-        yield return new WaitForSeconds(0.23f);
+        yield return new WaitForSeconds(AnimationDelay);
 
         _expirationTime = Time.time + _cooldown;
         pushable.Push(direction, _pushSpeed);
