@@ -8,6 +8,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private DynamicJoystick _joystick;
     [SerializeField] private float _speed;
     [SerializeField] private Pushable _pushable;
+    [SerializeField] private GroundCheck _groundCheck;
 
     private Rigidbody _rigidBody;
     private float _threshold = 0.01f;
@@ -33,7 +34,9 @@ public class PlayerMover : MonoBehaviour
 
         if (Input.GetMouseButton(LeftMouseButton) && direction.magnitude > _threshold)
         {
-            Move(direction, _speed);
+            if(_groundCheck.Grounded)
+                Move(direction, _speed);
+
             Rotate(direction);
         }
     }
