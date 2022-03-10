@@ -11,12 +11,12 @@ public class CameraTransition : MonoBehaviour
     [SerializeField] private bool _setPointAsParent;
 
     private float _timeToTransit = 1f;
-    protected float _delay = 0f;
+    protected float Delay = 0f;
     private CameraFollowing _following;
     private FocalPoint _focalPoint;
     private Camera _camera;
     private float changeSpeed;
-    protected bool _lookAtPlayer = true;
+    protected bool LookAtPlayer = true;
 
     public event Action TransitionCompleted;
 
@@ -49,7 +49,7 @@ public class CameraTransition : MonoBehaviour
 
     private IEnumerator TransitAnimation()
     {
-        yield return new WaitForSeconds(_delay);
+        yield return new WaitForSeconds(Delay);
 
         while (_camera.transform.position != _cameraPoint.transform.position)
         {

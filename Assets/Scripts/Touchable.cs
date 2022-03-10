@@ -12,7 +12,7 @@ public class Touchable : MonoBehaviour, IPushable
     [SerializeField] private float _forceMultiplier;
 
     private Rigidbody _rigidbody;
-    private const int UntuchableLayer = 9;
+    private const int UntouchableLayer = 9;
 
     private void Awake()
     {
@@ -26,6 +26,6 @@ public class Touchable : MonoBehaviour, IPushable
         _ragdollHandler.EnableRagdoll();
         _rigidbody.AddForce(-transform.parent.transform.forward * pushSpeed * _forceMultiplier, ForceMode.VelocityChange);
         _enemyTriggerZone.gameObject.SetActive(false);
-        gameObject.layer = UntuchableLayer;
+        gameObject.layer = UntouchableLayer;
     }
 }
