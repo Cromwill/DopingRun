@@ -8,7 +8,7 @@ public class SyringeCollectionZone : MonoBehaviour
     [SerializeField] private Animator _animator;
 
     private Enlargable _enlargable;
-    private const string full = "full";
+    private const string Full = "full";
 
     private void Start()
     {
@@ -21,7 +21,7 @@ public class SyringeCollectionZone : MonoBehaviour
         {
             injector.Disable();
             _enlargable.EnalargeAnimation();
-            _animator.SetTrigger(full);
+            _animator.SetTrigger(Full);
             _particle.Play();
         }
     }

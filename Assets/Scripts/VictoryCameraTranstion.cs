@@ -6,7 +6,7 @@ public class VictoryCameraTranstion : CameraTransition
 {
     private void Awake()
     {
-        _delay = 1f;
+        Delay = 1f;
         _cameraPoint = FindObjectOfType<VictoryCameraPoint>();
     }
 }

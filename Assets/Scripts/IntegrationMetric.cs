@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IntegrationMetric
 {
-    private const string sessionCount = "sessionCount";
+    private const string SessionCountName = "sessionCount";
     public int SessionCount;
 
     public void OnGameStart()
@@ -50,13 +50,13 @@ public class IntegrationMetric
     {
         int count = 1;
 
-        if (PlayerPrefs.HasKey(sessionCount))
+        if (PlayerPrefs.HasKey(SessionCountName))
         {
-            count = PlayerPrefs.GetInt(sessionCount);
+            count = PlayerPrefs.GetInt(SessionCountName);
             count++;
         }
 
-        PlayerPrefs.SetInt(sessionCount, count);
+        PlayerPrefs.SetInt(SessionCountName, count);
         SessionCount = count;
 
         return count;
