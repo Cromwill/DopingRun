@@ -22,8 +22,6 @@ public class HustleZone : MonoBehaviour
     {
         if (_stepCoeficient <= 0)
             _stepCoeficient = 1;
-
-        _cooldown = AnimationDelay;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,7 +54,10 @@ public class HustleZone : MonoBehaviour
         if (IsOnCooldown())
         {
             CollidedWithPushable?.Invoke();
-            StartCoroutine(Delay(pushable,direction));
+            _expirationTime = Time.time + _cooldown;
+            pushable.Push(direction, _pushSpeed);
+
+            //StartCoroutine(Delay(pushable,direction));
         }
     }
 
