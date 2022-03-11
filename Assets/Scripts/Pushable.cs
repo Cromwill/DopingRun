@@ -7,10 +7,13 @@ using UnityEngine;
 public class Pushable : MonoBehaviour, IPushable
 {
     [SerializeField] private float _pushTime;
+    [SerializeField] private Enlargable _enlargable;
 
     private Rigidbody _rigidbody;
     private float _pushSpeed;
     private Vector3 _direction;
+    private bool _isSpeedSetted;
+
     public bool IsPushed { get; private set; }
 
     public event Action PushEnd;
@@ -25,6 +28,19 @@ public class Pushable : MonoBehaviour, IPushable
     {
         if(IsPushed)
             _rigidbody.MovePosition(transform.position + _direction * _pushSpeed * Time.deltaTime);
+    }
+
+    public void SetPushTime(int step)
+    {
+        if (_isSpeedSetted)
+            return;
+
+        _pushTime -= (float)step / 100f;
+
+        if (_pushTime < 0)
+            _pushTime = 0;
+
+        _isSpeedSetted = true;
     }
 
     public void Push(Vector3 direction, float pushSpeed)
