@@ -16,8 +16,13 @@ public class DeathPhrases
         "Come and get me, maggot",
         "To infinity, and beyond!",
         "I can fly!!",
-        "Wow, i see a cake!"
+        "Wow, i see a cake!",
+        "So slippery",
+        "I was blindfolded",
+        "I wasn't ready!",
+        "Agh, sliped"
     };
+
     public string GetRandomPhrase()
     {
         return _phrases[Random.Range(0, _phrases.Count)];
