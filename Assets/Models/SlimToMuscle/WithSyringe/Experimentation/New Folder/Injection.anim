@@ -48,6 +48,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 4.9666667
         value: {x: -0.465, y: 4.014, z: -5.191}
+        inSlope: {x: -7.600007, y: 57.200054, z: -66.90007}
+        outSlope: {x: -7.600007, y: 57.200054, z: -66.90007}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
+        time: 5
+        value: {x: -0.99, y: 7.49, z: -9.02}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -30349,7 +30358,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 4.9666667
+    m_StopTime: 5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -59697,6 +59706,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 4.9666667
         value: -0.465
+        inSlope: -7.600007
+        outSlope: -7.600007
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 5
+        value: -0.99
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -59743,6 +59761,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 4.9666667
         value: 4.014
+        inSlope: 57.200054
+        outSlope: 57.200054
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 5
+        value: 7.49
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -59789,6 +59816,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 4.9666667
         value: -5.191
+        inSlope: -66.90007
+        outSlope: -66.90007
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 5
+        value: -9.02
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -59978,7 +60014,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 4.9333334
+  - time: 4.9666667
     functionName: Throw
     data: 
     objectReferenceParameter: {fileID: 0}
