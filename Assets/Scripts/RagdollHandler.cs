@@ -5,6 +5,8 @@ using UnityEngine;
 public class RagdollHandler : MonoBehaviour
 {
     private Rigidbody[] _rigidbodys;
+
+    private List<Collider> _colliders = new List<Collider>();
     private void Start()
     {
         _rigidbodys = GetComponentsInChildren<Rigidbody>();
@@ -16,8 +18,11 @@ public class RagdollHandler : MonoBehaviour
             if (rigidbody.TryGetComponent(out CharacterJoint characterJoint))
                 characterJoint.enableProjection = true;
 
-            if (transform.parent.TryGetComponent(out SumoFighter sumoFighter) && rigidbody.TryGetComponent(out Collider collider))
+            if (rigidbody.TryGetComponent(out Collider collider))
+            {
+                _colliders.Add(collider);
                 collider.enabled = false;
+            }
         }
     }
 
@@ -26,6 +31,11 @@ public class RagdollHandler : MonoBehaviour
         foreach (var rigidbody in _rigidbodys)
         {
             rigidbody.isKinematic = false;
+
+            foreach (var collider in _colliders)
+            {
+                collider.enabled = true;
+            }
         }
     }
 }

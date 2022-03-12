@@ -11,7 +11,7 @@ public class Pushable : MonoBehaviour, IPushable
     private Rigidbody _rigidbody;
     private float _pushSpeed;
     private Vector3 _direction;
-    private bool _isSpeedSetted;
+    private bool _isSpeedSetted = true;
 
     public bool IsPushed { get; private set; }
 
