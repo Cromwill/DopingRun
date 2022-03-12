@@ -80,7 +80,7 @@ public class PlayerAnimator : MonoBehaviour
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.SumoRun))
         {
             _animator.SetTrigger(AnimationClipNames.Attack);
-            StartCoroutine(ResetTrigger(AnimationClipNames.Attack));
+            //StartCoroutine(ResetTrigger(AnimationClipNames.Attack));
         }
     }
 
@@ -89,13 +89,13 @@ public class PlayerAnimator : MonoBehaviour
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.SumoRun))
         {
             _animator.SetTrigger(AnimationClipNames.Hitted);
-            StartCoroutine(AnimationClipNames.Hitted);
+            //StartCoroutine(AnimationClipNames.Hitted);
         } 
     }
 
     private IEnumerator ResetTrigger(string name)
     {
-        yield return new WaitForSeconds(0.001f);
+        yield return new WaitForSeconds(0.01f);
 
         _animator.ResetTrigger(name);
     }

@@ -4,6 +4,11 @@ public class SumoControls
     {
         if (player.TryGetComponent(out PlayerMover playerMover))
             playerMover.enabled = true;
+
+        var hitCounter = player.GetComponentInChildren<HitCounter>();
+
+        if (hitCounter != null)
+            hitCounter.enabled = true;
     }
 
     public void EnableJouystick(JoystickCanvas joystickCanvas)
