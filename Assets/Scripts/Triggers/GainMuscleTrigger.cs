@@ -23,6 +23,7 @@ public class GainMuscleTrigger : MonoBehaviour
             hustleZone.AddPushSpeed(enlargable.Step);
             Pushable pushable = player.GetComponent<Pushable>();
             pushable.SetPushTime(enlargable.Step);
+            hustleZone.IncreaseCollider();
 
             foreach (var gainMuscleTrigger in _gainMuscleTriggers)
             {

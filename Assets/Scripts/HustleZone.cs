@@ -4,15 +4,18 @@ using UnityEngine;
 using UnityEngine.Events;
 using FirstGearGames.SmoothCameraShaker;
 
+[RequireComponent(typeof(BoxCollider))]
 public class HustleZone : MonoBehaviour
 {
     [SerializeField] private float _pushSpeed = 25;
-    [SerializeField] private float _stepCoeficient;
+    [SerializeField] private float _syringeCoeficient;
     [SerializeField] private float _cooldown;
     [SerializeField] private ParticleSystem _hitParticles;
 
     private float _expirationTime;
+    private BoxCollider _boxCollider;
     private const float AnimationDelay = 0.23f;
+    private bool _isPushSpeedSetted;
 
     public event UnityAction CollidedWithPushable;
     public event UnityAction CollidedWithTouchable;
@@ -20,8 +23,10 @@ public class HustleZone : MonoBehaviour
 
     private void Start()
     {
-        if (_stepCoeficient <= 0)
-            _stepCoeficient = 1;
+        if (_syringeCoeficient <= 0)
+            _syringeCoeficient = 1;
+
+        _boxCollider = GetComponent<BoxCollider>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -47,6 +52,11 @@ public class HustleZone : MonoBehaviour
             if (pushable is BreakablePiece)
                 Break(pushable, direction);
         }
+    }
+
+    public void IncreaseCollider()
+    {
+        _boxCollider.size = new Vector3(1.2f, _boxCollider.size.y, _boxCollider.size.z);
     }
 
     private void TryPush(IPushable pushable, Vector3 direction)
@@ -80,10 +90,14 @@ public class HustleZone : MonoBehaviour
         }
     }
 
-    public void AddPushSpeed(float pushSpeed)
+    public void AddPushSpeed(float syringeCollected)
     {
+        if (_isPushSpeedSetted)
+            return;
+
         Debug.Log("asdhasidfahsfuiashi");
-        _pushSpeed += pushSpeed * _stepCoeficient;
+
+        _pushSpeed += syringeCollected * _syringeCoeficient;
     }
 
     private bool IsOnCooldown()

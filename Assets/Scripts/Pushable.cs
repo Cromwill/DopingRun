@@ -7,7 +7,6 @@ using UnityEngine;
 public class Pushable : MonoBehaviour, IPushable
 {
     [SerializeField] private float _pushTime;
-    [SerializeField] private Enlargable _enlargable;
 
     private Rigidbody _rigidbody;
     private float _pushSpeed;

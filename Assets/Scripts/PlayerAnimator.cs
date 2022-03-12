@@ -7,6 +7,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private Pushable _pushable;
     [SerializeField] private HustleZone _hustleZone;
+    [SerializeField] private EnlargePlayer _enlargePlayer;
 
     private StartLevelButton _startLevel;
     private float _gainMuscleAnimationTime;
@@ -46,6 +47,9 @@ public class PlayerAnimator : MonoBehaviour
         _hustleZone.CollidedWithTouchable += OnCollideWithTouchable;
         _hustleZone.CollidedWithPushable += OnCollidedWithPushable;
         _pushable.PushStart += OnPushed;
+
+        if(_enlargePlayer != null)
+            _enlargePlayer.AnimationEnd += RunSumo;
     }
 
     private void OnDisable()
@@ -54,6 +58,9 @@ public class PlayerAnimator : MonoBehaviour
         _hustleZone.CollidedWithTouchable -= OnCollideWithTouchable;
         _hustleZone.CollidedWithPushable -= OnCollidedWithPushable;
         _pushable.PushStart -= OnPushed;
+
+        if (_enlargePlayer != null)
+            _enlargePlayer.AnimationEnd -= RunSumo;
     }
 
     public void GainMuscle()
@@ -70,24 +77,27 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnCollidedWithPushable()
     {
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.RunSumo))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.SumoRun))
+        {
             _animator.SetTrigger(AnimationClipNames.Attack);
+            StartCoroutine(ResetTrigger(AnimationClipNames.Attack));
+        }
     }
 
     private void OnPushed()
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.RunSumo))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.SumoRun))
         {
             _animator.SetTrigger(AnimationClipNames.Hitted);
-            StartCoroutine(ResetTrigger());
+            StartCoroutine(AnimationClipNames.Hitted);
         } 
     }
 
-    private IEnumerator ResetTrigger()
+    private IEnumerator ResetTrigger(string name)
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.001f);
 
-        _animator.ResetTrigger(AnimationClipNames.Hitted);
+        _animator.ResetTrigger(name);
     }
 
 
@@ -97,8 +107,14 @@ public class PlayerAnimator : MonoBehaviour
             _animator.SetTrigger(AnimationClipNames.Run);
     }
 
+    public void RunSumo(EnlargePlayer enlargePlayer)
+    {
+        _animator.SetTrigger(AnimationClipNames.SumoRun);
+    }
+
     public void OnVictory()
     {
+        _animator.SetLayerWeight(1, 0);
         _animator.SetTrigger(AnimationClipNames.Victory);
     }
 }
