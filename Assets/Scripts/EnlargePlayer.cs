@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnlargePlayer : MonoBehaviour
 {
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
+    [SerializeField] private SkinnedMeshRenderer _clothesMeshRenderer;
     [SerializeField] private float _timeToGainMuscle;
     [SerializeField] private float _targetScaleValue;
     [SerializeField] private SkinnedMeshRenderer _meshRenderer;
@@ -15,7 +16,8 @@ public class EnlargePlayer : MonoBehaviour
     private float _scalePerStep;
     private float _weightPerStep;
     private const float _initialScale = 1f;
-    private const float _maxWeight = 100f;
+    private const float _maxWeight = 63f;
+    private const float _clothesMaxWeight = 100f;
     private const string _outline = "_OutlineWidth";
     private const float _maxOutlineWidth = 3f;
     private float _targetWeight;
@@ -66,7 +68,8 @@ public class EnlargePlayer : MonoBehaviour
     private void OnFlexing()
     {
         StartCoroutine(EnlargeAnimation());
-        StartCoroutine(GainMuscleAnimation());
+        StartCoroutine(GainMuscleAnimation(_skinnedMeshRenderer, _targetWeight));
+        StartCoroutine(GainMuscleAnimation(_clothesMeshRenderer,_clothesMaxWeight));
         StartCoroutine(Hulkization());
     }
 
@@ -87,16 +90,16 @@ public class EnlargePlayer : MonoBehaviour
         }
     }
 
-    private IEnumerator GainMuscleAnimation()
+    private IEnumerator GainMuscleAnimation(SkinnedMeshRenderer skinnedMeshRenderer,float targetWeight)
     {
         float currentWeight = 0;
-        float changeSpeed = _targetWeight / _timeToGainMuscle;
+        float changeSpeed = targetWeight / _timeToGainMuscle;
 
-        while (currentWeight < _targetWeight)
+        while (currentWeight < targetWeight)
         {
-            currentWeight = Mathf.MoveTowards(currentWeight, _targetWeight, changeSpeed * Time.deltaTime);
+            currentWeight = Mathf.MoveTowards(currentWeight, targetWeight, changeSpeed * Time.deltaTime);
 
-            _skinnedMeshRenderer.SetBlendShapeWeight(0, currentWeight);
+            skinnedMeshRenderer.SetBlendShapeWeight(0, currentWeight);
 
             yield return null;
         }
