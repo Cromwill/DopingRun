@@ -20,7 +20,8 @@ public class DeathPhrases
         "So slippery",
         "I was blindfolded",
         "I wasn't ready!",
-        "Agh, sliped"
+        "Agh, sliped",
+        "It's just a flesh wound"
     };
 
     public string GetRandomPhrase()
