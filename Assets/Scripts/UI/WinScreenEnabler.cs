@@ -8,7 +8,6 @@ public class WinScreenEnabler : MonoBehaviour
     [SerializeField] private float _delay;
     [SerializeField] private WinScreen _winScreen;
 
-
     private void Awake()
     {
         _winScreen.gameObject.SetActive(false);

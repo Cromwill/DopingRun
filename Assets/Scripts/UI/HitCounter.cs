@@ -11,7 +11,7 @@ public class HitCounter : MonoBehaviour
     [SerializeField] private TMP_Text _hitText;
     [SerializeField] private TMP_Text _gettingHitText;
     [SerializeField] private TMP_Text _deathText;
-    [SerializeField] private float MaxFontSize;
+    [SerializeField] private float _maxFontSize;
     [SerializeField] private float _minFontSize;
     [SerializeField] private float _timeBeforeFade;
 
@@ -71,7 +71,7 @@ public class HitCounter : MonoBehaviour
             StopCoroutine(_enlargeCoroutine);
 
         _enlargeCoroutine = StartCoroutine(Animation(_gettingHitText));
-        _fadeCoroutines.Add(StartCoroutine(DelayedFade(_gettingHitText, _timeBeforeFade)));
+        _fadeCoroutines.Add(StartCoroutine(DelayedFade(_gettingHitText, 0.5f)));
 
         _counterText.color = SetColorAlpha(_counterText.color, 0);
         _hitText.color = SetColorAlpha(_hitText.color, 0);
@@ -104,11 +104,11 @@ public class HitCounter : MonoBehaviour
 
     private IEnumerator Animation(TMP_Text text)
     {
-        float changeSpeed = (MaxFontSize - _minFontSize) / 0.2f;
+        float changeSpeed = (_maxFontSize - _minFontSize) / 0.2f;
 
-        while (text.fontSize < MaxFontSize)
+        while (text.fontSize < _maxFontSize)
         {
-            text.fontSize = Mathf.MoveTowards(text.fontSize, MaxFontSize, changeSpeed * Time.deltaTime);
+            text.fontSize = Mathf.MoveTowards(text.fontSize, _maxFontSize, changeSpeed * Time.deltaTime);
             yield return null;
         }
 
