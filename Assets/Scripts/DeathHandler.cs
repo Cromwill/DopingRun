@@ -25,6 +25,9 @@ public class DeathHandler : MonoBehaviour
         _ragdollHandler.EnableRagdoll();
 
         if(_hitCounter != null)
+        {
+            _hitCounter.enabled = true;
             _hitCounter.OnDeath();
+        }
     }
 }
