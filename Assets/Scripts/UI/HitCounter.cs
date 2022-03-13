@@ -104,7 +104,7 @@ public class HitCounter : MonoBehaviour
 
     private IEnumerator Animation(TMP_Text text)
     {
-        float changeSpeed = (_maxFontSize - _minFontSize) / 0.2f;
+        float changeSpeed = (_maxFontSize - _minFontSize) / 0.1f;
 
         while (text.fontSize < _maxFontSize)
         {
