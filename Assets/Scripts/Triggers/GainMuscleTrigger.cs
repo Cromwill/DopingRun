@@ -5,10 +5,14 @@ using UnityEngine;
 public class GainMuscleTrigger : MonoBehaviour
 {
     private GainMuscleTrigger[] _gainMuscleTriggers;
+    private CameraTarget _cameraTarget;
 
     private void Awake()
     {
         _gainMuscleTriggers = FindObjectsOfType<GainMuscleTrigger>();
+
+        _cameraTarget = FindObjectOfType<CameraTarget>();
+        Error.CheckOnNull(_cameraTarget, nameof(CameraTarget));
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,6 +28,7 @@ public class GainMuscleTrigger : MonoBehaviour
             Pushable pushable = player.GetComponent<Pushable>();
             pushable.SetPushTime(enlargable.Step);
             hustleZone.IncreaseCollider();
+            _cameraTarget.gameObject.SetActive(false);
 
             foreach (var gainMuscleTrigger in _gainMuscleTriggers)
             {
