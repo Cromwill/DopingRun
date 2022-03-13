@@ -17,7 +17,6 @@ public class WinScreen : MonoBehaviour
     public void ShowLevelNumber()
     {
         _levelNumber.text = $"Level {_levelsHandler.Counter}";
-        StartCoroutine(CountSyringe());
     }
 
     private IEnumerator CountSyringe()
