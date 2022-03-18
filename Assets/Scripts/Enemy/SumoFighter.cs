@@ -41,6 +41,7 @@ public class SumoFighter : MonoBehaviour
 
     public void FindTarget()
     {
+        
         Collider[] enemysColliders = Physics.OverlapSphere(transform.position, _triggerRadius, _enemyLayerMask);
 
         Collider enemyCollider = GetClosestEnemyCollider(enemysColliders);
@@ -54,6 +55,7 @@ public class SumoFighter : MonoBehaviour
         }
 
         Init(enemy);
+        
     }
 
     private Collider GetClosestEnemyCollider(Collider[] enemiesColliders)
