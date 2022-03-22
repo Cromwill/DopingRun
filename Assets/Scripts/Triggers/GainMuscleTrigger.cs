@@ -33,8 +33,12 @@ public class GainMuscleTrigger : MonoBehaviour
             foreach (var gainMuscleTrigger in _gainMuscleTriggers)
             {
                 gainMuscleTrigger.enabled = false;
-            }
+            }          
+        }
 
+        if(other.TryGetComponent(out MergeMan mergeMan))
+        {
+            mergeMan.StartMerge();
         }
     }
 }

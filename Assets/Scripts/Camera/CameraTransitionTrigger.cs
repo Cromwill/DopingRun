@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using DG.Tweening;
 
 [RequireComponent(typeof(CameraTransition))]
 public class CameraTransitionTrigger : MonoBehaviour
@@ -19,6 +20,8 @@ public class CameraTransitionTrigger : MonoBehaviour
         {
             _cameraTransition.Transit();
             transform.gameObject.GetComponent<Collider>().enabled = false;
+
+            player.GetComponentInChildren<EnlargePlayer>().transform.DOLocalRotate(new Vector3(0, 0, 0), 1f);
         }
     }
 }
