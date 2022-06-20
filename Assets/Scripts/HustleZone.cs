@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using FirstGearGames.SmoothCameraShaker;
 
 [RequireComponent(typeof(BoxCollider))]
 public class HustleZone : MonoBehaviour
@@ -66,17 +63,7 @@ public class HustleZone : MonoBehaviour
             CollidedWithPushable?.Invoke();
             _expirationTime = Time.time + _cooldown;
             pushable.Push(direction, _pushSpeed);
-
-            //StartCoroutine(Delay(pushable,direction));
         }
-    }
-
-    private IEnumerator Delay(IPushable pushable, Vector3 direction)
-    {
-        yield return new WaitForSeconds(AnimationDelay);
-
-        _expirationTime = Time.time + _cooldown;
-        pushable.Push(direction, _pushSpeed);
     }
 
     private void Break(IPushable pushable, Vector3 direction)
@@ -94,8 +81,6 @@ public class HustleZone : MonoBehaviour
     {
         if (_isPushSpeedSetted)
             return;
-
-        Debug.Log("asdhasidfahsfuiashi");
 
         _pushSpeed += syringeCollected * _syringeCoeficient;
     }

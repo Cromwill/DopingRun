@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -9,7 +7,7 @@ public class LevelsList : ScriptableObject
     [SerializeField] private AssetReference[] _scenes;
 
     private AssetReference _currentScene;
-    public int SceneCount => _scenes.Length-1;
+    public int SceneCount => _scenes.Length - 1;
 
     public AssetReference GetScene(int index)
     {
@@ -34,7 +32,8 @@ public class LevelsList : ScriptableObject
             do
             {
                 index = Random.Range(0, _scenes.Length);
-            } while (index == currentSceneIndex);
+            }
+            while (index == currentSceneIndex);
         }
 
         _currentScene = _scenes[index];

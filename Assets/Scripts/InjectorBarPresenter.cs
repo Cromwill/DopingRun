@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using LiquidVolumeFX;
@@ -14,7 +13,6 @@ public class InjectorBarPresenter : MonoBehaviour
     private Slider _slider;
     private float _currentValue;
     private float _changeSpeed = 3f;
-    private float _minimalLiquidValue = 0.2f;
 
     public event Action OnValueZero;
 

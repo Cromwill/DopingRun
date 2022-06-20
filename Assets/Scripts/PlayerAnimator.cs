@@ -47,9 +47,6 @@ public class PlayerAnimator : MonoBehaviour
         _hustleZone.CollidedWithTouchable += OnCollideWithTouchable;
         _hustleZone.CollidedWithPushable += OnCollidedWithPushable;
         _pushable.PushStart += OnPushed;
-
-        if(_enlargePlayer != null)
-            _enlargePlayer.AnimationEnd += RunSumo;
     }
 
     private void OnDisable()
@@ -58,9 +55,6 @@ public class PlayerAnimator : MonoBehaviour
         _hustleZone.CollidedWithTouchable -= OnCollideWithTouchable;
         _hustleZone.CollidedWithPushable -= OnCollidedWithPushable;
         _pushable.PushStart -= OnPushed;
-
-        if (_enlargePlayer != null)
-            _enlargePlayer.AnimationEnd -= RunSumo;
     }
 
     public void GainMuscle()
@@ -80,7 +74,6 @@ public class PlayerAnimator : MonoBehaviour
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.SumoRun))
         {
             _animator.SetTrigger(AnimationClipNames.Attack);
-            //StartCoroutine(ResetTrigger(AnimationClipNames.Attack));
         }
     }
 
@@ -89,7 +82,6 @@ public class PlayerAnimator : MonoBehaviour
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.SumoRun))
         {
             _animator.SetTrigger(AnimationClipNames.Hitted);
-            //StartCoroutine(AnimationClipNames.Hitted);
         } 
     }
 
@@ -105,11 +97,6 @@ public class PlayerAnimator : MonoBehaviour
     {
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.Idle))
             _animator.SetTrigger(AnimationClipNames.Run);
-    }
-
-    public void RunSumo(EnlargePlayer enlargePlayer)
-    {
-        _animator.SetTrigger(AnimationClipNames.SumoRun);
     }
 
     public void OnVictory()

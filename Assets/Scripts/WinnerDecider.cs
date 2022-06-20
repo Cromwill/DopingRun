@@ -6,7 +6,6 @@ using UnityEngine;
 public class WinnerDecider : MonoBehaviour
 {
     private SumoFighterList _sumoFighterList;
-    private DeathTrigger _deathTrigger;
 
     public event Action Victory;
 
@@ -40,6 +39,6 @@ public class WinnerDecider : MonoBehaviour
 
     public void Disable()
     {
-        this.enabled = false;
+        enabled = false;
     }
 }
