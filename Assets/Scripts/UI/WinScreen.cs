@@ -9,14 +9,13 @@ public class WinScreen : MonoBehaviour
     [SerializeField] private TMP_Text _syringeCounterText;
     [SerializeField] private float _maxFontSize;
     [SerializeField] private Color _allSyringeCollectedCollor;
-    [SerializeField] private LevelsHandler _levelsHandler;
     [SerializeField] private SyringeCounter _syringeCounter;
 
     private TextAnimation _textAnimation = new TextAnimation();
 
     public void ShowLevelNumber()
     {
-        _levelNumber.text = $"Level {_levelsHandler.Counter}";
+        _levelNumber.text = $"Level {LevelsHandler.Instance.Counter}";
     }
 
     private IEnumerator CountSyringe()

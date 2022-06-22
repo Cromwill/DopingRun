@@ -1,21 +1,21 @@
 using UnityEngine;
-using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Levels list")]
 public class LevelsList : ScriptableObject
 {
-    [SerializeField] private AssetReference[] _scenes;
+    [SerializeField] private Scene[] _scenes;
 
-    private AssetReference _currentScene;
+    private Scene _currentScene;
     public int SceneCount => _scenes.Length - 1;
 
-    public AssetReference GetScene(int index)
+    public Scene GetScene(int index)
     {
         _currentScene = _scenes[index];
         return _currentScene;
     }
 
-    public AssetReference GetCurrentScene()
+    public Scene GetCurrentScene()
     {
         if (_currentScene == null)
             _currentScene = _scenes[0];
@@ -23,7 +23,7 @@ public class LevelsList : ScriptableObject
         return _currentScene;
     }
 
-    public AssetReference GetRandomScene(int currentSceneIndex)
+    public Scene GetRandomScene(int currentSceneIndex)
     {
         int index = 0;
 
