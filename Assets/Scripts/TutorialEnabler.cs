@@ -18,6 +18,7 @@ public class TutorialEnabler : MonoBehaviour
 
         _tutorialScreen.SetActive(false);
     }
+
     private void OnEnable()
     {
         _cameraTransition.TransitionCompleted += Show;

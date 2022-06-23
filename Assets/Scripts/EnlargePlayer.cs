@@ -70,7 +70,7 @@ public class EnlargePlayer : MonoBehaviour
         StartCoroutine(EnlargeAnimation());
         StartCoroutine(GainMuscleAnimation(_skinnedMeshRenderer, _targetWeight));
         StartCoroutine(GainMuscleAnimation(_clothesMeshRenderer,_clothesMaxWeight));
-        StartCoroutine(Hulkization());
+        //StartCoroutine(Hulkization());
     }
 
     private void OnFlexEnd()
