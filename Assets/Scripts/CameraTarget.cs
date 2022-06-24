@@ -7,12 +7,16 @@ using RunnerMovementSystem.Examples;
 [RequireComponent(typeof(MovementSystem))]
 public class CameraTarget : MonoBehaviour
 {
+    [SerializeField] private StartLevelButton _startLevelButton;
+
     private MovementSystem _movementSystem;
     private MovementSystem _playerMovementSystem;
     private CameraFollowing _cameraFollowing;
     private float _offset;
 
     private bool _isMoving;
+    private bool _isStart;
+
     private void Awake()
     {
         _cameraFollowing = FindObjectOfType<CameraFollowing>();
@@ -36,15 +40,25 @@ public class CameraTarget : MonoBehaviour
     private void OnEnable()
     {
         _playerMovementSystem.TransitedToSegment += OnPlayerTransitToSegment;
+        _startLevelButton.RunStarted += OnRunStart;
     }
 
     private void OnDisable()
     {
         _playerMovementSystem.TransitedToSegment -= OnPlayerTransitToSegment;
+        _startLevelButton.RunStarted -= OnRunStart;
+    }
+
+    private void OnRunStart()
+    {
+        _isStart = true;
     }
 
     private void Update()
     {
+        if (_isStart == false)
+            return;
+
         if (Input.GetMouseButtonDown(0))
             _isMoving = true;
 

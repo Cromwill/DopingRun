@@ -5,21 +5,25 @@ namespace RunnerMovementSystem.Examples
     public class MouseInput : MonoBehaviour
     {
         [SerializeField] private MovementSystem _roadMovement;
+        [SerializeField] private StartLevelButton _startLevelButton;
         [SerializeField] private float _sensitivity = 0.01f;
 
         private Vector3 _mousePosition;
         private float _saveOffset;
+        private bool _isStart;
 
         public bool IsMoved { get; private set; }
 
         private void OnEnable()
         {
             _roadMovement.PathChanged += OnPathChanged;
+            _startLevelButton.RunStarted += OnRunStart;
         }
 
         private void OnDisable()
         {
             _roadMovement.PathChanged -= OnPathChanged;
+            _startLevelButton.RunStarted -= OnRunStart;
         }
 
         private void OnPathChanged(PathSegment _)
@@ -28,8 +32,16 @@ namespace RunnerMovementSystem.Examples
             _mousePosition = Input.mousePosition;
         }
 
+        private void OnRunStart()
+        {
+            _isStart = true;
+        }
+
         private void Update()
         {
+            if (_isStart == false)
+                return;
+
             if (Input.GetMouseButtonDown(0))
             {
                 _saveOffset = _roadMovement.Offset;

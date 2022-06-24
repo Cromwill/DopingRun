@@ -30,4 +30,16 @@ public class DeathHandler : MonoBehaviour
             _hitCounter.OnDeath();
         }
     }
+
+    public void Relive()
+    {
+        _animator.enabled = true;
+        _ragdollHandler.DisableRagdoll();
+
+        if (_hitCounter != null)
+        {
+            _hitCounter.enabled = false;
+            //_hitCounter.OnDeath(); ??
+        }
+    }
 }

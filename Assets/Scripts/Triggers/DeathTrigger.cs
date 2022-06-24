@@ -11,6 +11,8 @@ public class DeathTrigger : LoseTrigger
 
     public event Action<SumoFighter> FighterOffTheRing;
 
+    private bool _isDied;
+
     private void Awake()
     {
         _cameraLookAt = Camera.main.GetComponent<CameraLookAt>();

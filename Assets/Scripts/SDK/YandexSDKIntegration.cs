@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Agava.YandexGames;
 using UnityEngine;
@@ -5,6 +6,10 @@ using UnityEngine;
 public class YandexSDKIntegration : MonoBehaviour
 {
     public static YandexSDKIntegration Instance = null;
+
+    public event Action Rewarded;
+    public event Action VideoOpened;
+    public event Action VideoClosed;
 
     private void Awake()
     {
@@ -43,13 +48,42 @@ public class YandexSDKIntegration : MonoBehaviour
 #if !UNITY_WEBGL || UNITY_EDITOR
         return;
 #endif
+
 #pragma warning disable CS0162 // Обнаружен недостижимый код
-        InterestialAd.Show(OnAdOpen);
+        InterestialAd.Show();
 #pragma warning restore CS0162 // Обнаружен недостижимый код
     }
 
-    private void OnAdOpen()
+    public void VideoAdShow()
     {
-        
+#if !UNITY_WEBGL || UNITY_EDITOR
+        OnRewardedCallback();
+        OnVideoCloseCallback();
+        return;
+#endif
+
+#pragma warning disable CS0162 // Обнаружен недостижимый код
+        VideoAd.Show(OnVideoOpenCallback, OnRewardedCallback, OnVideoCloseCallback, OnVideoErrorCallback);
+#pragma warning restore CS0162 // Обнаружен недостижимый код
+    }
+
+    private void OnVideoOpenCallback()
+    {
+        VideoOpened?.Invoke();
+    }
+
+    private void OnVideoCloseCallback()
+    {
+        VideoClosed?.Invoke();
+    }
+
+    private void OnRewardedCallback()
+    {
+        Rewarded?.Invoke();
+    }
+
+    private void OnVideoErrorCallback(string message)
+    {
+        Debug.LogError(message);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,8 @@ public class LevelsHandler : MonoBehaviour
     public static LevelsHandler Instance = null;
 
     public int Counter { get; private set; }
+
+    public event Action<int> LevelLoaded;
 
     private void Awake()
     {
@@ -24,6 +27,7 @@ public class LevelsHandler : MonoBehaviour
         else
             Counter++;
 
+        LevelLoaded?.Invoke(Counter - 1);
         SceneManager.LoadScene(Counter);
     }
 

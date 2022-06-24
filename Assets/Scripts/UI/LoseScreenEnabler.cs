@@ -31,6 +31,7 @@ public class LoseScreenEnabler : MonoBehaviour
         foreach (var deathTrigger in _deathTriggers)
         {
             deathTrigger.PlayerHasLost += OnLose;
+            deathTrigger.PlayerHasRelive += OnRelive;
         }
     }
 
@@ -39,6 +40,7 @@ public class LoseScreenEnabler : MonoBehaviour
         foreach (var deathTrigger in _deathTriggers)
         {
             deathTrigger.PlayerHasLost -= OnLose;
+            deathTrigger.PlayerHasRelive -= OnRelive;
         }
     }
 
@@ -46,6 +48,12 @@ public class LoseScreenEnabler : MonoBehaviour
     {
         _winDecider.Disable();
         StartCoroutine(Delay());
+    }
+
+    private void OnRelive()
+    {
+        _winDecider.enabled = true;
+        _loseScreen.gameObject.SetActive(false);
     }
 
     private IEnumerator Delay()

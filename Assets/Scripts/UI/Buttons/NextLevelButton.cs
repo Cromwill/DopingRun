@@ -23,6 +23,7 @@ public class NextLevelButton : MonoBehaviour
 
     private void OnClick()
     {
+        YandexSDKIntegration.Instance.AdShow();
         LevelsHandler.Instance.LoadNextLevel();
     }
 }
