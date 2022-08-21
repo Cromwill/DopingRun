@@ -19,6 +19,11 @@ public class PlayerMover : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody>();
     }
 
+    private void OnDisable()
+    {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+    }
+
     private void FixedUpdate()
     {
         if (_pushable.IsPushed)
@@ -34,10 +39,21 @@ public class PlayerMover : MonoBehaviour
 
         if (Input.GetMouseButton(LeftMouseButton) && direction.magnitude > _threshold)
         {
-            if(_groundCheck.Grounded)
+#if UNITY_WEBGL
+            Texture2D cursor = new Texture2D(0, 0);
+            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
+#else
+            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+#endif
+
+            if (_groundCheck.Grounded)
                 Move(direction, _speed);
 
             Rotate(direction);
+        }
+        else
+        {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
     }
 

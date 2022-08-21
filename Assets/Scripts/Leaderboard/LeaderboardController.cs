@@ -1,4 +1,5 @@
 using Agava.YandexGames;
+using Agava.VKGames;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,13 @@ public class LeaderboardController : MonoBehaviour
 
     [SerializeField] private PanelView _panel;
     [SerializeField] private List<PlayerRecordView> _players;
+
+    private Player _player;
+
+    private void Awake()
+    {
+        _player = FindObjectOfType<Player>();
+    }
 
     private void OnEnable()
     {
@@ -27,7 +35,10 @@ public class LeaderboardController : MonoBehaviour
 #if !UNITY_WEBGL || UNITY_EDITOR
         return;
 #endif
-        Leaderboard.SetScore(LeaderboardName, Convert.ToInt32(LevelsHandler.Instance.Counter));
+
+#if YANDEX_GAMES
+        Leaderboard.SetScore(LeaderboardName, Convert.ToInt32(_player.Coins));
+#endif
     }
 
     private void GetLeaderboardEntries()
@@ -35,6 +46,7 @@ public class LeaderboardController : MonoBehaviour
 #if !UNITY_WEBGL || UNITY_EDITOR
         return;
 #endif
+#if YANDEX_GAMES
         Leaderboard.GetEntries(LeaderboardName, (result) =>
         {
             for (int i = 0; i < result.entries.Length && i < _players.Count; i++)
@@ -49,6 +61,7 @@ public class LeaderboardController : MonoBehaviour
                 _players[i].Init(name, score);
             }
         });
+#endif
     }
 
     private void OnLevelLoaded(int level)
@@ -61,11 +74,20 @@ public class LeaderboardController : MonoBehaviour
 #if !UNITY_WEBGL || UNITY_EDITOR
         return;
 #endif
+
+#if VK_GAMES
+        Agava.VKGames.Leaderboard.ShowLeaderboard(_player.Coins);
+#endif
+
+#if YANDEX_GAMES
         PlayerAccount.RequestPersonalProfileDataPermission(GetLeaderboardEntries, OnGetProfileDataPermissionError);
+#endif
     }
 
     private void OnGetProfileDataPermissionError(string message)
     {
+#if YANDEX_GAMES
         PlayerAccount.Authorize(GetLeaderboardEntries);
+#endif
     }
 }

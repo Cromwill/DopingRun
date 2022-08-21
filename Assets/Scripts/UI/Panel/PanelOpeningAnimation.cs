@@ -34,13 +34,14 @@ public class PanelOpeningAnimation : MonoBehaviour
         if (_isOpen)
             return;
         
+        Sequence sequence = DOTween.Sequence();
         _isOpen = true;
 
         transform.position = _openButton.transform.position;
         transform.localScale = new Vector3(0.1f, 0.1f, 1);
 
-        transform.DOMove(_endPosition, 0.5f);
         transform.DOScale(1, 0.5f);
+        sequence.Append(transform.DOMove(_endPosition, 0.5f));
     }
 
     private void Stop()

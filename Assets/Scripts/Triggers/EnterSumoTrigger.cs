@@ -80,7 +80,7 @@ public class EnterSumoTrigger : MonoBehaviour
 
     private IEnumerator DelayedCanvasDisable()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0f);
 
         _joystickCanvas.gameObject.SetActive(false);
     }

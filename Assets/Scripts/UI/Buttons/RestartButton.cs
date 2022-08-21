@@ -23,7 +23,10 @@ public class RestartButton : MonoBehaviour
 
     private void OnClick()
     {
-        YandexSDKIntegration.Instance.AdShow();
+#if UNITY_EDITOR
         LevelsHandler.Instance.RestartLevel();
+        return;
+#endif
+        SDKIntegration.Instance.AdShow(()=> LevelsHandler.Instance.RestartLevel());
     }
 }

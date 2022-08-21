@@ -6,25 +6,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class StartLevelButton : MonoBehaviour
+public class StartLevelButton : MonoBehaviour, IPointerDownHandler
 {
-    private Button _button;
-
     public event Action RunStarted;
 
-    private void Awake()
+    public void OnPointerDown(PointerEventData eventData)
     {
-        _button = GetComponent<Button>();
-    }
-
-    private void OnEnable()
-    {
-        _button.onClick.AddListener(OnClick);
-    }
-
-    private void OnDisable()
-    {
-        _button.onClick.RemoveListener(OnClick);
+        OnClick();
     }
 
     private void OnClick()

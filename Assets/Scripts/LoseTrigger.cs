@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class LoseTrigger : MonoBehaviour, ILosable
 {
-    public event Action PlayerHasLost;
+    public event Action<string> PlayerHasLost;
     public event Action PlayerHasRelive;
 
-    public void PlayerLost()
+    public void PlayerLost(string type)
     {
-        PlayerHasLost?.Invoke();
+        PlayerHasLost?.Invoke(type);
     }
 
     public void PlayerRelive()

@@ -103,6 +103,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b1ad4dd261f1b4bab3d9c1b35bc775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioClips:
+  - {fileID: 8300000, guid: cd5fb55f23884e14e85b8faa97f6b6e0, type: 3}
+  - {fileID: 8300000, guid: 5a9b3e921109d2e4d956163fc4c711af, type: 3}
+  - {fileID: 8300000, guid: 071a288c80a30a54889325fee64e8a3b, type: 3}
 --- !u!1 &3685359155811560944
 GameObject:
   m_ObjectHideFlags: 0
@@ -2118,6 +2122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df81e8ab3bdf5e42be06eed3d80267f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundEffects: []
 --- !u!95 &4741367406468665257
 Animator:
   serializedVersion: 4

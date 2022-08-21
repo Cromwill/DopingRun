@@ -5,6 +5,7 @@ using UnityEngine;
 public class LoseScreenEnabler : MonoBehaviour
 {
     [SerializeField] private float _delay;
+    [SerializeField] private JoystickCanvas _joystickCanvas;
 
     private ILosable[] _deathTriggers;
     private LoseScreen _loseScreen;
@@ -44,9 +45,11 @@ public class LoseScreenEnabler : MonoBehaviour
         }
     }
 
-    private void OnLose()
+    private void OnLose(string loseType)
     {
         _winDecider.Disable();
+
+        Analytics.Instance.FailLevel(LevelsHandler.Instance.Counter, loseType);
         StartCoroutine(Delay());
     }
 
@@ -61,5 +64,6 @@ public class LoseScreenEnabler : MonoBehaviour
         yield return new WaitForSeconds(_delay);
 
         _loseScreen.gameObject.SetActive(true);
+        _joystickCanvas.gameObject.SetActive(false);
     }
 }

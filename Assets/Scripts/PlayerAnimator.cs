@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using RunnerMovementSystem;
 using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Pushable _pushable;
     [SerializeField] private HustleZone _hustleZone;
     [SerializeField] private EnlargePlayer _enlargePlayer;
+    [SerializeField] private MovementSystem _movementSystem;
 
     private StartLevelButton _startLevel;
     private float _gainMuscleAnimationTime;
@@ -43,6 +45,9 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_movementSystem != null)
+            _movementSystem.TransitedToSegment += OnTransitToSegment;
+
         _startLevel.RunStarted += Run;
         _hustleZone.CollidedWithTouchable += OnCollideWithTouchable;
         _hustleZone.CollidedWithPushable += OnCollidedWithPushable;
@@ -51,6 +56,9 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_movementSystem != null)
+            _movementSystem.TransitedToSegment -= OnTransitToSegment;
+
         _startLevel.RunStarted -= Run;
         _hustleZone.CollidedWithTouchable -= OnCollideWithTouchable;
         _hustleZone.CollidedWithPushable -= OnCollidedWithPushable;
@@ -60,7 +68,32 @@ public class PlayerAnimator : MonoBehaviour
     public void GainMuscle()
     {
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.Run))
+        {
+            _animator.applyRootMotion = true;
             _animator.SetTrigger(AnimationClipNames.GainMuscle);
+        }
+    }
+
+    public void Run()
+    {
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.Idle))
+        {
+            _animator.applyRootMotion = false;
+            _animator.SetTrigger(AnimationClipNames.Run);
+        }
+    }
+
+    public void OnVictory()
+    {
+        _animator.applyRootMotion = true;
+        _animator.SetLayerWeight(1, 0);
+        _animator.SetTrigger(AnimationClipNames.Victory);
+    }
+
+    private void OnTransitToSegment(TransitionSegment segment)
+    {
+        _animator.applyRootMotion = false;
+        _animator.SetTrigger(AnimationClipNames.Jump);
     }
 
     private void OnCollideWithTouchable()
@@ -90,18 +123,5 @@ public class PlayerAnimator : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
 
         _animator.ResetTrigger(name);
-    }
-
-
-    public void Run()
-    {
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName(AnimationClipNames.Idle))
-            _animator.SetTrigger(AnimationClipNames.Run);
-    }
-
-    public void OnVictory()
-    {
-        _animator.SetLayerWeight(1, 0);
-        _animator.SetTrigger(AnimationClipNames.Victory);
     }
 }

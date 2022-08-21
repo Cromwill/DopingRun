@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class RagdollHandler : MonoBehaviour
 {
+    [SerializeField] private List<SoundEffect> _soundEffects;
+
     private Rigidbody[] _rigidbodys;
     private Vector3[] _initialPositions;
+    private AudioSource _audioSource;
 
     private List<Collider> _colliders = new List<Collider>();
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     private void Start()
     {
@@ -36,6 +44,13 @@ public class RagdollHandler : MonoBehaviour
 
     public void EnableRagdoll()
     {
+        if (_soundEffects.Count > 0)
+        {
+            AudioClip clip = _soundEffects.Find(effect => effect.SoundEffectType == SoundEffectType.Fall).AudioClip;
+            _audioSource.clip = clip;
+            _audioSource.Play();
+        }
+
         foreach (var rigidbody in _rigidbodys)
         {
             rigidbody.isKinematic = false;

@@ -23,12 +23,12 @@ public class RunerDeathTrigger : LoseTrigger
 
     private void OnEnable()
     {
-        YandexSDKIntegration.Instance.Rewarded += Relive;
+        SDKIntegration.Instance.Rewarded += Relive;
     }
 
     private void OnDisable()
     {
-        YandexSDKIntegration.Instance.Rewarded -= Relive;
+        SDKIntegration.Instance.Rewarded -= Relive;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,7 +37,7 @@ public class RunerDeathTrigger : LoseTrigger
         {
             _cameraFollowing.enabled = false;
             _runerControls.Disable(player);
-            PlayerLost();
+            PlayerLost("Runner");
             _cameraTarget.gameObject.SetActive(false);
 
             if (player.TryGetComponent(out DeathHandler deathHandler))

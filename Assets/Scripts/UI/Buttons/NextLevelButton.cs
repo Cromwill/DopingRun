@@ -23,7 +23,10 @@ public class NextLevelButton : MonoBehaviour
 
     private void OnClick()
     {
-        YandexSDKIntegration.Instance.AdShow();
+#if UNITY_EDITOR
         LevelsHandler.Instance.LoadNextLevel();
+        return;
+#endif
+        SDKIntegration.Instance.AdShow(() => LevelsHandler.Instance.LoadNextLevel());
     }
 }

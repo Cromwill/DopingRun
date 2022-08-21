@@ -24,6 +24,8 @@ namespace RunnerMovementSystem.Examples
         {
             _roadMovement.PathChanged -= OnPathChanged;
             _startLevelButton.RunStarted -= OnRunStart;
+
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
 
         private void OnPathChanged(PathSegment _)
@@ -39,8 +41,11 @@ namespace RunnerMovementSystem.Examples
 
         private void Update()
         {
-            if (_isStart == false)
+            if (_isStart == false || Time.timeScale == 0)
+            {
+                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
                 return;
+            }
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -51,8 +56,19 @@ namespace RunnerMovementSystem.Examples
 
             if (Input.GetMouseButton(0))
             {
+#if UNITY_WEBGL
+                Texture2D cursor = new Texture2D(0, 0);
+                Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
+#else
+                Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+#endif
+
                 var offset = Input.mousePosition - _mousePosition;
                 _roadMovement.SetOffset(_saveOffset + offset.x * _sensitivity);
+            }
+            else
+            {
+                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
             }
 
             if(IsMoved)

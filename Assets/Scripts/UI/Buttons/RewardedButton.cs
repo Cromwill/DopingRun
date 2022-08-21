@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class RewardedButton : MonoBehaviour
     private bool _isRewarded;
 
     public event Action Rewarded;
+    public event Action Clicked;
 
     private void Awake()
     {
@@ -20,33 +22,51 @@ public class RewardedButton : MonoBehaviour
     private void OnEnable()
     {
         _button.onClick.AddListener(OnClick);
-        YandexSDKIntegration.Instance.Rewarded += OnRewarded;
-        YandexSDKIntegration.Instance.VideoClosed += OnVideoClosed;
+        SDKIntegration.Instance.Rewarded += OnRewarded;
+        SDKIntegration.Instance.VideoClosed += OnVideoClosed;
+        SDKIntegration.Instance.VideoOpened += OnVideoOpened;
     }
 
     private void OnDisable()
     {
         _button.onClick.RemoveListener(OnClick);
-        YandexSDKIntegration.Instance.Rewarded -= OnRewarded;
-        YandexSDKIntegration.Instance.VideoClosed -= OnVideoClosed;
+        SDKIntegration.Instance.Rewarded -= OnRewarded;
+        SDKIntegration.Instance.VideoClosed -= OnVideoClosed;
+        SDKIntegration.Instance.VideoOpened -= OnVideoOpened;
     }
 
     private void OnClick()
     {
-        YandexSDKIntegration.Instance.VideoAdShow();
+        Clicked?.Invoke();
+        SDKIntegration.Instance.VideoAdShow();
+
+#if VK_GAMES
+        OnVideoOpened();
+#endif
     }
 
     private void OnRewarded()
     {
         _isRewarded = true;
+
+#if VK_GAMES
+        OnVideoClosed();
+#endif
     }
 
     private void OnVideoClosed()
     {
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+
         if (_isRewarded)
         {
-            Time.timeScale = 1;
             Rewarded?.Invoke();
         }
+    }
+
+    private void OnVideoOpened()
+    {
+        AudioListener.pause = true;
     }
 }

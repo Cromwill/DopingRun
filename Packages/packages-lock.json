@@ -1,11 +1,18 @@
 {
   "dependencies": {
-    "com.agava.yandexgames": {
-      "version": "https://github.com/forcepusher/com.agava.yandexgames.git#8.3.1",
+    "com.agava.vkgames": {
+      "version": "https://github.com/punisherpete/com.agava.vkgames.git#1.0.1",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "654717451044d31d0f430208be6bc1108af33dbb"
+      "hash": "c2228389637de34914d56dd89f73457389a9a51f"
+    },
+    "com.agava.yandexgames": {
+      "version": "https://github.com/forcepusher/com.agava.yandexgames.git#10.0.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1df0c8786bdfec993d6f7a42caad1a0ace4d1480"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",

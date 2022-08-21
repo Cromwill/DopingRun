@@ -604,7 +604,6 @@ namespace LiquidVolumeFX {
                                 EditorGUILayout.LabelField(shaderNames[k], GUILayout.Width(EditorGUIUtility.labelWidth));
                                 if (GUILayout.Button("Locate", GUILayout.Width(80))) {
                                     Shader shader = AssetDatabase.LoadAssetAtPath<Shader>(shaderPaths[k]);
-                                    Selection.activeObject = shader;
                                     EditorGUIUtility.PingObject(shader);
                                 }
                                 EditorGUILayout.EndHorizontal();

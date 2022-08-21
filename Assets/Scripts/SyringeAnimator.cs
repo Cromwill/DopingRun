@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class SyringeAnimator : MonoBehaviour
 {
-    [SerializeField] private SkinnedMeshRenderer _syringe;
+    [SerializeField] private SkinnedMeshRenderer[] _syringes;
 
     private void Throw()
     {
-        _syringe.enabled = false;
+        foreach (var syringe in _syringes)
+        {
+            syringe.enabled = false;
+        }
     }
 }

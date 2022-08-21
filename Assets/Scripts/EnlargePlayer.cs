@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class EnlargePlayer : MonoBehaviour
     [SerializeField] private float _targetScaleValue;
     [SerializeField] private SkinnedMeshRenderer _meshRenderer;
     [SerializeField] private Material _outlineMaterial;
+    [SerializeField] private List<SoundEffect> _soundEffects;
 
     private Vector3 _maxScale;
     private float _scalePerStep;
@@ -24,11 +26,14 @@ public class EnlargePlayer : MonoBehaviour
     private Enlargable _enlargable;
     private InjectorBarPresenter _barPresenter;
     private PlayerAnimator _playerAnimator;
+    private AudioSource _audioSource;
 
     public event Action<EnlargePlayer> AnimationEnd;
 
     private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
+
         _maxScale = Vector3.one * _targetScaleValue;
         _enlargable = FindObjectOfType<Enlargable>();
         Error.CheckOnNull(_enlargable, nameof(Enlargable));
@@ -58,11 +63,43 @@ public class EnlargePlayer : MonoBehaviour
 
     private void OnInjection()
     {
+        AudioClip clip = _soundEffects.Find(effect => effect.SoundEffectType == SoundEffectType.Injection).AudioClip;
+        _audioSource.clip = clip;
+        _audioSource.Play();
+
         StepCalculation();
         TargetSizeCalculation();
 
         _barPresenter.SetTimeToErase(_playerAnimator.InjectionAnimationTime);
         _enlargable.Reset();
+    }
+
+    private void OnHit()
+    {
+        AudioClip clip = _soundEffects.Find(effect => effect.SoundEffectType == SoundEffectType.Hit).AudioClip;
+        _audioSource.clip = clip;
+        _audioSource.Play();
+    }
+
+    private void OnAttack()
+    {
+        AudioClip clip = _soundEffects.Find(effect => effect.SoundEffectType == SoundEffectType.Attack).AudioClip;
+        _audioSource.clip = clip;
+        _audioSource.Play();
+    }
+
+    private void OnJump()
+    {
+        AudioClip clip = _soundEffects.Find(effect => effect.SoundEffectType == SoundEffectType.Jump).AudioClip;
+        _audioSource.clip = clip;
+        _audioSource.Play();
+    }
+
+    private void OnWin()
+    {
+        AudioClip clip = _soundEffects.Find(effect => effect.SoundEffectType == SoundEffectType.Win).AudioClip;
+        _audioSource.clip = clip;
+        _audioSource.Play();
     }
 
     private void OnFlexing()

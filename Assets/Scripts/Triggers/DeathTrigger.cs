@@ -52,7 +52,7 @@ public class DeathTrigger : LoseTrigger
 
         if (other.TryGetComponent(out Player player))
         {
-            PlayerLost();
+            PlayerLost("Ring");
             _sumoControls.Disable(player);
 
             _cameraLookAt.enabled = false;

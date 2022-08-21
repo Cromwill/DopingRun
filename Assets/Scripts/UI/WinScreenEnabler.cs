@@ -5,6 +5,7 @@ using UnityEngine;
 public class WinScreenEnabler : MonoBehaviour
 {
     [SerializeField] private WinnerDecider _wienerDecider;
+    [SerializeField] private JoystickCanvas _joystickCanvas;
     [SerializeField] private float _delay;
     [SerializeField] private WinScreen _winScreen;
 
@@ -25,6 +26,7 @@ public class WinScreenEnabler : MonoBehaviour
 
     private void OnVictory()
     {
+        Analytics.Instance.CompleteLevel(LevelsHandler.Instance.Counter);
         StartCoroutine(Delay());
     }
 
@@ -33,6 +35,7 @@ public class WinScreenEnabler : MonoBehaviour
         yield return new WaitForSeconds(_delay);
 
         _winScreen.gameObject.SetActive(true);
+        _joystickCanvas.gameObject.SetActive(false);
         _winScreen.ShowLevelNumber();
     }
 }

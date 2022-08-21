@@ -56,7 +56,7 @@ namespace RunnerMovementSystem.Examples
             transform.rotation = targetRotation;
         }
 
-        private void Disable()
+        private void Disable(string loseType)
         {
             this.enabled = false;
         }

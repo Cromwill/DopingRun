@@ -5,9 +5,9 @@ using UnityEngine;
 
 interface ILosable
 {
-    public event Action PlayerHasLost;
+    public event Action<string> PlayerHasLost;
     public event Action PlayerHasRelive;
 
-    public void PlayerLost();
+    public void PlayerLost(string type);
     public void PlayerRelive();
 }

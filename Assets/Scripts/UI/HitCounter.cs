@@ -19,6 +19,7 @@ public class HitCounter : MonoBehaviour
     private Coroutine _enlargeCoroutine;
     private List<Coroutine> _fadeCoroutines = new List<Coroutine>();
     private DeathPhrases _deathPhrases = new DeathPhrases();
+
     private void OnEnable()
     {
         _hustleZone.CollidedWithPushable += OnHit;
@@ -88,7 +89,6 @@ public class HitCounter : MonoBehaviour
         _counter++;
 
         _counterText.text =$"x{_counter}";
-        _hitText.text = "Hit!";
 
         if (_enlargeCoroutine != null)
             StopCoroutine(_enlargeCoroutine);

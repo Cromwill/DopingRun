@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class EventSystemInstance : MonoBehaviour
 {
     private static EventSystemInstance _instance = null;
+    private AudioSource _audioSource;
 
     private void Awake()
     {
@@ -13,6 +15,7 @@ public class EventSystemInstance : MonoBehaviour
         else
             Destroy(gameObject);
 
+        _audioSource = GetComponent<AudioSource>();
         Screen.fullScreenMode = FullScreenMode.Windowed;
         DontDestroyOnLoad(gameObject);
     }

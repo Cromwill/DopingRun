@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Text.RegularExpressions;
 
 public class WinScreen : MonoBehaviour
 {
@@ -15,7 +16,12 @@ public class WinScreen : MonoBehaviour
 
     public void ShowLevelNumber()
     {
-        _levelNumber.text = $"Level {LevelsHandler.Instance.Counter}";
+        Debug.Log("ShowLevelNumber");
+        string text = _levelNumber.text;
+        text = Regex.Replace(text, @"[ \r\n\t]", "");
+        text += " " + LevelsHandler.Instance.Counter;
+
+        _levelNumber.text = text;
     }
 
     private IEnumerator CountSyringe()
