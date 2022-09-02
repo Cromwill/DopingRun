@@ -26,6 +26,9 @@ public class Analytics : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
+        return;
+#endif
         GameAnalytics.Initialize();
 
         if (PlayerPrefs.HasKey(SessionCountKey))
@@ -46,6 +49,9 @@ public class Analytics : MonoBehaviour
 
     public void StartLevel(int level)
     {
+#if UNITY_EDITOR
+        return;
+#endif
         _levelStartTime = (int)Time.time;
         Dictionary<string, object> properties = new Dictionary<string, object>()
         {
@@ -57,6 +63,9 @@ public class Analytics : MonoBehaviour
 
     public void CompleteLevel(int level)
     {
+#if UNITY_EDITOR
+        return;
+#endif
         int timeSpent = (int)Time.time - _levelStartTime;
         Dictionary<string, object> properties = new Dictionary<string, object>()
         {
@@ -69,6 +78,9 @@ public class Analytics : MonoBehaviour
 
     public void FailLevel(int level, string reason)
     {
+#if UNITY_EDITOR
+        return;
+#endif
         int timeSpent = (int)Time.time - _levelStartTime;
         Dictionary<string, object> properties = new Dictionary<string, object>()
         {
@@ -82,6 +94,9 @@ public class Analytics : MonoBehaviour
 
     public void RestartLevel(int level)
     {
+#if UNITY_EDITOR
+        return;
+#endif
         Dictionary<string, object> properties = new Dictionary<string, object>()
         {
             { "level", level },
@@ -92,6 +107,9 @@ public class Analytics : MonoBehaviour
 
     public void SoftSpent(string type, string name, int amount)
     {
+#if UNITY_EDITOR
+        return;
+#endif
         if (PlayerPrefs.HasKey(SoftSpentCountKey))
             _softSpentCount = PlayerPrefs.GetInt(SoftSpentCountKey);
 
@@ -113,16 +131,25 @@ public class Analytics : MonoBehaviour
 
     public void InterstitialStart(string placement, string adSDKname)
     {
+#if UNITY_EDITOR
+        return;
+#endif
         GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.Interstitial, adSDKname, placement);
     }
 
     public void RewardedShown(string placement, string adSDKname)
     {
+#if UNITY_EDITOR
+        return;
+#endif
         GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.OfferWall, adSDKname, placement);
     }
 
     public void RewardedStart(string placement, string adSDKname)
     {
+#if UNITY_EDITOR
+        return;
+#endif
         GameAnalytics.NewAdEvent(GAAdAction.Show, GAAdType.RewardedVideo, adSDKname, placement);
     }
 }

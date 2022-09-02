@@ -16,7 +16,6 @@ public class WinScreen : MonoBehaviour
 
     public void ShowLevelNumber()
     {
-        Debug.Log("ShowLevelNumber");
         string text = _levelNumber.text;
         text = Regex.Replace(text, @"[ \r\n\t]", "");
         text += " " + LevelsHandler.Instance.Counter;

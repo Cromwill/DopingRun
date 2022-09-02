@@ -37,7 +37,7 @@ public class LeaderboardController : MonoBehaviour
 #endif
 
 #if YANDEX_GAMES
-        Leaderboard.SetScore(LeaderboardName, Convert.ToInt32(_player.Coins));
+        Agava.YandexGames.Leaderboard.SetScore(LeaderboardName, Convert.ToInt32(_player.Coins));
 #endif
     }
 
@@ -47,7 +47,7 @@ public class LeaderboardController : MonoBehaviour
         return;
 #endif
 #if YANDEX_GAMES
-        Leaderboard.GetEntries(LeaderboardName, (result) =>
+        Agava.YandexGames.Leaderboard.GetEntries(LeaderboardName, (result) =>
         {
             for (int i = 0; i < result.entries.Length && i < _players.Count; i++)
             {

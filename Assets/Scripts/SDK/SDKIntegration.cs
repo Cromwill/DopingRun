@@ -63,7 +63,7 @@ public class SDKIntegration : MonoBehaviour
 #endif
 
 #if YANDEX_GAMES
-        InterestialAd.Show(OnAdOpened, (wasShown) =>
+        Agava.YandexGames.InterstitialAd.Show(OnAdOpened, (wasShown) =>
         {
             AudioListener.pause = false;
             Debug.Log("Closed Interestial Ad " + AudioListener.pause);
@@ -87,7 +87,7 @@ public class SDKIntegration : MonoBehaviour
 #endif
 
 #if YANDEX_GAMES
-        VideoAd.Show(OnVideoOpenCallback, OnRewardedCallback, OnVideoCloseCallback, OnVideoErrorCallback);
+        Agava.YandexGames.VideoAd.Show(OnVideoOpenCallback, OnRewardedCallback, OnVideoCloseCallback, OnVideoErrorCallback);
 #endif
 
 #if VK_GAMES

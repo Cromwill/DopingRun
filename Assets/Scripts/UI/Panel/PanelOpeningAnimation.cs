@@ -8,7 +8,9 @@ public class PanelOpeningAnimation : MonoBehaviour
 {
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _closeButton;
+    [SerializeField] private GameObject _panel;
 
+    private float _duration = 0.5f;
     private Vector3 _endPosition;
     private bool _isOpen;
 
@@ -33,15 +35,15 @@ public class PanelOpeningAnimation : MonoBehaviour
     {
         if (_isOpen)
             return;
-        
-        Sequence sequence = DOTween.Sequence();
+
         _isOpen = true;
 
         transform.position = _openButton.transform.position;
-        transform.localScale = new Vector3(0.1f, 0.1f, 1);
+        transform.localScale = new Vector3(0f, 0f, 1);
 
-        transform.DOScale(1, 0.5f);
-        sequence.Append(transform.DOMove(_endPosition, 0.5f));
+        transform.DOScale(1, _duration);
+        transform.DOMove(_endPosition, _duration);
+        StartCoroutine(Activate(_isOpen, 0));
     }
 
     private void Stop()
@@ -51,6 +53,15 @@ public class PanelOpeningAnimation : MonoBehaviour
         transform.localScale = Vector3.one;
         transform.position = _endPosition;
 
-        transform.DOScale(0, 0.5f);
+        transform.DOScale(0, _duration);
+        transform.DOMove(_openButton.transform.position, _duration);
+        StartCoroutine(Activate(_isOpen, _duration));
+    }
+
+    private IEnumerator Activate(bool value, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        _panel.SetActive(value);
     }
 }
